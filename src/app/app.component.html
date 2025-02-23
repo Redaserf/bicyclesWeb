@@ -9,10 +9,7 @@
 
     <nav class="nav">     
         <ul class="pt-5 list-unstyled d-flex flex-column align-items-center">
-            <li><a href="#">Iniciar sesion</a></li>
-            <li><a href="#">Informacion</a></li>
-            <li><a href="#">Descargar-App</a></li>
-            <li><a href="#">Contactanos</a></li>
+            <li *ngFor="let item of opcionesSeguimiento"><a href="{{ item.ruta }}">{{ item.nombre }}</a></li>
         </ul>
     </nav>
 
