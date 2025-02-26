@@ -18,15 +18,25 @@ export const routes: Routes = [
         children: [
             {
                 path: '',
+                redirectTo: 'home',
+                pathMatch: 'full'
+            },
+            {
+                path: 'home',
                 component: HomeComponent,
             }
         ]
     },
 
-     {
+    {
         path: 'auth',
         component: AuthLayoutComponent,
         children: [
+            {
+                path: '',
+                redirectTo: 'login',
+                pathMatch: 'full'
+            },
             {
                 path: 'login',
                 component: LoginComponent
