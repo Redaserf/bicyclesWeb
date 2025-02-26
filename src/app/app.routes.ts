@@ -4,41 +4,38 @@ import { Routes } from '@angular/router';
 import { GuestLayoutComponent } from './pages/guest/layout/guest-layout/guest-layout.component';
 import { HomeComponent } from './pages/guest/home/home.component';
 import { AuthLayoutComponent } from './pages/guest/auth-layout/auth-layout.component';
+import { LoginComponent } from './pages/guest/login/login.component';
+import { AppComponent } from './app.component';
+import { RegisterComponent } from './pages/guest/register/register.component';
 
 export const routes: Routes = [
 
-    //guest
+    //rutas de guest (usuario no autenticado)
     {
         path: '',
         component: GuestLayoutComponent,
+        pathMatch: 'full',
         children: [
             {
                 path: '',
-                component: HomeComponent
-                //componente de registro
-            },
-        //     {
-        //         path: 'login',
-        //         component: CardComponent
-        //         //componente de login
-        //     }
+                component: HomeComponent,
+            }
         ]
     },
-    // {
-    //     path: 'auth',
-    //     component: AuthLayoutComponent,
-    //     children: [
-    //         {
-    //             path: 'login',
-    //             // component: CardComponent
-    //             //componente de login
-    //         },
-    //         {
-    //             path: 'registro',
-    //             // component: CardComponent
-    //             //componente de registro
-    //         }
-    //     ]
-    // }
+
+     {
+        path: 'auth',
+        component: AuthLayoutComponent,
+        children: [
+            {
+                path: 'login',
+                component: LoginComponent
+            },
+            {
+                path: 'registro',
+                component: RegisterComponent
+            }
+        ]
+    }
 
 ];

@@ -63,10 +63,12 @@ export class GuestLayoutComponent {
 
   //opciones Array
    opcionesSeguimiento = [
-    {nombre: "Iniciar Sesión", ruta: "/login"},
+    {nombre: "Iniciar Sesión", ruta: "/auth/login"},
+    {nombre: "Registrarse", ruta: "/auth/registro"},
     {nombre: "Informacion", ruta: "#"},
     {nombre: "Descargar-App", ruta: "#"},
     {nombre: "Contactanos", ruta: "#"},
+
   ];
 
 }
