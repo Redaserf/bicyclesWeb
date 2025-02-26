@@ -1,11 +1,21 @@
 import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import * as AOS from 'aos';
+
+
+//componentes
+import { LogoComponent } from "../../../all/logo/logo.component";
+import { FooterComponent } from '../../../all/footer/footer.component';
+
+//directivas
+import { NgFor } from '@angular/common';
 
 // declare const AOS: any;
 
 @Component({
   selector: 'app-guest-layout',
-  imports: [],
+  imports: [RouterOutlet, RouterLink, LogoComponent, FooterComponent, NgFor],
   templateUrl: './guest-layout.component.html',
   styleUrl: './guest-layout.component.css'
 })
@@ -50,4 +60,13 @@ export class GuestLayoutComponent {
       });
     }
   }
+
+  //opciones Array
+   opcionesSeguimiento = [
+    {nombre: "Iniciar Sesión", ruta: "/login"},
+    {nombre: "Informacion", ruta: "#"},
+    {nombre: "Descargar-App", ruta: "#"},
+    {nombre: "Contactanos", ruta: "#"},
+  ];
+
 }

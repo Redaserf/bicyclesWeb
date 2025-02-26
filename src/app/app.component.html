@@ -1,39 +1,4 @@
 <body>
-  
-  <section  class="d-flex flex-column justify-content-center align-items-center" style="height: 100vh;">
+    <router-outlet></router-outlet>
 
-    <app-logo></app-logo>
-
-    <input class="menu-icon" type="checkbox" id="menu-icon" name="menu-icon"/>
-    <label for="menu-icon"></label>
-
-    <nav class="nav">     
-        <ul class="pt-5 list-unstyled d-flex flex-column align-items-center">
-            <li *ngFor="let item of opcionesSeguimiento"><a href="{{ item.ruta }}">{{ item.nombre }}</a></li>
-        </ul>
-    </nav>
-
-    <div data-aos="fade-up" data-aos-duration="1000" class="section-center">
-        <h1 class="mb-0">BICYCLES</h1>
-    </div>
-  </section>
-
-  <router-outlet /> 
-  <!-- contenido de la pagina -->
-
-  <section class="footer">
-    <div class="footer-basic">
-        <footer>
-          <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
-          <ul class="list-inline">
-              <li class="list-inline-item"><a href="#">Home</a></li>
-              <li class="list-inline-item"><a href="#">Services</a></li>
-              <li class="list-inline-item"><a href="#">About</a></li>
-              <li class="list-inline-item"><a href="#">Terms</a></li>
-              <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
-          </ul>
-          <p class="copyright">Animales de granja © 2025</p>
-      </footer>
-  </div>
-  </section>
 </body>
