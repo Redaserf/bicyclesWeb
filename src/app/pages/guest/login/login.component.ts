@@ -3,10 +3,11 @@ import * as AOS from 'aos';
 import { faUser, faKey } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  imports: [FontAwesomeModule, FormsModule],
+  imports: [FontAwesomeModule, FormsModule, RouterLink],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })

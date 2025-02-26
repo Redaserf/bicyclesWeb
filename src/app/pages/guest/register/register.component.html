@@ -1,59 +1,46 @@
 <!-- Seccion del formulario -->
-<section>
-  <div class="container mt-5">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <div class="card shadow-lg">
-          <div class="card-header text-center bg-primary text-white">
-            <h4>Registro</h4>
-          </div>
-          <div class="card-body">
-            <form>
-              <div class="mb-3">
-                <label class="form-label">Nombre</label>
-                <input type="text" name="firstName" #fName="ngModel" [(ngModel)]="userObject.firstName" class="form-control" placeholder="Ingresa tu nombre">
-                <div class="text-danger">
-                    <span *ngIf="fName.errors?.['required'] && fName.touched"></span>
-                </div>
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Apellido</label>
-                <input type="text" #lName="ngModel" name="lastName" [(ngModel)]="userObject.lastName" class="form-control" placeholder="Ingresa tu apellido">
-                <div class="text-danger">
-                  <span *ngIf="lName.errors?.['required'] && lName.touched"></span>
-                </div>
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Peso (kg)</label>
-                <input type="number" #weight="ngModel" name="weight" [(ngModel)]="userObject.weight" class="form-control" placeholder="Ej. 70">
-                <div class="text-danger">
-                  <span *ngIf="weight.errors?.['required'] && weight.touched"></span>
-                </div>
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Correo</label>
-                <input type="email" #email="ngModel" name="email" [(ngModel)]="userObject.email" class="form-control" placeholder="correo">
-              </div>
-              <div class="text-danger">
-                <span *ngIf="email.errors?.['required'] && email.touched"></span>
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Contraseña</label>
-                <input type="password" #password="ngModel" name="password" [(ngModel)]="userObject.password" class="form-control" placeholder="Ingresa tu contraseña">
-                <div class="text-danger">
-                  <span *ngIf="password.errors?.['required'] && password.touched"></span>
-                </div>
-              </div>
-              <div class="d-grid">
-                <button type="button" class="btn btn-primary" (click)="save()">Registrarse</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
+<div class="wrapper" data-aos="fade-up">
+  <div class="logo">
+    <img src="images/image.png" alt="Logo">
   </div>
-</section>
+  <div class="text-center name">REGÍSTRATE</div>
+  <form class="p-2 mt-3">
 
+    <div class="form-field d-flex align-items-center">
+      <span class="far fa-user"></span>
+      <input type="text" name="firstName"  [(ngModel)]="userObject.nombre" placeholder="Nombre" >
+    </div>
+
+    <div class="form-field d-flex align-items-center">
+      <span class="far fa-user"></span>
+      <input type="text"  name="lastName" [(ngModel)]="userObject.apellido" placeholder="Apellidos">
+    </div>
+
+    <div class="form-field d-flex align-items-center">
+      <span class="far fa-user"></span>
+      <input type="number"  name="weight" [(ngModel)]="userObject.peso" placeholder="Peso">
+    </div>
+
+    <div class="form-field d-flex align-items-center">
+      <span class="far fa-envelope"></span>
+      <input type="email"  name="email" [(ngModel)]="userObject.email" placeholder="email">
+    </div>
+
+    <div class="form-field d-flex align-items-center">
+      <span class="fas fa-key"></span>
+      <input type="password" name="password" [(ngModel)]="userObject.password" placeholder="Contraseña">
+    </div>
+
+    <div class="form-field d-flex align-items-center">
+      <span class="fas fa-key"></span>
+      <input type="password" name="confirmPassword" [(ngModel)]="confirm_password" id="confirmPassword" placeholder="Confirmar Contraseña">
+    </div>
+
+    <button class="btn mt-2" type="submit" (click)="save()" >Registrarse</button>
+  </form>
+  <div class="text-center fs-6 mt-2">
+    <a href="#">¿Olvidaste tu contraseña?</a> o <a routerLink="/auth/login">Inicia sesión</a>
+  </div>
+</div>
 
 
