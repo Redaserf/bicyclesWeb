@@ -1,1 +1,20 @@
-<p>sidebar works!</p>
+<button id="toggleMenu" (click)="toggleSidebar()">
+    <i [class]="menuAbierto ? 'fas fa-times' : 'fas fa-bars'"></i>
+  </button>
+  
+  <div id="mainNav" class="d-flex flex-column justify-content-start" [ngClass]="{'active': menuAbierto}">
+      <div class="logo-container">
+          <img src="images/bicyclesBlanco.png" alt="Bicycles">
+      </div>
+  
+      <ul class="list-unstyled ms-2">
+          <li><a class="vlink" href="#"><i class="fas fa-home"></i><span>Home</span></a></li>
+          <li><a class="vlink" href="#"><i class="fas fa-th"></i><span>Services</span></a></li>
+          <li><a class="vlink" href="#"><i class="fas fa-headset"></i><span>Call Us</span></a></li>
+          <li><a class="vlink" href="#"><i class="far fa-calendar-alt"></i><span>Schedule</span></a></li>
+          <li><a class="vlink" href="#"><i class="fas fa-user-circle"></i><span>About Us</span></a></li>
+          <li><a class="vlink" href="#"><i class="fas fa-newspaper"></i><span>News</span></a></li>
+          <li><a class="vlink" href="#"><i class="fas fa-photo-video"></i><span>Gallery</span></a></li>
+      </ul>
+  </div>
+  
