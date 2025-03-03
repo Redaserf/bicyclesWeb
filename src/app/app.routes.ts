@@ -7,6 +7,11 @@ import { AuthLayoutComponent } from './pages/guest/auth-layout/auth-layout.compo
 import { LoginComponent } from './pages/guest/login/login.component';
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './pages/guest/register/register.component';
+import { SidebarComponent } from './pages/admin/sidebar/sidebar.component';
+import { SidebarComponentUser } from './pages/user/sidebar/sidebar.component';
+import { RecorridoComponent } from './pages/user/recorrido/recorrido.component';
+import { UserLayoutComponent } from './pages/user/user-layout/user-layout.component';
+import { DashboardComponent } from './pages/user/dashboard/dashboard.component';
 
 export const routes: Routes = [
 
@@ -46,6 +51,17 @@ export const routes: Routes = [
                 component: RegisterComponent
             }
         ]
-    }
+    },
+
+    {
+        path: 'dashboard',
+        component: DashboardComponent,
+        children: 
+        [
+            {path: '', redirectTo: 'recorrido', pathMatch: 'full'},
+            {path: "recorrido", component: RecorridoComponent},
+            {path: "user", component: UserLayoutComponent},
+        ]
+    },
 
 ];
