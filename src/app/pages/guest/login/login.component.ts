@@ -4,6 +4,9 @@ import { faUser, faKey } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { Observable } from 'rxjs';
+import { CanExit } from '../../../guards/form-login.guard';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-login',
@@ -11,11 +14,12 @@ import { RouterLink } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements AfterViewInit {
+export class LoginComponent implements AfterViewInit,CanExit {
   faUser = faUser;
   faKey = faKey;
   username: string = '';
   password: string = '';
+  isFormDirty: boolean = false;
 
   ngAfterViewInit(): void {
     AOS.init({
@@ -27,8 +31,42 @@ export class LoginComponent implements AfterViewInit {
     });
   }
 
+  canExit(): Observable<boolean> {
+    if (!this.isFormDirty) {
+      return new Observable<boolean>((observer) => {
+        observer.next(true);
+        observer.complete();
+      });
+    }
+
+    return new Observable<boolean>((observer) => {
+      Swal.fire({
+        title: '¿Estás seguro que quieres salir?',
+        text: 'Tienes cambios sin guardar.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, salir',
+        cancelButtonText: 'Cancelar',
+        background: '#fff',
+        customClass: {
+          popup: 'custom-swal-popup'
+        }
+      }).then((result) => {
+        observer.next(result.isConfirmed);
+        observer.complete();
+      });
+    });
+  }
+
+  onInputChange() {
+    this.isFormDirty = true; 
+  }
+
   onSubmit() {
     console.log('Usuario:', this.username);
     console.log('Contraseña:', this.password);
+    this.isFormDirty = false; 
   }
 }
