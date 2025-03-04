@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { RecorridoComponent } from '../recorrido/recorrido.component';
 import { RouterOutlet } from '@angular/router';
-import { SidebarComponentUser } from "../sidebar/sidebar.component";
+import { SidebarUserComponent } from '../sidebar-user/sidebar-user.component';
 
 @Component({
   selector: 'app-user-layout',
-  imports: [RecorridoComponent, RouterOutlet, SidebarComponentUser],
+  imports: [RecorridoComponent, RouterOutlet, SidebarUserComponent],
   templateUrl: './user-layout.component.html',
   styleUrl: './user-layout.component.css'
 })
