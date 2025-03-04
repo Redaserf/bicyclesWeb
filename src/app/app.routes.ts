@@ -18,6 +18,8 @@ import { TablaAdministradoresComponent } from './pages/admin/tablas/tabla-admini
 import { TablaBicicletasComponent } from './pages/admin/tablas/tabla-bicicletas/tabla-bicicletas.component';
 import { TablaRecorridosComponent } from './pages/admin/tablas/tabla-recorridos/tabla-recorridos.component';
 import { TablaGenericaComponent } from './pages/admin/tablas/tabla-generica/tabla-generica.component';
+import { FormLoginGuard } from './guards/form-login.guard'; 
+import { FormRegisterGuard } from './guards/form-register.guard';
 
 export const routes: Routes = [
 
@@ -50,11 +52,13 @@ export const routes: Routes = [
             },
             {
                 path: 'login',
-                component: LoginComponent
+                component: LoginComponent,
+                canDeactivate:[FormLoginGuard]
             },
             {
                 path: 'registro',
-                component: RegisterComponent
+                component: RegisterComponent,
+                canDeactivate: [FormRegisterGuard]
             }
         ]
     },
