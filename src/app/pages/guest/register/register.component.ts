@@ -55,7 +55,10 @@ export class RegisterComponent implements AfterViewInit,CanExit{
         cancelButtonColor: '#d33',
         confirmButtonText: 'Sí, salir',
         cancelButtonText: 'Cancelar',
-        background: '#fff'
+        background: '#fff',
+        customClass: {
+          popup: 'custom-swal-popup'
+        }
       }).then((result) => {
         observer.next(result.isConfirmed);
         observer.complete();
