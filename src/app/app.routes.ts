@@ -12,6 +12,8 @@ import { SidebarComponentUser } from './pages/user/sidebar/sidebar.component';
 import { RecorridoComponent } from './pages/user/recorrido/recorrido.component';
 import { UserLayoutComponent } from './pages/user/user-layout/user-layout.component';
 import { DashboardComponent } from './pages/user/dashboard/dashboard.component';
+import { FormLoginGuard } from './guards/form-login.guard'; 
+import { FormRegisterGuard } from './guards/form-register.guard';
 
 export const routes: Routes = [
 
@@ -44,11 +46,13 @@ export const routes: Routes = [
             },
             {
                 path: 'login',
-                component: LoginComponent
+                component: LoginComponent,
+                canDeactivate:[FormLoginGuard]
             },
             {
                 path: 'registro',
-                component: RegisterComponent
+                component: RegisterComponent,
+                canDeactivate: [FormRegisterGuard]
             }
         ]
     },
