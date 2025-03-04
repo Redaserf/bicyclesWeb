@@ -13,6 +13,8 @@ import { DashboardComponent } from './pages/user/dashboard/dashboard.component';
 import { PerfilComponent } from './pages/user/perfil/perfil.component';
 import { SidebarUserComponent } from './pages/user/sidebar-user/sidebar-user.component';
 import { CodeVerificationComponent } from './pages/guest/code-verification/code-verification.component';
+import { FormLoginGuard } from './guards/form-login.guard'; 
+import { FormRegisterGuard } from './guards/form-register.guard';
 
 export const routes: Routes = [
 
@@ -45,11 +47,13 @@ export const routes: Routes = [
             },
             {
                 path: 'login',
-                component: LoginComponent
+                component: LoginComponent,
+                canDeactivate:[FormLoginGuard]
             },
             {
                 path: 'registro',
-                component: RegisterComponent
+                component: RegisterComponent,
+                canDeactivate: [FormRegisterGuard]
             }
         ]
     },
