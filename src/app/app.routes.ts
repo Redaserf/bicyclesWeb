@@ -13,6 +13,11 @@ import { DashboardComponent } from './pages/user/dashboard/dashboard.component';
 import { PerfilComponent } from './pages/user/perfil/perfil.component';
 import { SidebarUserComponent } from './pages/user/sidebar-user/sidebar-user.component';
 import { CodeVerificationComponent } from './pages/guest/code-verification/code-verification.component';
+import { TablaUsuariosComponent } from './pages/admin/tablas/tabla-usuarios/tabla-usuarios.component';
+import { TablaAdministradoresComponent } from './pages/admin/tablas/tabla-administradores/tabla-administradores.component';
+import { TablaBicicletasComponent } from './pages/admin/tablas/tabla-bicicletas/tabla-bicicletas.component';
+import { TablaRecorridosComponent } from './pages/admin/tablas/tabla-recorridos/tabla-recorridos.component';
+import { TablaGenericaComponent } from './pages/admin/tablas/tabla-generica/tabla-generica.component';
 
 export const routes: Routes = [
 
@@ -70,4 +75,11 @@ export const routes: Routes = [
     {path: "recorrido", component: UserLayoutComponent},
     {path: "codigo", component: CodeVerificationComponent},
 
+
+    // Tablas (admin)
+    {path: "usuarios", component: TablaUsuariosComponent},
+    {path: "administradores", component: TablaAdministradoresComponent},
+    {path: "bicicletas", component: TablaBicicletasComponent},
+    {path: "recorridos", component: TablaRecorridosComponent},
+    {path: "generica", component: TablaGenericaComponent},
 ];
