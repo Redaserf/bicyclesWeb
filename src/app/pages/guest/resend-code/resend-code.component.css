@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+      
+      body {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 300;
+        font-size: 15px;
+        line-height: 1.7;
+        color: #333;
+        background-color: #ECF7FF;
+        background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat-back.svg');
+        background-position: center;
+        background-repeat: repeat;
+        background-size: 4%;
+        margin: 0;
+        padding: 0;
+      }
+      
+      .card {
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 40px rgba(24, 138, 255, 0.6);
+      }
+      
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 45px rgba(24, 138, 255, 0.8);
+      }
+      
+      .btn-primary {
+        background-color: #188AFF;
+        border-color: #188AFF;
+      }
+      
+      h2 {
+        color: #188AFF;
+        font-weight: 800;
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 1.8rem;
+      }
+      
+      .logo-card {
+        display: block;
+        margin: 0 auto 20px auto;
+        max-width: 180px;
+        opacity: 0.8;
+      }
+      
+      .email-input {
+        width: 100%;
+        padding: 10px;
+        font-size: 1rem;
+        border: 2px solid #188AFF;
+        border-radius: 5px;
+        margin-bottom: 15px;
+      }

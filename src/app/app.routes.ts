@@ -18,6 +18,7 @@ import { TablaAdministradoresComponent } from './pages/admin/tablas/tabla-admini
 import { TablaBicicletasComponent } from './pages/admin/tablas/tabla-bicicletas/tabla-bicicletas.component';
 import { TablaRecorridosComponent } from './pages/admin/tablas/tabla-recorridos/tabla-recorridos.component';
 import { TablaGenericaComponent } from './pages/admin/tablas/tabla-generica/tabla-generica.component';
+import { ResendCodeComponent } from './pages/guest/resend-code/resend-code.component';
 
 export const routes: Routes = [
 
@@ -74,6 +75,7 @@ export const routes: Routes = [
     {path: "perfil", component: PerfilComponent},
     {path: "recorrido", component: UserLayoutComponent},
     {path: "codigo", component: CodeVerificationComponent},
+    {path: "resend", component: ResendCodeComponent},
 
 
     // Tablas (admin)
