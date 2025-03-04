@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import AOS from 'aos';
-import { SidebarComponentUser } from '../sidebar/sidebar.component';
+import { SidebarUserComponent } from '../sidebar-user/sidebar-user.component';
 
 @Component({
   selector: 'app-recorrido',
-  imports: [SidebarComponentUser],
+  imports: [SidebarUserComponent],
   templateUrl: './recorrido.component.html',
   styleUrl: './recorrido.component.css'
 })

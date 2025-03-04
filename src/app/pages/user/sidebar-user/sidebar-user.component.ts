@@ -2,12 +2,13 @@ import { NgClass } from '@angular/common';
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-sidebarGuest',
+  selector: 'app-sidebar-user',
   imports: [NgClass],
-  templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.css'
+  templateUrl: './sidebar-user.component.html',
+  styleUrl: './sidebar-user.component.css'
 })
-export class SidebarComponentUser {
+export class SidebarUserComponent {
+
   menuAbierto: boolean = false;
 
   toggleSidebar(): void {
