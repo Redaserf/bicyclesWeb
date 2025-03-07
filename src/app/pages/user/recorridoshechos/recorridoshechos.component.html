@@ -1,0 +1,102 @@
+<div id="content" class="container">
+  <div class="container mt-4 p-4 shadow-lg rounded-4 bg-white" id="main-container">   
+    <h1 class="titulo">
+      <i class="fas fa-route"></i> Mis Recorridos
+    </h1>
+    <div class="bici-card">
+      <div class="bici-icon">
+        <i class="fas fa-route"></i>
+      </div>
+      <div class="bici-info">
+        <div class="bici-title">Recorrido 1</div>
+        <div class="bici-meta">23KM - 2 Horas - 07/03/2025</div>
+      </div>
+      <button 
+        class="view-details-btn" 
+        onclick="document.getElementById('modalRecorrido1').classList.add('show')"
+      >
+        <i class="fas fa-eye"></i>
+      </button>
+    </div>
+    <div class="bici-card">
+      <div class="bici-icon">
+        <i class="fas fa-route"></i>
+      </div>
+      <div class="bici-info">
+        <div class="bici-title">Recorrido 2</div>
+        <div class="bici-meta">30KM - 1.5 Horas - 08/03/2025</div>
+      </div>
+      <button 
+        class="view-details-btn" 
+        onclick="document.getElementById('modalRecorrido2').classList.add('show')"
+      >
+        <i class="fas fa-eye"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modalRecorrido1">
+  <div class="modal-content">
+    <h2>Detalles del Recorrido</h2>
+    <div class="recorrido-detalles">
+      <p>
+        <i class="fas fa-route"></i>
+        <strong>Recorrido:</strong> Recorrido 1
+      </p>
+      <p>
+        <i class="fas fa-road"></i>
+        <strong>Distancia:</strong> 23 km
+      </p>
+      <p>
+        <i class="fas fa-clock"></i>
+        <strong>Tiempo:</strong> 120 min (2 horas)
+      </p>
+      <p>
+        <i class="fas fa-calendar-alt"></i>
+        <strong>Fecha:</strong> 07/03/2025
+      </p>
+    </div>
+    <div class="modal-buttons">
+      <button 
+        class="cancel-btn" 
+        onclick="document.getElementById('modalRecorrido1').classList.remove('show')"
+      >
+        Cerrar
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL PARA DETALLES DEL RECORRIDO 2 -->
+<div class="modal-overlay" id="modalRecorrido2">
+  <div class="modal-content">
+    <h2>Detalles del Recorrido</h2>
+    <div class="recorrido-detalles">
+      <p>
+        <i class="fas fa-route"></i>
+        <strong>Recorrido:</strong> Recorrido 2
+      </p>
+      <p>
+        <i class="fas fa-road"></i>
+        <strong>Distancia:</strong> 30 km
+      </p>
+      <p>
+        <i class="fas fa-clock"></i>
+        <strong>Tiempo:</strong> 90 min (1.5 horas)
+      </p>
+      <p>
+        <i class="fas fa-calendar-alt"></i>
+        <strong>Fecha:</strong> 08/03/2025
+      </p>
+    </div>
+    <div class="modal-buttons">
+      <button 
+        class="cancel-btn" 
+        onclick="document.getElementById('modalRecorrido2').classList.remove('show')"
+      >
+        Cerrar
+      </button>
+    </div>
+  </div>
+</div>

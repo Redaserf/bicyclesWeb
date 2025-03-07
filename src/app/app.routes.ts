@@ -27,6 +27,7 @@ import { EstadisticasComponent } from './pages/admin/estadisticas/estadisticas.c
 import { EstadisticauserComponent } from './pages/user/estadisticauser/estadisticauser.component';
 import { HomeuserComponent } from './pages/user/homeuser/homeuser.component';
 import { BicicletasComponent } from './pages/user/bicicletas/bicicletas.component';
+import { RecorridoshechosComponent } from './pages/user/recorridoshechos/recorridoshechos.component';
 
 export const routes: Routes = [
 
@@ -62,7 +63,11 @@ export const routes: Routes = [
             {
                 path:"perfil",
                 component:PerfilComponent
-            }
+            },
+            {
+                path:"recorridoshechos",
+                component:RecorridoshechosComponent
+            },
         ]
     },
 
