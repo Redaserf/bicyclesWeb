@@ -21,6 +21,8 @@ import { TablaGenericaComponent } from './pages/admin/tablas/tabla-generica/tabl
 import { ResendCodeComponent } from './pages/guest/resend-code/resend-code.component';
 import { FormLoginGuard } from './guards/form-login.guard'; 
 import { FormRegisterGuard } from './guards/form-register.guard';
+import { PerfilAdminComponent } from './pages/admin/perfil-admin/perfil-admin.component';
+import { SidebarComponent } from './pages/admin/sidebar/sidebar.component';
 
 export const routes: Routes = [
 
@@ -83,6 +85,8 @@ export const routes: Routes = [
 
 
     // Tablas (admin)
+    {path :"sidebaradmin",component:SidebarComponent},
+    {path: "perfiladmin", component: PerfilAdminComponent},
     {path: "usuarios", component: TablaUsuariosComponent},
     {path: "administradores", component: TablaAdministradoresComponent},
     {path: "bicicletas", component: TablaBicicletasComponent},
