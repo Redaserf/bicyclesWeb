@@ -26,6 +26,7 @@ import { SidebarComponent } from './pages/admin/sidebar/sidebar.component';
 import { EstadisticasComponent } from './pages/admin/estadisticas/estadisticas.component';
 import { EstadisticauserComponent } from './pages/user/estadisticauser/estadisticauser.component';
 import { HomeuserComponent } from './pages/user/homeuser/homeuser.component';
+import { BicicletasComponent } from './pages/user/bicicletas/bicicletas.component';
 
 export const routes: Routes = [
 
@@ -43,6 +44,24 @@ export const routes: Routes = [
             {
                 path: 'home',
                 component: HomeComponent,
+            }
+        ]
+    },
+    {
+        path:"user",
+        component:UserLayoutComponent,
+        children:[
+            {
+                path:"recorridos",
+                component:RecorridoComponent,
+            },
+            {
+                path:"bicicletas",
+                component:BicicletasComponent
+            },
+            {
+                path:"perfil",
+                component:PerfilComponent
             }
         ]
     },
@@ -87,6 +106,7 @@ export const routes: Routes = [
     {path: "resend", component: ResendCodeComponent},
     {path:"estadisticasuser",component:EstadisticauserComponent},
     {path:"homeuser",component:HomeuserComponent},
+    {path:"bicletas",component:BicicletasComponent},
 
 
     // Tablas (admin)

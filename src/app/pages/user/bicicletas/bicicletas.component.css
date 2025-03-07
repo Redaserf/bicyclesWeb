@@ -1,0 +1,251 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #ECF7FF;
+  color: #333;
+}
+
+#content {
+  margin-left: 200px;
+  padding: 20px;
+  transition: margin-left 0.4s ease-in-out;
+}
+
+@media (max-width: 768px) {
+  #content {
+    margin-left: 0;
+    padding-top: 60px;
+  }
+}
+
+#main-container {
+  max-width: 900px;
+  margin: auto;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.titulo {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #188AFF;
+  margin: 0;
+}
+
+.search-container {
+  position: relative;
+  width: 250px;
+  margin-top: 10px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 8px 40px 8px 15px;
+  border: 2px solid #188AFF;
+  border-radius: 30px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.search-input:focus {
+  border-color: #0f6fdc;
+}
+
+.search-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #188AFF;
+  font-size: 1rem;
+}
+
+.add-btn {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.add-btn button {
+  background-color: #188AFF;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.bici-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(120deg, #E6F7FF, #B0E0FF);
+  border-radius: 15px;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.bici-icon {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.bici-actions {
+  display: flex;
+  gap: 5px;
+}
+
+/* MODALES */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s ease;
+}
+
+.modal-overlay.show {
+  display: flex;
+  opacity: 1;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 15px;
+}
+
+/* Botones de modales con estilo minimalista y redondeado */
+.confirm-btn {
+  background-color: #188AFF;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.confirm-btn:hover {
+  background-color: #0f6fdc;
+}
+
+.cancel-btn {
+  background-color: #188AFF;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.cancel-btn:hover {
+  background-color: #0f6fdc;
+}
+
+/* Estilo para inputs de modales */
+.modal-input {
+  width: 100%;
+  padding: 10px 15px;
+  border: 2px solid #188AFF;
+  border-radius: 30px;
+  font-size: 1rem;
+  margin-top: 10px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.modal-input:focus {
+  border-color: #0f6fdc;
+}
+
+/* Texto en modales */
+.modal-text {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #444;
+}
+
+/* Botones de editar y eliminar */
+.edit-btn {
+  background-color: #FFC107; /* Amarillo */
+  color: #333;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.edit-btn:hover {
+  background-color: #e0a800;
+}
+
+.delete-btn {
+  background-color: #DC3545; /* Rojo */
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.delete-btn:hover {
+  background-color: #c82333;
+}
+@media (max-width: 768px) {
+    .header-container {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .search-container {
+      width: 100%;
+      max-width: 300px;
+      margin: 10px auto 0 auto;
+    }
+  }
