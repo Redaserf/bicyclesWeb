@@ -1,15 +1,24 @@
 <div id="content" class="container">
-  <div class="container mt-4 p-4 shadow-lg rounded-4 bg-white" id="main-container">   
-    <h1 class="titulo">
-      <i class="fas fa-route"></i> Mis Recorridos
-    </h1>
+  <div class="container mt-4 p-4 shadow-lg rounded-4 bg-white" id="main-container">
+    <!-- Header con título y buscador -->
+    <div class="header-container">
+      <h1 class="titulo">
+        <i class="fas fa-route"></i> Mis Recorridos
+      </h1>
+      <div class="search-container">
+        <input type="text" placeholder="Buscar por fecha o bicicleta" class="search-input">
+        <i class="fas fa-search search-icon"></i>
+      </div>
+    </div>
+
+    <!-- Tarjeta de Recorrido 1 -->
     <div class="bici-card">
       <div class="bici-icon">
         <i class="fas fa-route"></i>
       </div>
       <div class="bici-info">
         <div class="bici-title">Recorrido 1</div>
-        <div class="bici-meta">23KM - 2 Horas - 07/03/2025</div>
+        <div class="bici-meta">23KM - 2 Horas - 07/03/2025 - Bici: Specialized</div>
       </div>
       <button 
         class="view-details-btn" 
@@ -18,13 +27,15 @@
         <i class="fas fa-eye"></i>
       </button>
     </div>
+
+    <!-- Tarjeta de Recorrido 2 -->
     <div class="bici-card">
       <div class="bici-icon">
         <i class="fas fa-route"></i>
       </div>
       <div class="bici-info">
         <div class="bici-title">Recorrido 2</div>
-        <div class="bici-meta">30KM - 1.5 Horas - 08/03/2025</div>
+        <div class="bici-meta">30KM - 1.5 Horas - 08/03/2025 - Bici: Trek</div>
       </div>
       <button 
         class="view-details-btn" 
@@ -36,6 +47,7 @@
   </div>
 </div>
 
+<!-- MODAL PARA DETALLES DEL RECORRIDO 1 -->
 <div class="modal-overlay" id="modalRecorrido1">
   <div class="modal-content">
     <h2>Detalles del Recorrido</h2>
@@ -55,6 +67,10 @@
       <p>
         <i class="fas fa-calendar-alt"></i>
         <strong>Fecha:</strong> 07/03/2025
+      </p>
+      <p>
+        <i class="fas fa-bicycle"></i>
+        <strong>Bici:</strong> Specialized
       </p>
     </div>
     <div class="modal-buttons">
@@ -88,6 +104,10 @@
       <p>
         <i class="fas fa-calendar-alt"></i>
         <strong>Fecha:</strong> 08/03/2025
+      </p>
+      <p>
+        <i class="fas fa-bicycle"></i>
+        <strong>Bici:</strong> Trek
       </p>
     </div>
     <div class="modal-buttons">
