@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import AOS from 'aos';
 import Chart from 'chart.js/auto';
+import { SidebarUserComponent } from '../sidebar-user/sidebar-user.component';
 
 @Component({
   selector: 'app-estadisticauser',
-  imports: [],
+  imports: [SidebarUserComponent],
   templateUrl: './estadisticauser.component.html',
   styleUrl: './estadisticauser.component.css'
 })

@@ -68,6 +68,10 @@ export const routes: Routes = [
                 path:"recorridoshechos",
                 component:RecorridoshechosComponent
             },
+            {
+                path:"estadisticas",
+                component:EstadisticauserComponent
+            }
         ]
     },
 

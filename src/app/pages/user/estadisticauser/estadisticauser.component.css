@@ -19,9 +19,6 @@ body {
     width: 100% !important;
     height: auto !important;
   }
-  .container {
-    max-width: 100%;
-  }
   .bg-white {
     background: white;
   }
@@ -39,6 +36,19 @@ body {
   .nav-pills .nav-link.active {
     background-color: #0056b3;
   }
+  #content {
+    margin-left: 200px;
+    padding: 20px;
+    transition: margin-left 0.4s ease-in-out;
+  }
+  
+  @media (max-width: 768px) {
+    #content {
+      margin-left: 0;
+      padding-top: 60px;
+    }
+  }
+  
   #main-container {
     max-width: 900px;
     margin: auto;
@@ -46,16 +56,4 @@ body {
     border-radius: 20px;
     box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
     padding: 30px;
-  }
-  #content {
-    margin-left: 200px;
-    padding: 20px;
-    flex: 1;
-    transition: margin-left 0.4s ease-in-out;
-  }
-  @media (max-width: 768px) {
-    #content {
-      margin-left: 0;
-      padding-top: 60px;
-    }
   }
