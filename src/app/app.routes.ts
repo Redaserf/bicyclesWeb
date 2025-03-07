@@ -23,6 +23,9 @@ import { FormLoginGuard } from './guards/form-login.guard';
 import { FormRegisterGuard } from './guards/form-register.guard';
 import { PerfilAdminComponent } from './pages/admin/perfil-admin/perfil-admin.component';
 import { SidebarComponent } from './pages/admin/sidebar/sidebar.component';
+import { EstadisticasComponent } from './pages/admin/estadisticas/estadisticas.component';
+import { EstadisticauserComponent } from './pages/user/estadisticauser/estadisticauser.component';
+import { HomeuserComponent } from './pages/user/homeuser/homeuser.component';
 
 export const routes: Routes = [
 
@@ -82,9 +85,12 @@ export const routes: Routes = [
     {path: "recorrido", component: UserLayoutComponent},
     {path: "codigo", component: CodeVerificationComponent},
     {path: "resend", component: ResendCodeComponent},
+    {path:"estadisticasuser",component:EstadisticauserComponent},
+    {path:"homeuser",component:HomeuserComponent},
 
 
     // Tablas (admin)
+    {path:"estadisticasadmin",component:EstadisticasComponent},
     {path :"sidebaradmin",component:SidebarComponent},
     {path: "perfiladmin", component: PerfilAdminComponent},
     {path: "usuarios", component: TablaUsuariosComponent},
