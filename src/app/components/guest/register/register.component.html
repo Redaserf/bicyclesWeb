@@ -1,121 +1,82 @@
-<div class="container-personalizado" data-aos="fade-up">
-  <div class="register-card">
-    <!-- Logo -->
-    <div class="logo-container">
+<div class="container my-5" data-aos="fade-up">
+  <div class="card card-custom ">
+    <div class="text-center mb-3">
       <img src="images/logimg.png" alt="Logo" class="logo-img">
     </div>
-    
-    <div class="form-title">REGÍSTRATE</div>
+    <h3 class="text-center mb-4">REGÍSTRATE</h3>
 
     <form (ngSubmit)="save()" #registerForm="ngForm">
-      <!-- Nombre -->
-      <div class="input-group">
-        <span class="input-icon"><i class="far fa-user"></i></span>
-        <input 
-          type="text" 
-          class="input-field" 
-          name="firstName" 
-          [(ngModel)]="userObject.nombre" 
-          placeholder="Nombre" 
-          (input)="onInputChange()" 
-          required
-        >
-      </div>
-
-      <!-- Apellidos -->
-      <div class="input-group">
-        <span class="input-icon"><i class="far fa-user"></i></span>
-        <input 
-          type="text" 
-          class="input-field" 
-          name="lastName" 
-          [(ngModel)]="userObject.apellido" 
-          placeholder="Apellidos" 
-          (input)="onInputChange()" 
-          required
-        >
-      </div>
-
-      <!-- Fila de Peso y Estatura -->
-      <div class="input-row">
-        <!-- Peso -->
-        <div class="input-group">
-          <span class="input-icon"><i class="fas fa-weight"></i></span>
-          <input 
-            type="number" 
-            class="input-field" 
-            name="weight" 
-            [(ngModel)]="userObject.peso" 
-            placeholder="Peso" 
-            (input)="onInputChange()"
-            required
-          >
+      <div class="row">
+        <div class="col-md-6">
+          <div class="input-group-custom d-flex align-items-center">
+            <i class="fa-regular fa-user"></i>
+            <input type="text" class="form-control" placeholder="Nombre" name="firstName" [(ngModel)]="userObject.nombre" required>
+          </div>
         </div>
-        <!-- Estatura -->
-        <div class="input-group">
-          <span class="input-icon"><i class="fas fa-ruler"></i></span>
-          <input 
-            type="number" 
-            class="input-field" 
-            name="height" 
-            [(ngModel)]="userObject.estatura" 
-            placeholder="Estatura" 
-            (input)="onInputChange()"
-            required
-          >
+
+        <div class="col-md-6">
+          <div class="input-group-custom d-flex align-items-center">
+            <i class="fa-regular fa-user"></i>
+            <input type="text" class="form-control" placeholder="Apellidos" name="lastName" [(ngModel)]="userObject.apellido" required>
+          </div>
         </div>
       </div>
 
-      <!-- Email -->
-      <div class="input-group">
-        <span class="input-icon"><i class="far fa-envelope"></i></span>
-        <input 
-          type="email" 
-          class="input-field" 
-          name="email" 
-          [(ngModel)]="userObject.email" 
-          placeholder="Email" 
-          (input)="onInputChange()" 
-          required
-        >
+      <div class="row">
+        <div class="col-md-6">
+          <div class="input-group-custom d-flex align-items-center">
+            <i class="fa-solid fa-weight-scale"></i>
+            <input type="number" class="form-control" placeholder="Peso" name="weight" [(ngModel)]="userObject.peso" required>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="input-group-custom d-flex align-items-center">
+            <i class="fa-solid fa-ruler"></i>
+            <input type="number" class="form-control" placeholder="Estatura" name="height" [(ngModel)]="userObject.estatura" required>
+          </div>
+        </div>
       </div>
 
-      <!-- Contraseña -->
-      <div class="input-group">
-        <span class="input-icon"><i class="fas fa-key"></i></span>
+      <div class="input-group-custom d-flex align-items-center">
+        <i class="fa-regular fa-envelope"></i>
+        <input type="email" class="form-control" placeholder="Email" name="email" [(ngModel)]="userObject.email" required>
+      </div>
+      <div class="input-group-custom d-flex align-items-center">
+        <!-- Tu ícono principal de candado -->
+        <i class="fa-solid fa-key"></i>
+      
+        <!-- Input con binding para mostrar/ocultar -->
         <input 
-          type="password" 
-          class="input-field" 
-          name="password" 
-          [(ngModel)]="userObject.password" 
-          placeholder="Contraseña" 
-          (input)="onInputChange()" 
+          [type]="verPassword ? 'text' : 'password'"
+          class="form-control"
+          placeholder="Contraseña"
+          name="password"
+          [(ngModel)]="userObject.password"
+          (input)="onInputChange()"
           required
         >
-      </div>
-
-      <!-- Confirmar Contraseña -->
-      <div class="input-group">
-        <span class="input-icon"><i class="fas fa-key"></i></span>
-        <input 
-          type="password" 
-          class="input-field" 
-          name="confirmPassword" 
-          [(ngModel)]="confirm_password" 
-          placeholder="Confirmar Contraseña" 
-          (input)="onInputChange()" 
-          required
+      
+        <!-- Ojito toggle -->
+        <span 
+          class="toggle-pass ms-2" 
+          (click)="verPassword = !verPassword"
         >
+          <fa-icon [icon]="verPassword ? faEyeSlash : faEye"></fa-icon>
+        </span>
+      </div>
+      <div class="input-group-custom d-flex align-items-center">
+        <i class="fa-solid fa-key"></i>
+        <input type="password" class="form-control" placeholder="Confirmar contraseña" name="confirmPassword" [(ngModel)]="confirm_password" required>
       </div>
 
-      <!-- Botón de registro -->
-      <button class="btn-submit" type="submit" [disabled]="!registerForm.form.valid">
+      <button type="submit" class="btn btn-custom w-100 mt-2" [disabled]="!registerForm.form.valid">
         Registrarse
       </button>
-    </form>
 
-    <div class="register-link">
-      ¿Ya tienes una cuenta? <a routerLink="/auth/login">Inicia sesión</a>
-    </div>
+      <p class="text-center mt-3">
+        ¿Ya tienes cuenta? <a routerLink="/auth/login" class="text-decoration-none">Inicia sesión</a>
+      </p>
+    </form>
   </div>
 </div>

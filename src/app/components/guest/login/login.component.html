@@ -1,49 +1,54 @@
-<div class="container-personalizado" data-aos="fade-up">
-    <div class="login-card">
-      <div class="logo-container">
-        <img src="images/logimg.png" alt="Logo" class="logo-img">
-      </div>
-      <div class="form-title">LOGIN</div>
-  
-      <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
-        <div class="input-group">
-          <span class="input-icon">
-            <fa-icon [icon]="faUser"></fa-icon>
-          </span>
-          <input 
-            type="text" 
-            class="input-field" 
-            placeholder="Usuario" 
-            name="username" 
-            [(ngModel)]="username" 
-            required
-          >
-        </div>
-  
-        <div class="input-group">
-          <span class="input-icon">
-            <fa-icon [icon]="faKey"></fa-icon>
-          </span>
-          <input 
-            type="password" 
-            class="input-field" 
-            placeholder="Contraseña" 
-            name="password" 
-            [(ngModel)]="password" 
-            required
-          >
-        </div>
-  
-        <button 
-          class="btn-submit" 
-          [disabled]="!loginForm.form.valid"
-        >
-          Iniciar Sesión
-        </button>
-  
-        <div class="register-link">
-          ¿No tienes cuenta? <a routerLink="/auth/register">Regístrate</a>
-        </div>
-      </form>
+<div class="container my-5 container-personalizado" data-aos="fade-up">
+  <div class="card card-custom ">
+    <div class="text-center mb-3">
+      <img src="images/logimg.png" alt="Logo" class="logo-img">
     </div>
+
+    <h3 class="text-center mb-4">INICIA SESIÓN</h3>
+
+    <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+
+      <div class="input-group-custom d-flex align-items-center">
+        <span class="input-icon">
+          <fa-icon [icon]="faUser"></fa-icon>
+        </span>
+        <input 
+          type="text" 
+          class="form-control input-field" 
+          placeholder="Usuario" 
+          name="username" 
+          [(ngModel)]="username" 
+          required>
+      </div>
+
+      <div class="input-group-custom d-flex align-items-center">
+        <span class="input-icon">
+          <fa-icon [icon]="faKey"></fa-icon>
+        </span>
+        <input 
+          [type]="verPassword ? 'text' : 'password'"
+          class="input-field" 
+          placeholder="Contraseña" 
+          name="password" 
+          [(ngModel)]="password" 
+          required
+        >
+        <span class="input-icon toggle-pass" (click)="verPassword = !verPassword">
+          <fa-icon [icon]="verPassword ? faEyeSlash : faEye"></fa-icon>
+        </span>
+      </div>
+
+      <button 
+        class="btn-custom w-100 mt-3" 
+        type="submit" 
+        [disabled]="!loginForm.form.valid"
+      >
+        Iniciar Sesión
+      </button>
+
+      <p class="text-center mt-3">
+        ¿Aún no tienes cuenta? <a routerLink="/auth/register" class="text-decoration-none">Regístrate aquí</a>
+      </p>
+    </form>
   </div>
+</div>
