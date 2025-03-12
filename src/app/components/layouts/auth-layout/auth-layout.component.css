@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 
 
-.auth-layout{
+.auth-layout {
     font-family: 'Montserrat', sans-serif;
     background-color: #ECF7FF;
     background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat-back.svg');
@@ -9,9 +9,10 @@
     background-repeat: repeat;
     background-size: 4%;
     margin: 0;
-    padding: 0;
+    padding: 0 15px; /* Padding horizontal para que no se pegue a los bordes en móviles */
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-}
+    width: 100%;
+  }

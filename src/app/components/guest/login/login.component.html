@@ -1,24 +1,49 @@
-<div class="wrapper" data-aos="fade-up">
-    <div class="logo">
-        <img src="images/image.png" alt="Logo">
-    </div>
-    <div class="text-center name">INICIA SESIÓN</div>
-    
-    <form class="p-2 mt-3" (ngSubmit)="onSubmit()">
-        <div class="form-field d-flex align-items-center">
-            <fa-icon [icon]="faUser" class="icon"></fa-icon>
-            <input type="text" name="userName" id="userName" placeholder="Usuario" [(ngModel)]="username" (input)="onInputChange()" required>
+<div class="container-personalizado" data-aos="fade-up">
+    <div class="login-card">
+      <div class="logo-container">
+        <img src="images/logimg.png" alt="Logo" class="logo-img">
+      </div>
+      <div class="form-title">LOGIN</div>
+  
+      <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+        <div class="input-group">
+          <span class="input-icon">
+            <fa-icon [icon]="faUser"></fa-icon>
+          </span>
+          <input 
+            type="text" 
+            class="input-field" 
+            placeholder="Usuario" 
+            name="username" 
+            [(ngModel)]="username" 
+            required
+          >
         </div>
-        
-        <div class="form-field d-flex align-items-center">
-            <fa-icon [icon]="faKey" class="icon"></fa-icon>
-            <input type="password" name="password" id="pwd" placeholder="Contraseña" [(ngModel)]="password" (input)="onInputChange()" required>
+  
+        <div class="input-group">
+          <span class="input-icon">
+            <fa-icon [icon]="faKey"></fa-icon>
+          </span>
+          <input 
+            type="password" 
+            class="input-field" 
+            placeholder="Contraseña" 
+            name="password" 
+            [(ngModel)]="password" 
+            required
+          >
         </div>
-        
-        <button class="btn mt-2" type="submit">Ingresar</button>
-    </form>
-
-    <div class="text-center fs-6 mt-2">
-        ¿No tienes una cuenta? <a routerLink="/auth/register">Regístrate</a>
+  
+        <button 
+          class="btn-submit" 
+          [disabled]="!loginForm.form.valid"
+        >
+          Iniciar Sesión
+        </button>
+  
+        <div class="register-link">
+          ¿No tienes cuenta? <a routerLink="/auth/register">Regístrate</a>
+        </div>
+      </form>
     </div>
-</div>
+  </div>

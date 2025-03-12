@@ -23,6 +23,9 @@
     color: inherit;
     opacity: 0.75;
   }
+  i{
+    color: white;
+  }
   
   .footer-basic .social > a:hover {
     opacity: 0.9;

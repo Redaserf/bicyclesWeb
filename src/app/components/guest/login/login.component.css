@@ -1,119 +1,147 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
 
-body {
-    font-family: 'Montserrat', sans-serif;
-    background-color: #ECF7FF;
-    background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat-back.svg');
-    background-position: center;
-    background-repeat: repeat;
-    background-size: 4%;
-    margin: 0;
-    padding: 0;
+/* 
+   Ajusta esta clase .auth-layout a tu contenedor principal 
+   si quieres usar un layout global o en tu componente.
+*/
+.container-personalizado{
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
 }
-
-.wrapper {
-    width: 100%;
-    max-width: 380px;
-    padding: 30px 25px;
-    background-color: #ecf0f3;
-    border-radius: 20px;
-    box-shadow: 8px 8px 15px #b8b9be, -8px -8px 15px #ffffff;
-}
-
-.logo {
-    width: 90px;
-    margin: 0 auto 15px;
-}
-
-.logo img {
-    width: 100%;
-    height: 90px;
-    object-fit: cover;
-    border-radius: 50%;
-    box-shadow: 4px 4px 8px #b8b9be, -4px -4px 8px #ffffff;
-}
-
-.wrapper .name {
-    font-weight: 600;
-    font-size: 1.5rem;
+.form-title{
     text-align: center;
-    color: #333;
-    margin-top: 10px;
+}
+.login-card {
+  width: 100%;
+  max-width: 850px;
+  padding: 40px 35px;
+  align-items: center;
+  background: #FFFFFF;
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(21, 101, 192, 0.8);
+  animation: shadowPulse 2s infinite alternate;
+  margin: 0 auto; /* Centra la tarjeta en caso de layouts más grandes */
 }
 
-.form-field {
-    display: flex;
-    align-items: center;
-    padding: 12px;
-    margin-bottom: 15px;
-    border-radius: 15px;
-    background: #ecf0f3;
-    box-shadow: inset 4px 4px 6px #b8b9be, inset -4px -4px 6px #ffffff;
+@keyframes shadowPulse {
+  from {
+    box-shadow: 0 0 20px rgba(21, 101, 192, 0.6);
+  }
+  to {
+    box-shadow: 0 0 35px rgba(21, 101, 192, 1);
+  }
 }
 
-.form-field input {
-    width: 100%;
-    border: none;
-    outline: none;
-    background: none;
-    font-size: 1rem;
-    padding: 8px;
-    color: #555;
+.logo-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 25px;
 }
 
-.icon {
-    color: #777;
-    margin-right: 10px;
-    font-size: 1.1rem;
+.logo-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #000;
 }
 
-.btn {
-    width: 100%;
-    height: 45px;
-    background-color: #03A9F4;
-    color: #fff;
-    border: none;
-    border-radius: 20px;
-    box-shadow: 4px 4px 8px #b8b9be, -4px -4px 8px #ffffff;
-    font-weight: 600;
-    transition: background 0.3s ease, transform 0.2s ease;
+.input-group {
+  display: flex;
+  align-items: center;
+  background: #BBDEFB;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  padding: 10px 12px;
 }
 
-.btn:hover {
-    background-color: #0288d1;
-    transform: scale(1.03);
+.input-icon {
+  color: #1565C0;
+  font-size: 20px;
+  margin-right: 10px;
 }
 
-.text-center a {
-    text-decoration: none;
-    font-size: 0.85rem;
-    color: #03A9F4;
+.input-field {
+  border: none;
+  background: transparent;
+  flex: 1;
+  font-size: 16px;
+  outline: none;
+  color: #333;
 }
 
-.text-center a:hover {
-    color: #0288d1;
+.btn-submit {
+  width: 100%;
+  background: #004AAD; /* Azul más intenso */
+  color: #FFFFFF;
+  border: none;
+  padding: 14px 0; /* Un poco más alto */
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 16px;
+  transition: background 0.3s;
+  margin-top: 5px;
 }
 
-@media (max-width: 480px) {
-    .wrapper {
-        max-width: 90%;
-        padding: 20px 15px;
-    }
+.btn-submit:disabled {
+  background: #90CAF9;
+  cursor: not-allowed;
+}
 
-    .form-field input {
-        font-size: 0.95rem;
-    }
+.btn-submit:hover:not(:disabled) {
+  background: #00337C;
+}
 
-    .logo {
-        width: 90px;
-    }
+.register-link {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 15px;
+}
 
-    .btn {
-        height: 40px;
-        font-size: 0.9rem;
-    }
+.register-link a {
+  color: #1565C0;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.register-link a:hover {
+  text-decoration: underline;
+}
+
+/* 
+   Responsividad: Ajustamos padding y tamaños 
+   para que se vea mejor en pantallas pequeñas 
+*/
+@media (max-width: 500px) {
+  .login-card {
+    padding: 30px 20px; /* Menos padding para caber mejor */
+  }
+
+  .logo-img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .input-group {
+    padding: 10px 12px;
+  }
+
+  .input-icon {
+    font-size: 18px;
+  }
+
+  .input-field {
+    font-size: 16px; /* Más legible en pantalla pequeña */
+  }
+
+  .btn-submit {
+    font-size: 16px;
+    padding: 14px 0;
+  }
+
+  .register-link {
+    font-size: 14px;
+  }
 }
