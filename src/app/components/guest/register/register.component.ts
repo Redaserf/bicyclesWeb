@@ -6,7 +6,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import * as AOS from 'aos';
-
+import { faUser, faKey ,faEye, 
+  faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+  
 @Component({
   selector: 'app-register',
   imports: [FontAwesomeModule, RouterLink, FormsModule],
@@ -21,6 +23,10 @@ export class RegisterComponent implements AfterViewInit, CanExit {
     email: '',
     password: '',
   }
+    faEye = faEye;
+  faEyeSlash = faEyeSlash;
+
+  verPassword: boolean = false;
 
   confirm_password: string = '';
   isFormDirty: boolean = false;

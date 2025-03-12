@@ -4,7 +4,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import * as AOS from 'aos';
-import { faUser, faKey } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faKey ,faEye, 
+  faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import Swal from 'sweetalert2'
 import { Observable } from 'rxjs';
 
@@ -17,10 +18,16 @@ import { Observable } from 'rxjs';
 export class LoginComponent implements AfterViewInit, CanExit {
   faUser = faUser;
   faKey = faKey;
+  faEye = faEye;
+faEyeSlash = faEyeSlash;
   username: string = '';
+  verPassword: boolean = false;
   password: string = '';
   isFormDirty: boolean = false;
 
+  login() {
+    // tu lógica del login aquí
+  }
   ngAfterViewInit(): void {
     AOS.init({
       offset: 100,
@@ -59,6 +66,7 @@ export class LoginComponent implements AfterViewInit, CanExit {
       });
     });
   }
+  
 
   onInputChange() {
     this.isFormDirty = true; 
