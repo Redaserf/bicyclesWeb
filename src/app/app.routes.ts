@@ -43,7 +43,7 @@ export const routes: Routes = [
 
     // =========[ Guest ]=========
 
-    { path: '', component: GuestLayoutComponent, pathMatch: 'full'},
+    { path: '', redirectTo: 'home', pathMatch: 'full'},
     { path: 'home', component: GuestLayoutComponent, pathMatch: 'full'},
 
     // =========[ User ]=========
