@@ -1,0 +1,24 @@
+<button id="toggleMenu" (click)="toggleSidebar()">
+    <i [class]="menuAbierto ? 'fas fa-times' : 'fas fa-bars'"></i>
+  </button>
+  
+  <div id="mainNav" class="d-flex flex-column justify-content-between" [ngClass]="{'active': menuAbierto}">
+    <div>
+        <div class="logo-container">
+            <img src="images/bicyclesBlanco.png" alt="Bicycles">
+        </div>
+
+        <ul class="list-unstyled ms-2">
+            <li><a class="vlink" [routerLink]="['/user/home']"><i class="fas fa-th-large"></i><span>General</span></a></li>
+            <li><a class="vlink" [routerLink]="['/user/bicicletas']"><i class="fas fa-bicycle"></i><span>Bicicletas</span></a></li>
+            <li><a class="vlink" [routerLink]="['/user/recorridos']"><i class="fas fa-route"></i><span>Recorridos</span></a></li>
+            <li><a class="vlink" [routerLink]="['/user/estadisticas']"><i class="fas fa-chart-line"></i><span>Estadísticas</span></a></li>
+            <li><a class="vlink" [routerLink]="['/user/perfil']"><i class="fas fa-user-circle"></i><span>Perfil</span></a></li>
+        </ul>
+    </div>
+
+    <!-- Botón de Cerrar Sesión -->
+    <button id="logoutBtn">
+        <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+    </button>
+</div>

@@ -1,0 +1,82 @@
+<div class="container my-5" data-aos="fade-up">
+  <div class="card card-custom ">
+    <div class="text-center mb-3">
+      <img src="images/logimg.png" alt="Logo" class="logo-img">
+    </div>
+    <h3 class="text-center mb-4">REGÍSTRATE</h3>
+
+    <form (ngSubmit)="save()" #registerForm="ngForm">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="input-group-custom d-flex align-items-center">
+            <i class="fa-regular fa-user"></i>
+            <input type="text" class="form-control" placeholder="Nombre" name="firstName" [(ngModel)]="userObject.nombre" required>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="input-group-custom d-flex align-items-center">
+            <i class="fa-regular fa-user"></i>
+            <input type="text" class="form-control" placeholder="Apellidos" name="lastName" [(ngModel)]="userObject.apellido" required>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="input-group-custom d-flex align-items-center">
+            <i class="fa-solid fa-weight-scale"></i>
+            <input type="number" class="form-control" placeholder="Peso" name="weight" [(ngModel)]="userObject.peso" required>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="input-group-custom d-flex align-items-center">
+            <i class="fa-solid fa-ruler"></i>
+            <input type="number" class="form-control" placeholder="Estatura" name="height" [(ngModel)]="userObject.estatura" required>
+          </div>
+        </div>
+      </div>
+
+      <div class="input-group-custom d-flex align-items-center">
+        <i class="fa-regular fa-envelope"></i>
+        <input type="email" class="form-control" placeholder="Email" name="email" [(ngModel)]="userObject.email" required>
+      </div>
+      <div class="input-group-custom d-flex align-items-center">
+        <!-- Tu ícono principal de candado -->
+        <i class="fa-solid fa-key"></i>
+      
+        <!-- Input con binding para mostrar/ocultar -->
+        <input 
+          [type]="verPassword ? 'text' : 'password'"
+          class="form-control"
+          placeholder="Contraseña"
+          name="password"
+          [(ngModel)]="userObject.password"
+          (input)="onInputChange()"
+          required
+        >
+      
+        <!-- Ojito toggle -->
+        <span 
+          class="toggle-pass ms-2" 
+          (click)="verPassword = !verPassword"
+        >
+          <fa-icon [icon]="verPassword ? faEyeSlash : faEye"></fa-icon>
+        </span>
+      </div>
+      <div class="input-group-custom d-flex align-items-center">
+        <i class="fa-solid fa-key"></i>
+        <input type="password" class="form-control" placeholder="Confirmar contraseña" name="confirmPassword" [(ngModel)]="confirm_password" required>
+      </div>
+
+      <button type="submit" class="btn btn-custom w-100 mt-2" [disabled]="!registerForm.form.valid">
+        Registrarse
+      </button>
+
+      <p class="text-center mt-3">
+        ¿Ya tienes cuenta? <a routerLink="/auth/login" class="text-decoration-none">Inicia sesión</a>
+      </p>
+    </form>
+  </div>
+</div>

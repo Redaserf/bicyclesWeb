@@ -1,0 +1,99 @@
+body {
+  background-color: #f0f6ff;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.card-custom {
+  max-width: 850px;
+  border-radius: 20px;
+  padding: 30px;
+  background-color: #fff;
+  margin: 30px auto;
+  box-shadow: 0 0 25px rgba(21, 101, 192, 0.8);
+  animation: shadowPulse 2s infinite alternate;
+  transition: transform 0.3s ease;
+}
+
+@keyframes shadowPulse {
+  from {
+    box-shadow: 0 0 20px rgba(21, 101, 192, 0.6);
+  }
+  to {
+    box-shadow: 0 0 35px rgba(21, 101, 192, 1);
+  }
+}
+
+.logo-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid #1565C0;
+  object-fit: cover;
+}
+
+.input-group-custom {
+  background: #BBDEFB;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center; /* Esto alinea perfectamente iconos e inputs */
+}
+
+.input-group-custom input {
+  border: none;
+  background: transparent;
+  outline: none;
+  color: #333;
+  width: 100%;
+  font-size: 16px; /* tamaño estándar para alineación perfecta */
+  padding: 4px 0; /* para centrar verticalmente el texto */
+}
+
+.input-group-custom i, .input-group-custom .input-icon {
+  color: #1565C0;
+  font-size: 20px;
+  display: flex;
+  align-items: center; /* alineación vertical centrada perfecta */
+  justify-content: center;
+  margin-right: 10px;
+}
+
+.btn-custom {
+  background-color: #004AAD;
+  color: white;
+  border-radius: 10px;
+  font-weight: 600;
+  padding: 12px;
+  transition: background 0.3s;
+}
+
+.btn-custom:hover:not(:disabled) {
+  background-color: #00337C;
+}
+
+.btn-custom:disabled {
+  background-color: #90CAF9;
+}
+
+@media(max-width:576px){
+  .card-custom {
+    margin-top:120px;
+    padding: 20px;
+  }
+  .logo-img { 
+    width: 70px; 
+    height: 70px; 
+  }
+}
+.toggle-pass {
+  padding: auto;
+  cursor: pointer;
+  color: #1565C0;
+  margin-left: 0px;
+}
+
+.input-icon {
+  display: flex;
+  align-items: center;
+}

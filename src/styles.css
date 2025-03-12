@@ -1,2 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 @import "aos/dist/aos.css";
+
+.custom-swal-popup {
+    border-radius: 20px; /* Bordes redondeados */
+    box-shadow: 0px 0px 15px rgba(48, 133, 214, 0.6); /* Sombra azul */
+    border: 2px solid #3085d6; /* Borde azul */
+    padding: 20px; /* Espaciado interno */
+  }

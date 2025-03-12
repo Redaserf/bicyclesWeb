@@ -1,0 +1,113 @@
+
+
+a {
+    text-decoration: none;
+}
+
+#mainNav {
+    background: linear-gradient(180deg, #188AFF, #188AFF);
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 10px 0;
+    border-radius: 0 10px 10px 0;
+    transition: transform 0.4s ease-in-out;
+    width: 200px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 998;
+}
+
+.logo-container {
+    text-align: center;
+    padding: 10px;
+    margin-top: 60px;
+}
+
+.logo-container img {
+    max-width: 150px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.vlink {
+    color: white !important;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background 0.3s, transform 0.3s;
+    border-radius: 8px;
+}
+
+.vlink i {
+    font-size: 1.5rem;
+    color: white !important; /* Asegura que los iconos también sean blancos */
+}
+
+.vlink:hover {
+    background: #0056b3;
+    transform: translateX(5px);
+}
+
+#toggleMenu {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    background: #188AFF;
+    border: none;
+    color: white;
+    padding: 8px;
+    border-radius: 40%;
+    cursor: pointer;
+    z-index: 1000;
+    display: none;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+#toggleMenu:hover {
+    background: #188AFF;
+    transform: scale(1.1);
+}
+
+#toggleMenu i {
+    font-size: 1.4rem;
+}
+
+@media (max-width: 768px) {
+    #mainNav {
+        transform: translateX(-100%);
+    }
+
+    #mainNav.active {
+        transform: translateX(0);
+    }
+
+    #toggleMenu {
+        display: block;
+    }
+}
+#logoutBtn {
+    background: #2600ff;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    margin: 20px;
+    width: calc(100% - 40px);
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+#logoutBtn:hover {
+    background: #c82333;
+    transform: scale(1.05);
+}
+
+/* esta clase es para los otros componentes que estén */
+/* #content {
+    margin-left: 200px;
+    padding: 20px;
+    flex: 1;
+    transition: margin-left 0.4s ease-in-out;
+} */

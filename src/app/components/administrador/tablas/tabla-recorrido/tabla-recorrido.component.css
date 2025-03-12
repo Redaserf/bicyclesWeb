@@ -1,0 +1,105 @@
+/* Panel de la tabla */
+.panel {
+    background: linear-gradient(to right, #188AFF, #188AFF);
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 0 0 5px rgba(0,0,0,0.05), 0 0 0 10px rgba(0,0,0,0.05);
+  }
+  .panel .panel-heading {
+    padding: 20px 15px;
+    border-radius: 10px 10px 0 0;
+    margin: 0;
+  }
+  .panel .panel-heading .title {
+    color: #fff;
+    font-size: 28px;
+    font-weight: 500;
+    text-transform: capitalize;
+    line-height: 40px;
+    margin: 0;
+  }
+  .panel .panel-heading .btn_group {
+    text-align: end;
+  }
+  .panel .panel-heading .form-control {
+    color: #fff;
+    background-color: transparent;
+    width: 70%;
+    height: 40px;
+    border: 2px solid #fff;
+    border-radius: 20px;
+    display: inline-block;
+    transition: all 0.3s ease;
+  }
+  .panel .panel-heading .form-control:focus {
+    background-color: rgba(255,255,255,0.2);
+    box-shadow: none;
+    outline: none;
+  }
+  .panel .panel-heading .form-control::placeholder {
+    color: rgba(255,255,255,0.5);
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  .panel .panel-body {
+    padding: 0;
+  }
+
+  /* Encabezado de la tabla */
+  .panel .panel-body .table thead tr th {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.545);
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+    padding: 12px;
+    border: none;
+  }
+
+  /* Cuerpo de la tabla */
+  .panel .panel-body .table tbody tr td {
+    color: #000;                /* Texto en negro */
+    background-color: #fff;     /* Fondo blanco para contraste */
+    font-size: 15px;
+    padding: 15px 12px;         /* Espacio entre datos */
+    vertical-align: middle;
+    border: none;
+  }
+
+  /* Lista de acciones */
+  .panel .panel-body .table tbody .action-list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+  .panel .panel-body .table tbody .action-list li {
+    display: inline-block;
+    margin: 0 5px;
+  }
+  .panel .panel-body .table tbody .action-list li a {
+    color: #24a5fb;            /* Se puede ajustar el color del icono/texto de la acción */
+    font-size: 15px;
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease;
+    text-decoration: none;
+  }
+  .panel .panel-body .table tbody .action-list li a:hover {
+    text-shadow: 1px 1px 0 rgba(0,0,0,0.2);
+  }
+
+  /* Se elimina el footer de panel si no se requiere paginación */
+  .panel .panel-footer {
+    display: none;
+  }
+
+  @media only screen and (max-width:767px) {
+    .panel .panel-heading .title {
+      text-align: center;
+      margin: 0 0 10px;
+    }
+    .panel .panel-heading .btn_group {
+      text-align: center;
+    }
+  }

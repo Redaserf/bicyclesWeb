@@ -1,0 +1,22 @@
+<section  class="d-flex flex-column justify-content-center align-items-center" style="height: 100vh;  background-color: #ECF7FF;
+background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat-back.svg');
+background-position: center;
+background-repeat: repeat;
+background-size: 4%;
+margin: 0;
+padding: 0;">
+    <app-logo></app-logo>
+
+    <input class="menu-icon" type="checkbox" id="menu-icon" name="menu-icon"/>
+    <label for="menu-icon"></label>
+
+    <nav class="nav">     
+        <ul class="pt-5 list-unstyled d-flex flex-column align-items-center">
+            <li *ngFor="let opcion of opcionesSeguimiento"><a routerLink="{{ opcion.ruta }}">{{ opcion.nombre }}</a></li>
+        </ul>
+    </nav>
+
+    <div data-aos="fade-up" data-aos-duration="1000" class="section-center">
+        <h1 class="mb-0">BICYCLES</h1>
+    </div>
+</section>

@@ -1,0 +1,61 @@
+<!-- Fondo oscuro para el modal -->
+<div #overlay id="modalOverlay" class="overlay" (click)="closeModal()"></div>
+
+<!-- Modal de eliminar -->
+<div #modal id="deleteModal" class="card">
+  <div class="card-content">
+    <p class="card-heading">¿Eliminar usuario?</p>
+    <p class="card-description">Esta acción no se puede deshacer.</p>
+  </div>
+  <div class="card-button-wrapper">
+    <button class="card-button secondary" (click)="closeModal()">Cancelar</button>
+    <button class="card-button primary" (click)="deleteUser()">Eliminar</button>
+  </div>
+  <button class="exit-button" (click)="closeModal()">
+    <svg height="20px" viewBox="0 0 384 512">
+      <path
+        d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
+      ></path>
+    </svg>
+  </button>
+</div>
+
+<div class="container">
+
+  <!-- Tabla de usuarios -->
+  <div class="panel">
+    <div class="panel-heading">
+      <h2 class="panel-title">Usuarios</h2>
+    </div>
+    <div class="panel-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Acciones</th>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Edad</th>
+            <th>Peso</th>
+            <th>Estatura</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <ul class="action-list">
+                <li><button class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></button></li>
+                <li><button class="btn btn-danger btn-sm" (click)="openModal()"><i class="fa fa-trash"></i> </button></li>
+              </ul>
+            </td>
+            <td>asd</td>
+            <td>asd</td>
+            <td>asd</td>
+            <td>kg</td>
+            <td>m</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
