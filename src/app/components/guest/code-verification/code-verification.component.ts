@@ -10,7 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './code-verification.component.css'
 })
 export class CodeVerificationComponent {
-  code: string[] = ['', '', '', '', '', ''];
+  code: string = ''; // Ahora es una sola cadena en lugar de un array
   email: string = '';
 
   constructor(
@@ -22,42 +22,30 @@ export class CodeVerificationComponent {
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.email = params['email'] || '';
+      console.log("Email recibido:", this.email); 
     });
   }
 
   onSubmit(): void {
-    const verificationCode = this.code.join('');
+    console.log("Código ingresado:", this.code);
 
-    this.authService.verifyCode(this.email, verificationCode)
+    if (!this.email) {
+      alert("No se ha recibido un correo válido.");
+      return;
+    }
+
+    if (this.code.length !== 6) {
+      alert("El código debe tener 6 dígitos.");
+      return;
+    }
+
+    this.authService.verifyCode(this.email, this.code)
       .then(response => {
         alert('Código verificado correctamente.');
-        this.router.navigate(['/user/home']); // Redirigir al usuario
+        this.router.navigate(['/user/home']); 
       })
       .catch(error => {
         alert(error.mensaje || 'Código incorrecto. Inténtalo de nuevo.');
       });
   }
-
-  moveFocus(nextInput: HTMLInputElement | null, event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.value.length === 1 && nextInput) {
-      nextInput.focus();
-    }
-  }
-
-  moveFocusBack(previousInput: HTMLInputElement | null, event: Event): void {
-    const keyboardEvent = event as KeyboardEvent;
-    const input = event.target as HTMLInputElement;
-  
-    if (keyboardEvent.key === "Backspace") {
-      input.value = '';  // Borra el contenido del input actual
-      const index = this.code.indexOf(input.value);
-      if (index !== -1) {
-        this.code[index] = ''; // Asegura que también se borre en el array
-      }
-      if (previousInput) {
-        previousInput.focus(); // Mueve el foco al input anterior
-      }
-    }
-  }  
 }

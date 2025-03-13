@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
+import { Observable, from } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -77,6 +78,8 @@ export class AuthService {
   // ========================================================================================
 
   async verifyCode(email: string, code: string) {
+    console.log("Código a enviar:", code);
+
     try {
       const response = await axios.post(`${this.apiUrl}/verify-code`, {
         email,
@@ -93,6 +96,23 @@ export class AuthService {
       return this.handleError(error);
     }
   }  
+
+  // ========================================================================================
+
+  getAuthenticatedUser(): Observable<any> {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      return new Observable(observer => observer.next(null));
+    }
+
+    return from(
+      axios.get(`${this.apiUrl}/user`, {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      .then(response => response.data)
+      .catch(() => null)
+    );
+  }
 
   // ========================================================================================
 
