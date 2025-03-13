@@ -1,13 +1,34 @@
 import { Injectable } from '@angular/core';
-import axios from 'axios';
+import axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
   private apiUrl = 'http://127.0.0.1:8000/api/v1';
 
   constructor() {}
+
+//   private axiosInstance: AxiosInstance;
+
+//   constructor() {
+//     this.axiosInstance = axios.create({
+//       baseURL: 'http://127.0.0.1:8000/api/v1',
+//       timeout: 1000,
+//       headers: {
+//         'Content-Type': 'application/json',
+//       }
+//     });
+
+//     this.axiosInstance.interceptors.request.use((config) => {
+//       const token = localStorage.getItem('token');
+//       if (token) {
+//         config.headers.Authorization = `Bearer ${token}`;
+//       }
+//       return config;
+//     });
+//   }
 
   async register(
     nombre: string,
@@ -69,67 +90,31 @@ export class AuthService {
     }
   }
   
-
-  async verifyCode(email: string, codigo: string) {
-    try {
-      const response = await axios.post(`${this.apiUrl}/verificar-codigo`, { email, codigo });
-
-      if (response.data.token) {
-        localStorage.setItem('token', response.data.token);
-      }
-
-      return response.data;
-    } catch (error: any) {
-      return this.handleError(error);
-    }
+  public verifyCode(email: string, codigo: string) {
+    return this.axiosInstance.post('/verificar-codigo', { email, codigo })
+      .catch(this.handleError);
   }
 
-  async requestVerificationEmail(email: string) {
-    try {
-      const response = await axios.post(`${this.apiUrl}/reenviar`, { email });
-      return response.data;
-    } catch (error: any) {
-      return this.handleError(error);
-    }
+  public requestVerificationEmail(email: string) {
+    return this.axiosInstance.post('/reenviar', { email })
+      .catch(this.handleError);
   }
 
-  async forgotPassword(email: string) {
-    try {
-      const response = await axios.post(`${this.apiUrl}/forgot-password`, { email });
-      return response.data;
-    } catch (error: any) {
-      return this.handleError(error);
-    }
+  public forgotPassword(email: string) {
+    return this.axiosInstance.post('/forgot-password', { email })
+      .catch(this.handleError);
   }
 
-  async resetPassword(email: string, password: string, token: string) {
-    try {
-      const response = await axios.post(`${this.apiUrl}/reset-password`, { email, password, token });
-      return response.data;
-    } catch (error: any) {
-      return this.handleError(error);
-    }
+  public resetPassword(email: string, password: string, token: string) {
+    return this.axiosInstance.post('/reset-password', { email, password, token })
+      .catch(this.handleError);
   }
 
-  async logout() {
-    try {
-      localStorage.removeItem('token');
+  public logout() {
+    localStorage.removeItem('token');
 
-      await axios.post(`${this.apiUrl}/logout`, {}, {
-        headers: { Authorization: `Bearer ${this.getToken()}` }
-      });
-
-    } catch (error: any) {
-      console.warn('Error al cerrar sesión', error);
-    }
-  }
-
-  getToken() {
-    return localStorage.getItem('token');
-  }
-
-  isAuthenticated(): boolean {
-    return !!this.getToken();
+    return this.axiosInstance.post('/logout', {})
+      .catch(this.handleError);
   }
 
   // Manejo de errores

@@ -1,44 +1,32 @@
-<div id="content" class="container">
-    <div class="profile-container" data-aos="fade-up">
+<div class="container">
+  <div class="card shadow-sm mb-4">
+    <div class="card-header" style="background-color: #2794ff; color: #fff; border-radius: 10px 10px 0 0;">
+      <h3 class="m-0 py-2">Perfil</h3>
+    </div>
+    <form [formGroup]="perfilForm" (ngSubmit)="guardarPerfil()" novalidate class="p-4">
       <div class="row">
-        <div class="col-md-4 text-center">
-          <img src="images/image.png" alt="Foto de Perfil" class="profile-pic" />
-          <p>Cambiar foto</p>
-          <input type="file" class="form-control" />
-          <div class="mt-3">
-            <h2>Admin</h2>
-          </div>
+        <div class="col-md-6 mb-3">
+          <input formControlName="nombre" class="form-control" placeholder="Nombre" />
         </div>
-        <div class="col-md-8">
-          <h2>Perfil</h2>
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <input type="text" class="form-control" placeholder="Nombre" />
-            </div>
-            <div class="col-md-6 mb-3">
-              <input type="text" class="form-control" placeholder="Apellidos" />
-            </div>
-            <div class="col-md-6 mb-3">
-              <input type="text" class="form-control" placeholder="Teléfono" />
-            </div>
-            <div class="col-md-6 mb-3">
-              <input type="text" class="form-control" placeholder="Móvil" />
-            </div>
-            <div class="col-md-6 mb-3">
-              <input type="email" class="form-control" placeholder="Email" />
-            </div>
-            <div class="col-md-6 mb-3">
-              <input type="text" class="form-control" placeholder="Ciudad" />
-            </div>
-            <div class="col-md-6 mb-3">
-              <input type="password" class="form-control" placeholder="Contraseña" />
-            </div>
-            <div class="col-md-6 mb-3">
-              <input type="password" class="form-control" placeholder="Verifica la contraseña" />
-            </div>
-          </div>
-          <button class="btn btn-save">Guardar</button>
+
+        <div class="col-md-6 mb-3">
+          <input formControlName="apellido" class="form-control" placeholder="Apellido" />
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <input type="email" formControlName="email" class="form-control" placeholder="Email" />
+        </div>
+
+        <div class="col-md-3 mb-3">
+          <input type="number" step="0.01" formControlName="peso" class="form-control" placeholder="Peso (kg)" />
+        </div>
+
+        <div class="col-md-3 mb-3">
+          <input type="number" step="0.01" formControlName="estatura" class="form-control" placeholder="Estatura (m)" />
         </div>
       </div>
-    </div>
+
+      <button type="submit" class="btn btn-save">Guardar Perfil</button>
+    </form>
   </div>
+</div>
