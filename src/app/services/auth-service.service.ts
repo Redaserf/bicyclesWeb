@@ -9,19 +9,33 @@ export class AuthService {
 
   constructor() {}
 
-  async register(nombre: string, apellido: string, peso: number, estatura: number, email: string, password: string) {
+  async register(
+    nombre: string,
+    apellido: string,
+    peso: number,
+    estatura: number,
+    email: string,
+    password: string
+  ) {
     try {
-      const response = await axios.post(`${this.apiUrl}/register`, { 
-        nombre, 
-        apellido, 
-        peso, 
-        estatura, 
-        email, 
-        password 
+      console.log('Antes de enviar la solicitud al backend');
+
+      const response = await axios.post(`${this.apiUrl}/register`, {
+        nombre,
+        apellido,
+        peso,
+        estatura,
+        email,
+        password
       });
+
+    console.log('Respuesta recibida del backend:', response.data);
 
       return response.data;
     } catch (error: any) {
+      
+    console.log('Entró al catch en register');
+    console.error('Error completo:', error);
       return this.handleError(error);
     }
   }
@@ -33,12 +47,28 @@ export class AuthService {
       if (response.data.token) {
         localStorage.setItem('token', response.data.token);
       }
-
+  
       return response.data;
     } catch (error: any) {
-      return this.handleError(error);
+      if (error.response) {
+        const status = error.response.status;
+        const responseData = error.response.data;
+  
+        if (status === 401) {
+          throw { type: 'auth', message: responseData.mensaje || 'Credenciales inválidas.' };
+        }
+  
+        if (status === 422) {
+          throw { type: 'validation', message: responseData.mensaje || 'Error en la validación.', errores: responseData.errores || {} };
+        }
+  
+        throw { type: 'server', message: 'Error inesperado en el servidor.' };
+      } else {
+        throw { type: 'network', message: 'Error de conexión con el servidor.' };
+      }
     }
   }
+  
 
   async verifyCode(email: string, codigo: string) {
     try {
@@ -102,26 +132,43 @@ export class AuthService {
     return !!this.getToken();
   }
 
+  // Manejo de errores
   private handleError(error: any) {
+    console.error('AAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+    console.error('Error en la petición:', error);
+  
     if (error.response) {
       const status = error.response.status;
-      const responseData = error.response.data;
-
-      if (status === 400 || status === 422) {
-        let mensaje = responseData.mensaje || 'Error en la validación';
-        let detalles = Object.values(responseData.errores || {}).flat().join(' ');
-        throw { type: 'validation', message: `${mensaje}: ${detalles}` };
+  
+      // Manejo de errores de validación (código 422)
+      if (status === 422 && error.response.data) {
+        console.warn('Error de validación:', error.response.data);
+        return Promise.reject({
+          mensaje: error.response.data.mensaje || 'Error en la validación de los datos.',
+          errores: error.response.data.errores || {}
+        });
       }
-
+  
+      // Manejo de errores de validación (código 400)
+      if (status === 400 && error.response.data) {
+        console.warn('Error de validación:', error.response.data);
+        return Promise.reject({
+          mensaje: error.response.data.mensaje || 'Error en la validación de los datos.',
+          errores: error.response.data.errores || {}
+        });
+      }
+  
+      // Si el token no es válido o ha expirado
       if (status === 401 || status === 403) {
+        console.warn('Sesión expirada o no autorizado. Redirigiendo al login...');
         localStorage.removeItem('token');
-        window.location.href = '/guest/login'; // Redirigir al login
-        throw { type: 'auth', message: responseData.mensaje || 'Sesión no válida' };
+        window.location.href = '/auth/login';
+        return Promise.reject({ mensaje: 'Sesión expirada. Inicia sesión nuevamente.' });
       }
-
-      throw { type: 'server', message: 'Error inesperado en el servidor.' };
-    } else {
-      throw { type: 'network', message: 'Error de conexión con el servidor.' };
     }
+  
+    return Promise.reject({ mensaje: 'Ocurrió un error inesperado. Intenta de nuevo.' });
   }
+  
+
 }
