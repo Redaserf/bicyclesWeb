@@ -6,21 +6,8 @@ body {
     color: #333;
   }
   
-  @media (max-width: 768px) {
-    #content {
-      margin-left: 0;
-      padding-top: 60px;
-    }
-  }
   
-  #main-container {
-    max-width: 900px;
-    margin: auto;
-    background: white;
-    border-radius: 20px;
-    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
-    padding: 30px;
-  }
+  
   
   .header-container {
     display: flex;

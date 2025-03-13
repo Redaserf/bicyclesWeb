@@ -89,7 +89,7 @@ a {
     font-size: 1.4rem;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1600px) {
     #mainNav {
         transform: translateX(-100%);
     }
