@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../../services/auth-service.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-code-verification',
@@ -9,6 +11,32 @@ import { FormsModule } from '@angular/forms';
 })
 export class CodeVerificationComponent {
   code: string[] = ['', '', '', '', '', ''];
+  email: string = '';
+
+  constructor(
+    private authService: AuthService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      this.email = params['email'] || '';
+    });
+  }
+
+  onSubmit(): void {
+    const verificationCode = this.code.join('');
+
+    this.authService.verifyCode(this.email, verificationCode)
+      .then(response => {
+        alert('Código verificado correctamente.');
+        this.router.navigate(['/user/home']); // Redirigir al usuario
+      })
+      .catch(error => {
+        alert(error.mensaje || 'Código incorrecto. Inténtalo de nuevo.');
+      });
+  }
 
   moveFocus(nextInput: HTMLInputElement | null, event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -32,9 +60,4 @@ export class CodeVerificationComponent {
       }
     }
   }  
-
-  onSubmit(): void {
-    const verificationCode = this.code.join('');
-    console.log('Código ingresado:', verificationCode);
-  }
 }
