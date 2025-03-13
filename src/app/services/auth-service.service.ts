@@ -10,25 +10,7 @@ export class AuthService {
 
   constructor() {}
 
-//   private axiosInstance: AxiosInstance;
-
-//   constructor() {
-//     this.axiosInstance = axios.create({
-//       baseURL: 'http://127.0.0.1:8000/api/v1',
-//       timeout: 1000,
-//       headers: {
-//         'Content-Type': 'application/json',
-//       }
-//     });
-
-//     this.axiosInstance.interceptors.request.use((config) => {
-//       const token = localStorage.getItem('token');
-//       if (token) {
-//         config.headers.Authorization = `Bearer ${token}`;
-//       }
-//       return config;
-//     });
-//   }
+  // ========================================================================================
 
   async register(
     nombre: string,
@@ -61,6 +43,8 @@ export class AuthService {
     }
   }
 
+  // ========================================================================================
+
   async login(email: string, password: string) {
     try {
       const response = await axios.post(`${this.apiUrl}/login`, { email, password });
@@ -89,33 +73,28 @@ export class AuthService {
       }
     }
   }
+
+  // ========================================================================================
+
+  async verifyCode(email: string, code: string) {
+    try {
+      const response = await axios.post(`${this.apiUrl}/verify-code`, {
+        email,
+        codigo: code
+      });
   
-  public verifyCode(email: string, codigo: string) {
-    return this.axiosInstance.post('/verificar-codigo', { email, codigo })
-      .catch(this.handleError);
-  }
+      if (response.data.token) {
+        localStorage.setItem('token', response.data.token);
+      }
+  
+      return response.data;
+    } catch (error: any) {
+      console.error('Error al verificar el código:', error);
+      return this.handleError(error);
+    }
+  }  
 
-  public requestVerificationEmail(email: string) {
-    return this.axiosInstance.post('/reenviar', { email })
-      .catch(this.handleError);
-  }
-
-  public forgotPassword(email: string) {
-    return this.axiosInstance.post('/forgot-password', { email })
-      .catch(this.handleError);
-  }
-
-  public resetPassword(email: string, password: string, token: string) {
-    return this.axiosInstance.post('/reset-password', { email, password, token })
-      .catch(this.handleError);
-  }
-
-  public logout() {
-    localStorage.removeItem('token');
-
-    return this.axiosInstance.post('/logout', {})
-      .catch(this.handleError);
-  }
+  // ========================================================================================
 
   // Manejo de errores
   private handleError(error: any) {
