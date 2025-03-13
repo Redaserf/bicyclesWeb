@@ -1,7 +1,7 @@
 /* Contenedor general del perfil */
 .estadisticas-container {
   max-width: 1200px;
-  margin: 100px auto 40px;
+  margin: 80px auto 40px;
   font-family: 'Poppins', sans-serif;
   display: flex;
   flex-direction: column;
