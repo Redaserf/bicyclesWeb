@@ -1,167 +1,157 @@
-
-
-  /* Contenedor del perfil */
-  .profile-container {
-    width: 100%;
-    max-width: 900px;
-    background-color: #ecf0f3;
-    border-radius: 15px;
-    box-shadow: 8px 8px 15px #b8b9be, -8px -8px 15px #ffffff;
-    padding: 30px;
-    margin: auto;
+/* Animación de "pulso" para la sombra */
+@keyframes pulseShadow {
+  0% {
+    box-shadow: 0 8px 20px rgba(24, 138, 255, 0.15);
   }
-
-  .card {
-    background-color: #ffffff;
-    border: 4px solid #188aff;
-    border-radius: 20px;
-    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.8),
-      0 8px 16px rgba(0, 0, 0, 0.1);
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-    overflow: hidden;
-    height: 100%;
-    position: relative;
+  50% {
+    box-shadow: 0 8px 28px rgba(24, 138, 255, 0.3);
   }
-
-  .card:hover {
-    transform: translateY(-15px);
-    box-shadow: 0 20px 40px rgba(255, 255, 255, 1),
-      0 12px 20px rgba(0, 0, 0, 0.2);
-    border: 4px solid #0056b3;
+  100% {
+    box-shadow: 0 8px 20px rgba(24, 138, 255, 0.15);
   }
+}
 
-  .card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(5px);
-    z-index: -1;
+/* Contenedor general de todo el perfil */
+.profile-container {
+  max-width: 1200px;  
+     /* Controla el ancho máximo general */
+  margin: 120px auto 40px;   /* Más espacio arriba, centrado y algo de espacio abajo */
+  font-family: 'Poppins', sans-serif;  /* Fuente "bonita" */
+  display: flex;
+  flex-direction: column;    /* Apila tarjetas y botones de forma vertical */
+  gap: 20px;                 /* Espacio entre tarjetas y botones */
+  padding: 0 20px;           /* Margen interno para pantallas pequeñas */
+}
+
+/* Tarjetas base */
+.profile-card {
+  background-color: #fff;     
+  border-radius: 12px;
+  padding: 30px;
+  width: 1100px;             
+  margin: 0 auto;            /* Centra la tarjeta horizontalmente */
+  color: #333;               
+  /* Sombra base + animación de pulso */
+  animation: pulseShadow 3s infinite ease-in-out;
+}
+
+/* Centrar y negrita para todo el contenido de la tarjeta */
+.profile-card h2,
+.profile-card h3,
+.profile-card p {
+  text-align: center;
+  font-weight: 600; /* Negrita media (puedes subir a 700 si quieres más grosor) */
+}
+
+/* Tarjeta principal (nombre, email) */
+.main-info {
+  position: relative;
+}
+
+/* Tarjeta de detalles (usuario, teléfono, etc.) */
+.detail-info {
+  /* Mismo estilo, pero puedes personalizar si gustas */
+}
+
+/* Título de la sección de detalles */
+.detail-info .detail-title {
+  margin-bottom: 15px;
+  font-size: 1.4rem;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  padding-bottom: 8px;
+}
+
+/* Nombre principal */
+.profile-name {
+  font-size: 1.8rem;
+  margin-bottom: 5px;
+}
+
+/* Subtítulo (ej: correo principal) */
+.profile-subtitle {
+  font-size: 1rem;
+  margin-bottom: 20px;
+  opacity: 0.7;
+}
+
+/* Avatar */
+.avatar {
+  margin: 0 auto 20px; /* Centra el avatar y deja espacio debajo */
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #188AFF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.avatar img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Email */
+.profile-email {
+  font-size: 1.1rem;
+  margin: 10px 0;
+}
+
+/* Sección de acciones (botones) */
+.profile-actions {
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* Botón con gradiente y sombra */
+.action-btn {
+  background: linear-gradient(45deg, #188AFF, #0056b3);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 14px 24px;
+  margin: 0 10px; /* Espacio horizontal entre botones */
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(24, 138, 255, 0.2);
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.action-btn:hover {
+  transform: scale(1.07);
+  box-shadow: 0 8px 20px rgba(24, 138, 255, 0.3);
+  background: linear-gradient(45deg, #0056b3, #188AFF);
+}
+
+/* Responsividad: Ajustes en pantallas pequeñas */
+@media (max-width: 1150px) {
+  .profile-card {
+    width: 100%; /* Ocupa el ancho completo del contenedor */
   }
+}
 
-  .card-img-container {
-    width: 100%;
-    height: 150px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #ffffff;
-    padding: 10px;
-  }
-
-  .card-img-container img {
-    max-width: 85%;
-    max-height: 100%;
-    object-fit: contain;
-  }
-
-  .card-body {
+@media (max-width: 600px) {
+  .profile-card {
     padding: 20px;
-    text-align: center;
   }
 
-  .card-title {
-    font-size: 1.7rem;
-    font-weight: bold;
-    color: #188aff;
-    margin-bottom: 5px;
-  }
-
-  .card-text {
-    font-size: 1.2rem;
-    color: #555;
-    margin: 10px 0;
-  }
-
-  .badge {
-    background-color: #188aff;
-    color: white;
-    font-size: 0.9rem;
-    padding: 5px 15px;
-    border-radius: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  }
-
-  @media (max-width: 768px) {
-    .card {
-      max-width: 90%;
-      margin: 0 auto;
-    }
-  }
-
-  .container {
-    max-width: 100%;
-  }
-
-  .row {
-    margin: 0;
-  }
-
-  .col-md-6 {
-    padding: 15px;
-  }
-
-  .profile-pic {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    box-shadow: 4px 4px 8px #b8b9be, -4px -4px 8px #ffffff;
-    margin-bottom: 15px;
-  }
-
-  .profile-info h2 {
+  .profile-name {
     font-size: 1.5rem;
-    font-weight: 600;
-    color: #333;
   }
 
-  .profile-info p {
+  .profile-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .profile-email {
     font-size: 1rem;
-    color: #555;
   }
 
-  .form-control {
-    border-radius: 10px;
-    border: none;
-    box-shadow: inset 4px 4px 6px #b8b9be, inset -4px -4px 6px #ffffff;
-    padding: 10px;
+  .avatar {
+    width: 80px;
+    height: 80px;
   }
-
-  .btn-save {
-    background-color: #03a9f4;
-    color: white;
-    border-radius: 20px;
-    font-weight: 600;
-    padding: 10px 20px;
-    box-shadow: 4px 4px 8px #b8b9be, -4px -4px 8px #ffffff;
-  }
-
-  .btn-clear {
-    background-color: #e74c3c;
-    color: white;
-    border-radius: 20px;
-    font-weight: 600;
-    padding: 10px 20px;
-    box-shadow: 4px 4px 8px #b8b9be, -4px -4px 8px #ffffff;
-  }
-
-  /* Ajustes adicionales para pantallas muy pequeñas */
-  @media (max-width: 576px) {
-    .profile-container {
-      padding: 20px;
-      margin: 10px;
-    }
-    .form-control {
-      padding: 8px;
-      font-size: 0.9rem;
-    }
-    .btn-save,
-    .btn-clear {
-      padding: 8px 16px;
-      font-size: 0.9rem;
-    }
-  }
+}
