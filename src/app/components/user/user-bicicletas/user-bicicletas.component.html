@@ -1,74 +1,81 @@
+<div class="bici-container">
+  <div class="bici-card">
+    <!-- Cabecera -->
+    <div class="header-container">
+      <h1 class="titulo"><i class="fas fa-bicycle"></i> Mis Bicicletas</h1>
+      <div class="search-container">
+        <input type="text" placeholder="Buscar por nombre..." class="search-input">
+        <i class="fas fa-search search-icon"></i>
+      </div>
+    </div>
+    <!-- Botón Agregar -->
+    <div class="add-btn">
+      <button onclick="document.getElementById('modalAgregar').classList.add('show')">
+        <i class="fas fa-plus"></i> Agregar Bicicleta
+      </button>
+    </div>
+    <!-- Lista de Bicicletas -->
+    <div id="bicisContainer">
+      <div class="bici-item">
+        <div class="bici-icon"><i class="fas fa-bicycle"></i></div>
+        <div class="bici-name">Bici Roja</div>
+        <div class="bici-actions">
+          <button class="edit-btn" onclick="document.getElementById('modalEditar').classList.add('show')">
+            <i class="fas fa-edit"></i>
+          </button>
+          <button class="delete-btn" onclick="document.getElementById('modalEliminar').classList.add('show')">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
+      </div>
+      <div class="bici-item">
+        <div class="bici-icon"><i class="fas fa-bicycle"></i></div>
+        <div class="bici-name">Bici Azul</div>
+        <div class="bici-actions">
+          <button class="edit-btn" onclick="document.getElementById('modalEditar').classList.add('show')">
+            <i class="fas fa-edit"></i>
+          </button>
+          <button class="delete-btn" onclick="document.getElementById('modalEliminar').classList.add('show')">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-    <div class="container mt-4 p-4 shadow-lg rounded-4 bg-white" id="main-container">
-      <div class="header-container">
-        <h1 class="titulo"><i class="fas fa-bicycle"></i> Mis Bicicletas</h1>
-        <div class="search-container">
-          <input type="text" placeholder="Buscar por nombre..." class="search-input">
-          <i class="fas fa-search search-icon"></i>
-        </div>
-      </div>
-      <div class="add-btn">
-        <button onclick="document.getElementById('modalAgregar').classList.add('show')">
-          <i class="fas fa-plus"></i> Agregar Bicicleta
-        </button>
-      </div>
-      <div id="bicisContainer">
-        <div class="bici-card">
-          <div class="bici-icon"><i class="fas fa-bicycle"></i></div>
-          <div class="bici-name">Bici Roja</div>
-          <div class="bici-actions">
-            <button class="edit-btn" onclick="document.getElementById('modalEditar').classList.add('show')">
-              <i class="fas fa-edit"></i>
-            </button>
-            <button class="delete-btn" onclick="document.getElementById('modalEliminar').classList.add('show')">
-              <i class="fas fa-trash"></i>
-            </button>
-          </div>
-        </div>
-  
-        <div class="bici-card">
-          <div class="bici-icon"><i class="fas fa-bicycle"></i></div>
-          <div class="bici-name">Bici Azul</div>
-          <div class="bici-actions">
-            <button class="edit-btn" onclick="document.getElementById('modalEditar').classList.add('show')">
-              <i class="fas fa-edit"></i>
-            </button>
-            <button class="delete-btn" onclick="document.getElementById('modalEliminar').classList.add('show')">
-              <i class="fas fa-trash"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  <div class="modal-overlay" id="modalAgregar">
-    <div class="modal-content">
-      <h2>Agregar Bicicleta</h2>
-      <input type="text" placeholder="Nombre de la bicicleta" class="modal-input" />
-      <div class="modal-buttons">
-        <button class="cancel-btn" onclick="document.getElementById('modalAgregar').classList.remove('show')">Cancelar</button>
-        <button class="confirm-btn">Agregar</button>
-      </div>
+<!-- Modal Agregar Bicicleta -->
+<div class="modal-overlay" id="modalAgregar">
+  <div class="modal-content">
+    <h2>Agregar Bicicleta</h2>
+    <input type="text" placeholder="Nombre de la bicicleta" class="modal-input" />
+    <div class="modal-buttons">
+      <button class="cancel-btn" onclick="document.getElementById('modalAgregar').classList.remove('show')">Cancelar</button>
+      <button class="confirm-btn">Agregar</button>
     </div>
   </div>
-  
-  <div class="modal-overlay" id="modalEditar">
-    <div class="modal-content">
-      <h2>Editar Bicicleta</h2>
-      <input type="text" value="Bici Roja" class="modal-input" />
-      <div class="modal-buttons">
-        <button class="cancel-btn" onclick="document.getElementById('modalEditar').classList.remove('show')">Cancelar</button>
-        <button class="confirm-btn">Guardar</button>
-      </div>
-    </div>
-  </div>
+</div>
 
-  <div class="modal-overlay" id="modalEliminar">
-    <div class="modal-content">
-      <h2>¿Eliminar Bicicleta?</h2>
-      <p class="modal-text">¿Estás seguro de que quieres eliminar esta bicicleta?</p>
-      <div class="modal-buttons">
-        <button class="cancel-btn" onclick="document.getElementById('modalEliminar').classList.remove('show')">Cancelar</button>
-        <button class="confirm-btn">Eliminar</button>
-      </div>
+<!-- Modal Editar Bicicleta -->
+<div class="modal-overlay" id="modalEditar">
+  <div class="modal-content">
+    <h2>Editar Bicicleta</h2>
+    <input type="text" value="Bici Roja" class="modal-input" />
+    <div class="modal-buttons">
+      <button class="cancel-btn" onclick="document.getElementById('modalEditar').classList.remove('show')">Cancelar</button>
+      <button class="confirm-btn">Guardar</button>
     </div>
   </div>
+</div>
+
+<!-- Modal Eliminar Bicicleta -->
+<div class="modal-overlay" id="modalEliminar">
+  <div class="modal-content">
+    <h2>¿Eliminar Bicicleta?</h2>
+    <p class="modal-text">¿Estás seguro de que quieres eliminar esta bicicleta?</p>
+    <div class="modal-buttons">
+      <button class="cancel-btn" onclick="document.getElementById('modalEliminar').classList.remove('show')">Cancelar</button>
+      <button class="confirm-btn">Eliminar</button>
+    </div>
+  </div>
+</div>

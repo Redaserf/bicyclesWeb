@@ -25,7 +25,7 @@
 
 /* Tarjetas base */
 .profile-card {
-  background-color: #fff;     
+  background: linear-gradient(120deg, #E6F7FF, #eef8ff); 
   border-radius: 12px;
   padding: 30px;
   width: 1100px;             
