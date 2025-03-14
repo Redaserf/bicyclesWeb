@@ -90,33 +90,8 @@ export class AuthService {
     }
   }
   
-  public verifyCode(email: string, codigo: string) {
-    return this.axiosInstance.post('/verificar-codigo', { email, codigo })
-      .catch(this.handleError);
-  }
-
-  public requestVerificationEmail(email: string) {
-    return this.axiosInstance.post('/reenviar', { email })
-      .catch(this.handleError);
-  }
-
-  public forgotPassword(email: string) {
-    return this.axiosInstance.post('/forgot-password', { email })
-      .catch(this.handleError);
-  }
-
-  public resetPassword(email: string, password: string, token: string) {
-    return this.axiosInstance.post('/reset-password', { email, password, token })
-      .catch(this.handleError);
-  }
-
-  public logout() {
-    localStorage.removeItem('token');
-
-    return this.axiosInstance.post('/logout', {})
-      .catch(this.handleError);
-  }
-
+  
+ 
   // Manejo de errores
   private handleError(error: any) {
     console.error('AAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
