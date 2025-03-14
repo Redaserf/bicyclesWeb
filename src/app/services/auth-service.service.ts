@@ -49,16 +49,20 @@ export class AuthService {
   async login(email: string, password: string) {
     try {
       const response = await axios.post(`${this.apiUrl}/login`, { email, password });
-      
+  
       if (response.data.token) {
         localStorage.setItem('token', response.data.token);
       }
   
-      return response.data;
+      return response.data; 
     } catch (error: any) {
       if (error.response) {
         const status = error.response.status;
         const responseData = error.response.data;
+  
+        if (status === 403 && responseData.redirect === 'verify_code') {
+          throw { type: 'unverified', message: responseData.mensaje, email: responseData.email };
+        }
   
         if (status === 401) {
           throw { type: 'auth', message: responseData.mensaje || 'Credenciales inválidas.' };
@@ -114,6 +118,19 @@ export class AuthService {
     );
   }
 
+  // ========================================================================================
+
+  async resendVerificationEmail(email: string) {
+    try {
+      const response = await axios.post(`${this.apiUrl}/reenviar`, { email });
+  
+      return response.data;
+    } catch (error: any) {
+      console.error('Error al reenviar el correo:', error);
+      return this.handleError(error);
+    }
+  }
+  
   // ========================================================================================
 
   // Manejo de errores
