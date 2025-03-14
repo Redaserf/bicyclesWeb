@@ -25,6 +25,7 @@ import { TablaGenericaComponent } from './components/administrador/tablas/tabla-
 import { GuestLayoutComponent } from './components/layouts/guest-layout/guest-layout.component';
 import { AuthLayoutComponent } from './components/layouts/auth-layout/auth-layout.component';
 import { EditarUsuarioComponent } from './components/administrador/tablas/tabla-user/editar-usuario/editar-usuario.component';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
 
@@ -54,12 +55,12 @@ export const routes: Routes = [
         component:UserLayoutComponent,
         children:[
             {path: '', redirectTo: 'home', pathMatch: 'full'},
-            {path:"home", component: UserHomeComponent},
-            {path:"recorridos", component: UserRecorridoComponent},
-            {path:"bicicletas", component: UserBicicletasComponent},
-            {path:"perfil", component: UserPerfilComponent},
-            {path:"recorridos-realizados", component: UserRecorridoshechosComponent},
-            {path:"estadisticas", component: UserEstadisticasComponent},
+            {path:"home", component: UserHomeComponent, canActivate: [authGuard], data: { roles: [2, 3] } },
+            {path:"recorridos", component: UserRecorridoComponent, canActivate: [authGuard], data: { roles: [2, 3] } },
+            {path:"bicicletas", component: UserBicicletasComponent, canActivate: [authGuard], data: { roles: [2, 3] } },
+            {path:"perfil", component: UserPerfilComponent, canActivate: [authGuard], data: { roles: [2, 3] } },
+            {path:"recorridos-realizados", component: UserRecorridoshechosComponent, canActivate: [authGuard], data: { roles: [2, 3] } },
+            {path:"estadisticas", component: UserEstadisticasComponent, canActivate: [authGuard], data: { roles: [2, 3] } },
         ]
     },
 
@@ -70,14 +71,14 @@ export const routes: Routes = [
         component: AdminLayoutComponent,
         children: [
             {path: '', redirectTo: 'home', pathMatch: 'full'},
-            {path: 'home',component: AdminPerfilComponent}, // de momento este porque no hay un 'home' como tal asdfasdh
-            {path: 'perfil',component: AdminPerfilComponent},
-            {path: 'estadisticas',component: AdminEstadisticasComponent},
-            {path: 'usuarios',component: TablaUserComponent},
-            {path: 'administradores',component: TablaAdminComponent},
-            {path: 'bicicletas',component: TablaBicisComponent},
-            {path: 'recorridos',component: TablaRecorridoComponent}, // basta de reirse chicos
-            {path: 'other-stuff',component: TablaGenericaComponent},
+            {path: 'home',component: AdminPerfilComponent, canActivate: [authGuard], data: { roles: [3] } }, // de momento este porque no hay un 'home' como tal asdfasdh
+            {path: 'perfil',component: AdminPerfilComponent, canActivate: [authGuard], data: { roles: [3] } },
+            {path: 'estadisticas',component: AdminEstadisticasComponent, canActivate: [authGuard], data: { roles: [3] } },
+            {path: 'usuarios',component: TablaUserComponent, canActivate: [authGuard], data: { roles: [3] } },
+            {path: 'administradores',component: TablaAdminComponent, canActivate: [authGuard], data: { roles: [3] } },
+            {path: 'bicicletas',component: TablaBicisComponent, canActivate: [authGuard], data: { roles: [3] } },
+            {path: 'recorridos',component: TablaRecorridoComponent, canActivate: [authGuard], data: { roles: [3] } }, // basta de reirse chicos
+            {path: 'other-stuff',component: TablaGenericaComponent, canActivate: [authGuard], data: { roles: [3] } },
         ]
     },
 

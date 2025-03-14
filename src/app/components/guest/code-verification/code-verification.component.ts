@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../../services/auth-service.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-code-verification',
@@ -8,33 +11,102 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './code-verification.component.css'
 })
 export class CodeVerificationComponent {
-  code: string[] = ['', '', '', '', '', ''];
+  code: string = '';
+  email: string = '';
+  isResending: boolean = false;
 
-  moveFocus(nextInput: HTMLInputElement | null, event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.value.length === 1 && nextInput) {
-      nextInput.focus();
-    }
+  constructor(
+    private authService: AuthService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      this.email = params['email'] || '';
+      console.log("Email recibido:", this.email);
+    });
   }
 
-  moveFocusBack(previousInput: HTMLInputElement | null, event: Event): void {
-    const keyboardEvent = event as KeyboardEvent;
-    const input = event.target as HTMLInputElement;
-  
-    if (keyboardEvent.key === "Backspace") {
-      input.value = '';  // Borra el contenido del input actual
-      const index = this.code.indexOf(input.value);
-      if (index !== -1) {
-        this.code[index] = ''; // Asegura que también se borre en el array
-      }
-      if (previousInput) {
-        previousInput.focus(); // Mueve el foco al input anterior
-      }
-    }
-  }  
-
   onSubmit(): void {
-    const verificationCode = this.code.join('');
-    console.log('Código ingresado:', verificationCode);
+    console.log("Código ingresado:", this.code);
+
+    if (!this.email) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'No se ha recibido un correo válido.',
+        confirmButtonColor: '#d33'
+      });
+      return;
+    }
+
+    if (this.code.length !== 6) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Código inválido',
+        text: 'El código debe tener 6 dígitos.',
+        confirmButtonColor: '#FFA500'
+      });
+      return;
+    }
+
+    this.authService.verifyCode(this.email, this.code)
+      .then(response => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Verificación exitosa',
+          text: 'Tu cuenta ha sido verificada correctamente.',
+          confirmButtonText: 'Iniciar sesión',
+          confirmButtonColor: '#188AFF'
+        }).then(() => {
+          this.router.navigate(['/user/home']);
+        });
+      })
+      .catch(error => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Código incorrecto',
+          text: error.mensaje || 'Código incorrecto. Inténtalo de nuevo.',
+          confirmButtonColor: '#d33'
+        });
+      });
+  }
+
+  resendEmail(): void {
+    if (!this.email) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'No se ha recibido un correo válido.',
+        confirmButtonColor: '#d33'
+      });
+      return;
+    }
+
+    this.isResending = true;
+
+    this.authService.resendVerificationEmail(this.email)
+      .then(response => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Correo reenviado',
+          text: response.mensaje || 'Se ha reenviado el código de verificación.',
+          confirmButtonColor: '#188AFF'
+        });
+      })
+      .catch(error => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: error.mensaje || 'No se pudo reenviar el correo.',
+          confirmButtonColor: '#d33'
+        });
+      })
+      .finally(() => {
+        setTimeout(() => {
+          this.isResending = false;
+        }, 2000);
+      });
   }
 }

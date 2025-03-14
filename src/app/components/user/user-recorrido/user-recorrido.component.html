@@ -1,82 +1,135 @@
-
-
-<div id="content" class="container">     
-    <div class="row justify-content-center">
-        <div  class="col-md-6 col-lg-5">
-            <div class="card mx-auto">
-                <div class="card-img-container">
-                    <img src="images/bicycles.png" alt="Temperatura">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Temperatura</h5>
-                    <p class="card-text">23°C</p>
-                    <span class="badge">Celsius</span>
-                </div>
-            </div>
+<div class="recorridos-container">
+    <div class="recorridos-card">
+      <!-- Cabecera -->
+      <div class="header-container">
+        <h1 class="titulo"><i class="fas fa-road"></i> Mis Recorridos</h1>
+        <div class="filter-container">
+          <select class="filter-select">
+            <option value="bike">Bicicleta</option>
+            <option value="date">Fecha</option>
+          </select>
+          <input type="text" placeholder="Buscar..." class="filter-input">
         </div>
-
-        <div class="col-md-6 col-lg-5">
-            <div class="card mx-auto">
-                <div class="card-img-container">
-                    <img src="images/bicycles.png" alt="Distancia Recorrida">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Distancia Recorrida</h5>
-                    <p class="card-text">15 km</p>
-                    <span class="badge">Kilómetros</span>
-                </div>
+      </div>
+      <!-- Lista de Recorridos -->
+      <div id="recorridosContainer">
+        <div class="recorrido-item" onclick="document.getElementById('modalDetalle').classList.add('show')">
+          <div class="recorrido-icon"><i class="fas fa-bicycle"></i></div>
+          <div class="recorrido-info">
+            <div class="recorrido-name">Bici Roja</div>
+            <div class="recorrido-date">2025-03-10</div>
+            <div class="recorrido-stats">
+              <span class="recorrido-distance">15 km</span>
+              <span class="recorrido-duration">00:45:00</span>
             </div>
+          </div>
+          <div class="recorrido-actions">
+            <button class="delete-btn" onclick="event.stopPropagation(); document.getElementById('modalEliminar').classList.add('show')">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
         </div>
-
-        <div class="col-md-6 col-lg-5">
-            <div class="card mx-auto">
-                <div class="card-img-container">
-                    <img src="images/bicycles.png" alt="Tiempo del Recorrido">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Tiempo del Recorrido</h5>
-                    <p class="card-text">45 min</p>
-                    <span class="badge">Minutos</span>
-                </div>
+        <div class="recorrido-item" onclick="document.getElementById('modalDetalle').classList.add('show')">
+          <div class="recorrido-icon"><i class="fas fa-bicycle"></i></div>
+          <div class="recorrido-info">
+            <div class="recorrido-name">Bici Azul</div>
+            <div class="recorrido-date">2025-03-11</div>
+            <div class="recorrido-stats">
+              <span class="recorrido-distance">20 km</span>
+              <span class="recorrido-duration">01:00:00</span>
             </div>
+          </div>
+          <div class="recorrido-actions">
+            <button class="delete-btn" onclick="event.stopPropagation(); document.getElementById('modalEliminar').classList.add('show')">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
         </div>
-
-        <div class="col-md-6 col-lg-5">
-            <div class="card mx-auto">
-                <div class="card-img-container">
-                    <img src="images/bicycles.png" alt="Velocidad Máxima">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Velocidad Máxima</h5>
-                    <p class="card-text">35 km/h</p>
-                    <span class="badge">Km/h</span>
-                </div>
+        <div class="recorrido-item" onclick="document.getElementById('modalDetalle').classList.add('show')">
+            <div class="recorrido-icon"><i class="fas fa-bicycle"></i></div>
+            <div class="recorrido-info">
+              <div class="recorrido-name">Bici Azul</div>
+              <div class="recorrido-date">2025-03-11</div>
+              <div class="recorrido-stats">
+                <span class="recorrido-distance">20 km</span>
+                <span class="recorrido-duration">01:00:00</span>
+              </div>
             </div>
-        </div>
-        <div class="col-md-6 col-lg-5">
-            <div class="card mx-auto">
-                <div class="card-img-container">
-                    <img src="images/bicycles.png" alt="Tiempo del Recorrido">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Tiempo del Recorrido</h5>
-                    <p class="card-text">45 min</p>
-                    <span class="badge">Minutos</span>
-                </div>
+            <div class="recorrido-actions">
+              <button class="delete-btn" onclick="event.stopPropagation(); document.getElementById('modalEliminar').classList.add('show')">
+                <i class="fas fa-trash"></i>
+              </button>
             </div>
-        </div>
-
-        <div class="col-md-6 col-lg-5">
-            <div class="card mx-auto">
-                <div class="card-img-container">
-                    <img src="images/bicycles.png" alt="Velocidad Máxima">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Velocidad Máxima</h5>
-                    <p class="card-text">35 km/h</p>
-                    <span class="badge">Km/h</span>
-                </div>
+          </div>
+          <div class="recorrido-item" onclick="document.getElementById('modalDetalle').classList.add('show')">
+            <div class="recorrido-icon"><i class="fas fa-bicycle"></i></div>
+            <div class="recorrido-info">
+              <div class="recorrido-name">Bici Azul</div>
+              <div class="recorrido-date">2025-03-11</div>
+              <div class="recorrido-stats">
+                <span class="recorrido-distance">20 km</span>
+                <span class="recorrido-duration">01:00:00</span>
+              </div>
             </div>
-        </div>
+            <div class="recorrido-actions">
+              <button class="delete-btn" onclick="event.stopPropagation(); document.getElementById('modalEliminar').classList.add('show')">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          </div>
+          <div class="recorrido-item" onclick="document.getElementById('modalDetalle').classList.add('show')">
+            <div class="recorrido-icon"><i class="fas fa-bicycle"></i></div>
+            <div class="recorrido-info">
+              <div class="recorrido-name">Bici Azul</div>
+              <div class="recorrido-date">2025-03-11</div>
+              <div class="recorrido-stats">
+                <span class="recorrido-distance">20 km</span>
+                <span class="recorrido-duration">01:00:00</span>
+              </div>
+            </div>
+            <div class="recorrido-actions">
+              <button class="delete-btn" onclick="event.stopPropagation(); document.getElementById('modalEliminar').classList.add('show')">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          </div>
+      </div>
     </div>
-</div>
+  </div>
+
+  <!-- Modal Detalle Recorrido (Modal Grande) -->
+  <div class="modal-overlay" id="modalDetalle">
+    <div class="modal-content large-modal">
+      <div class="detalle-header">
+        <h2>Detalle del Recorrido</h2>
+      </div>
+      <div class="detalle-body">
+        <img src="images/logimg.png" alt="Imagen de Bicicleta" class="detalle-image">
+        <div class="detalle-info">
+          <p><strong>Bicicleta:</strong> Bici Roja</p>
+          <p><strong>Fecha:</strong> 2025-03-10</p>
+          <p><strong>Distancia Total:</strong> 15 km</p>
+          <p><strong>Duración:</strong> 00:45:00</p>
+          <p><strong>Velocidad Promedio:</strong> 20 km/h</p>
+          <p><strong>Velocidad Máxima:</strong> 30 km/h</p>
+          <p><strong>Calorías Quemadas:</strong> 300 kcal</p>
+          <p><strong>Temperatura Promedio:</strong> 22°C</p>
+        </div>
+      </div>
+      <div class="detalle-footer">
+        <button class="cancel-btn" onclick="document.getElementById('modalDetalle').classList.remove('show')">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Eliminar Recorrido -->
+  <div class="modal-overlay" id="modalEliminar">
+    <div class="modal-content">
+      <h2>¿Eliminar Recorrido?</h2>
+      <p class="modal-text">¿Estás seguro de que quieres eliminar este recorrido?</p>
+      <div class="modal-buttons">
+        <button class="cancel-btn" onclick="document.getElementById('modalEliminar').classList.remove('show')">Cancelar</button>
+        <button class="confirm-btn">Eliminar</button>
+      </div>
+    </div>
+  </div>

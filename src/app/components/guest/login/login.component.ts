@@ -2,16 +2,18 @@ import { AfterViewInit, Component } from '@angular/core';
 import { CanExit } from '../../../guards/form-login.guard';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import * as AOS from 'aos';
 import { faUser, faKey ,faEye, 
   faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import Swal from 'sweetalert2'
 import { Observable } from 'rxjs';
+import { AuthService } from '../../../services/auth-service.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
-  imports: [FontAwesomeModule, FormsModule, RouterLink],
+  imports: [FontAwesomeModule, FormsModule, RouterLink, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -19,15 +21,17 @@ export class LoginComponent implements AfterViewInit, CanExit {
   faUser = faUser;
   faKey = faKey;
   faEye = faEye;
-faEyeSlash = faEyeSlash;
-  username: string = '';
+  faEyeSlash = faEyeSlash;
+  email: string = '';
   verPassword: boolean = false;
   password: string = '';
   isFormDirty: boolean = false;
+  isLoading: boolean = false;
+  errorMessage: string = '';
+  erroresValidacion: any = {};
 
-  login() {
-    // tu lógica del login aquí
-  }
+constructor(private authService: AuthService, private router: Router) {}
+
   ngAfterViewInit(): void {
     AOS.init({
       offset: 100,
@@ -72,9 +76,61 @@ faEyeSlash = faEyeSlash;
     this.isFormDirty = true; 
   }
 
-  onSubmit() {
-    console.log('Usuario:', this.username);
-    console.log('Contraseña:', this.password);
-    this.isFormDirty = false; 
+  async onSubmit() {
+    this.errorMessage = '';
+    this.erroresValidacion = {};
+  
+    if (!this.email || !this.password) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Campos obligatorios',
+        text: 'Todos los campos son obligatorios.',
+        confirmButtonColor: '#3085d6'
+      });
+      return;
+    }
+  
+    this.isLoading = true;
+    try {
+      const response = await this.authService.login(this.email, this.password);
+      
+      localStorage.setItem('token', response.token);
+  
+      this.router.navigate(['/user/home']);
+  
+    } catch (error: any) {
+      if (error.type === 'unverified') {
+        Swal.fire({
+          icon: 'info',
+          title: 'Correo no verificado',
+          text: error.message,
+          confirmButtonText: 'Ingresar código',
+          confirmButtonColor: '#188AFF'
+        }).then(() => {
+          this.router.navigate(['/auth/code-verification'], { queryParams: { email: error.email } });
+        });
+  
+      } else if (error.type === 'auth') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Credenciales inválidas',
+          text: 'Por favor, verifica tu correo y contraseña.',
+          confirmButtonColor: '#d33'
+        });
+  
+      } else if (error.errores) {
+        this.erroresValidacion = error.errores;
+  
+      } else if (error.message) {
+        this.errorMessage = error.message;
+  
+      } else {
+        this.errorMessage = 'Ocurrió un error inesperado.';
+      }
+    } finally {
+      this.isLoading = false;
+    }
   }
+  
+  
 }
