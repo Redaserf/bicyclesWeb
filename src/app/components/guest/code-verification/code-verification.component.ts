@@ -3,17 +3,19 @@ import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../../services/auth-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-code-verification',
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './code-verification.component.html',
   styleUrl: './code-verification.component.css'
 })
 export class CodeVerificationComponent {
   code: string = '';
   email: string = '';
-  isResending: boolean = false;
+  isVerifying: boolean = false; // Para mostrar el ícono de carga en el botón
+  isResending: boolean = false; // Para mostrar el estado de reenviar correo
 
   constructor(
     private authService: AuthService,
@@ -51,6 +53,8 @@ export class CodeVerificationComponent {
       return;
     }
 
+    this.isVerifying = true; // Activar el estado de verificación
+
     this.authService.verifyCode(this.email, this.code)
       .then(response => {
         Swal.fire({
@@ -70,6 +74,9 @@ export class CodeVerificationComponent {
           text: error.mensaje || 'Código incorrecto. Inténtalo de nuevo.',
           confirmButtonColor: '#d33'
         });
+      })
+      .finally(() => {
+        this.isVerifying = false; // Desactivar el estado de verificación
       });
   }
 

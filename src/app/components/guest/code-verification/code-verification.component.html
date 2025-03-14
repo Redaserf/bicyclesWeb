@@ -14,7 +14,12 @@
                name="verificationCode">
       </div>
       <div class="d-grid">
-        <button type="submit" class="btn btn-primary">Verificar</button>
+        <button type="submit" class="btn btn-primary" [disabled]="isVerifying">
+          <span *ngIf="isVerifying">
+            <i class="fas fa-spinner fa-spin"></i> Verificando...
+          </span>
+          <span *ngIf="!isVerifying">Verificar</span>
+        </button>
       </div>
     </form>
 
@@ -26,6 +31,5 @@
         {{ isResending ? 'Reenviando...' : 'Reenviar código' }}
       </a>
     </p>
-    
   </div>
 </section>

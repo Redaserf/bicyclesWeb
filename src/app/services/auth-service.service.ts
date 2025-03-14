@@ -133,6 +133,28 @@ export class AuthService {
   
   // ========================================================================================
 
+  async logout() {
+    const token = localStorage.getItem('token');
+    if (!token) {
+        return Promise.reject({ mensaje: 'No hay sesión activa.' });
+    }
+
+    try {
+        const response = await axios.post(`${this.apiUrl}/logout`, {}, {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+
+        localStorage.removeItem('token');
+
+        return response.data;
+    } catch (error: any) {
+        console.error('Error al cerrar sesión:', error);
+        return this.handleError(error);
+    }
+  }
+
+  // ========================================================================================
+
   // Manejo de errores
   private handleError(error: any) {
     console.error('AAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
