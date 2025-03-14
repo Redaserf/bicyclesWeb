@@ -72,3 +72,42 @@ h2 {
         margin: 0 3px;
     }
 }
+
+a {
+    color: #188AFF;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #0056b3;
+}
+
+a.disabled {
+    pointer-events: none;
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+a.loading {
+    position: relative;
+}
+
+a.loading::after {
+    content: "";
+    width: 12px;
+    height: 12px;
+    border: 2px solid #188AFF;
+    border-top-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: 8px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}

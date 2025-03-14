@@ -1,22 +1,31 @@
 <section class="d-flex flex-column justify-content-center align-items-center vh-100">
-       <div class="card" style="max-width: 450px; width: 90%;">
-         <img src="images/bicycles.png" alt="Logo" class="logo-card">
-         <h2>Introduce tu código de verificación</h2>
-         <form (ngSubmit)="onSubmit()">
-           <div class="code-container">
-             <input type="text" 
-                    maxlength="6"
-                    pattern="[0-9]*"
-                    inputmode="numeric"
-                    class="digit-input"
-                    placeholder="Ingresa el código"
-                    [(ngModel)]="code"
-                    name="verificationCode">
-           </div>
-           <div class="d-grid">
-             <button type="submit" class="btn btn-primary">Verificar</button>
-           </div>
-         </form>
-       </div>
-   </section>
-   
+  <div class="card" style="max-width: 450px; width: 90%;">
+    <img src="images/bicycles.png" alt="Logo" class="logo-card">
+    <h2>Introduce tu código de verificación</h2>
+    <form (ngSubmit)="onSubmit()">
+      <div class="code-container">
+        <input type="text" 
+               maxlength="6"
+               pattern="[0-9]*"
+               inputmode="numeric"
+               class="digit-input"
+               placeholder="Ingresa el código"
+               [(ngModel)]="code"
+               name="verificationCode">
+      </div>
+      <div class="d-grid">
+        <button type="submit" class="btn btn-primary">Verificar</button>
+      </div>
+    </form>
+
+    <p class="text-center mt-3">
+      ¿No recibiste el correo? 
+      <a (click)="resendEmail()" 
+         [class.disabled]="isResending" 
+         [class.loading]="isResending">
+        {{ isResending ? 'Reenviando...' : 'Reenviar código' }}
+      </a>
+    </p>
+    
+  </div>
+</section>

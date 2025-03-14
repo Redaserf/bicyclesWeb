@@ -93,20 +93,37 @@ constructor(private authService: AuthService, private router: Router) {}
     this.isLoading = true;
     try {
       const response = await this.authService.login(this.email, this.password);
+      
       localStorage.setItem('token', response.token);
+  
       this.router.navigate(['/user/home']);
+  
     } catch (error: any) {
-      if (error.type === 'auth') {
+      if (error.type === 'unverified') {
+        Swal.fire({
+          icon: 'info',
+          title: 'Correo no verificado',
+          text: error.message,
+          confirmButtonText: 'Ingresar código',
+          confirmButtonColor: '#188AFF'
+        }).then(() => {
+          this.router.navigate(['/auth/code-verification'], { queryParams: { email: error.email } });
+        });
+  
+      } else if (error.type === 'auth') {
         Swal.fire({
           icon: 'error',
           title: 'Credenciales inválidas',
           text: 'Por favor, verifica tu correo y contraseña.',
           confirmButtonColor: '#d33'
         });
+  
       } else if (error.errores) {
         this.erroresValidacion = error.errores;
+  
       } else if (error.message) {
         this.errorMessage = error.message;
+  
       } else {
         this.errorMessage = 'Ocurrió un error inesperado.';
       }
@@ -114,5 +131,6 @@ constructor(private authService: AuthService, private router: Router) {}
       this.isLoading = false;
     }
   }
+  
   
 }
