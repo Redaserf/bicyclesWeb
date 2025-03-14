@@ -20,8 +20,8 @@
   </button>
 </div>
 
-<div class="container">
 
+<div class="container">
   <!-- Tabla de usuarios -->
   <div class="panel">
     <div class="panel-heading">
@@ -33,29 +33,32 @@
           <tr>
             <th>Acciones</th>
             <th>Nombre</th>
-            <th>Correo</th>
-            <th>Edad</th>
+            <th>Apellido</th>
+            <th>Email</th>
             <th>Peso</th>
             <th>Estatura</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr *ngFor="let usuario of usuarios">
             <td>
               <ul class="action-list">
-                <li><button class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></button></li>
-                <li><button class="btn btn-danger btn-sm" (click)="openModal()"><i class="fa fa-trash"></i> </button></li>
+                <li><button class="btn btn-warning btn-sm"><i class="fa fa-edit" (click)="editarUsuario(usuario)"></i></button></li>
+                <li>
+                  <button class="btn btn-danger btn-sm" (click)="openModal(usuario)">
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </li>
               </ul>
             </td>
-            <td>asd</td>
-            <td>asd</td>
-            <td>asd</td>
-            <td>kg</td>
-            <td>m</td>
+            <td>{{ usuario.nombre }}</td>
+            <td>{{ usuario.apellido }}</td>
+            <td>{{ usuario.email }}</td>
+            <td>{{ usuario.peso }}</td>
+            <td>{{ usuario.estatura }}</td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
-
 </div>

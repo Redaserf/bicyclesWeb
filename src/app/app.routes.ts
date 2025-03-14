@@ -24,6 +24,7 @@ import { TablaRecorridoComponent } from './components/administrador/tablas/tabla
 import { TablaGenericaComponent } from './components/administrador/tablas/tabla-generica/tabla-generica.component';
 import { GuestLayoutComponent } from './components/layouts/guest-layout/guest-layout.component';
 import { AuthLayoutComponent } from './components/layouts/auth-layout/auth-layout.component';
+import { EditarUsuarioComponent } from './components/administrador/tablas/tabla-user/editar-usuario/editar-usuario.component';
 
 export const routes: Routes = [
 
@@ -79,4 +80,7 @@ export const routes: Routes = [
             {path: 'other-stuff',component: TablaGenericaComponent},
         ]
     },
+
+    {path: 'admin/usuario/editar/:id', component: EditarUsuarioComponent },
+
 ];

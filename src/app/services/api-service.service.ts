@@ -41,7 +41,7 @@ export class ApiService {
     return this.axiosInstance.delete(url).catch(this.handleError);
   }
   
-  private handleError(error: AxiosError) {
+  private handleError(error: any) {
     console.error('Error en la petición:', error);
   
     if (error.response) {
@@ -53,6 +53,7 @@ export class ApiService {
           return Promise.reject(error.response.data);
   
         case 401:
+          return Promise.reject({ mensaje: 'No autorizado.' });
         case 403:
           console.warn('Sesión expirada o no autorizado. Redirigiendo al login...');
           localStorage.removeItem('token');
@@ -61,6 +62,8 @@ export class ApiService {
         case 404:
           return Promise.reject({ mensaje: 'Recurso no encontrado.' });
   
+        case 422:
+          return Promise.reject({ errores: error.response.data.errors });
         case 500:
           return Promise.reject({ mensaje: 'Error interno del servidor. Intenta más tarde.' });
   

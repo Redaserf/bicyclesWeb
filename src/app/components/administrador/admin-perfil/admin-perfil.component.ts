@@ -2,16 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import AOS from 'aos';
 import { ApiService } from '../../../services/api-service.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-admin-perfil',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, NgIf],
   templateUrl: './admin-perfil.component.html',
   styleUrl: './admin-perfil.component.css'
 })
 export class AdminPerfilComponent implements OnInit {
 
   perfilForm!: FormGroup;
+  errores: any = {};
 
   constructor(private api: ApiService) { }
 
@@ -19,25 +21,35 @@ export class AdminPerfilComponent implements OnInit {
 
   guardarPerfil() {
 
-    if (this.perfilForm.valid) {
-      const data = this.perfilForm.value;
-      console.log('data', data);
-      this.api.put('user', data).then((response: any) => {
-        console.log('response', response);
+    this.api.put('usuario', this.perfilForm.value).then((response: any) => {
+      console.log(response);
+    }).catch((error: any) => {
+      this.procesarErroresValidaciones(error);
+      console.log('jasdf', error);
+    });
+
+  }
+
+  procesarErroresValidaciones(error: any) {
+    if (error && error.errores) {
+      this.errores = error.errores;
+      Object.keys(this.errores).forEach((campo) => {
+        if (this.perfilForm.controls[campo]) {
+          this.perfilForm.controls[campo].setErrors({ servidor: this.errores[campo][0] });//solo el primer error
+        }
       });
-    } else {
-      console.log('Formulario no valido');
     }
-
   }
-
-  cambiarFoto(event: Event) {
-
-  }
-
-
 
   ngOnInit(): void {
+    this.perfilForm = new FormGroup({
+      nombre: new FormControl('', [Validators.required]),
+      apellido: new FormControl('', [Validators.required]),
+      email: new FormControl({value: '', disabled: true}, [Validators.required, Validators.email]),
+      peso: new FormControl('', [Validators.required, Validators.min(20)]),
+      estatura: new FormControl('', [Validators.required, Validators.min(0)]),
+    }); 
+
     this.api.get('user').then((response: any) => {
       const data = response.data;
       console.log('datos', data);
@@ -50,13 +62,6 @@ export class AdminPerfilComponent implements OnInit {
       });
     });
 
-    this.perfilForm = new FormGroup({
-      nombre: new FormControl('', [Validators.required]),
-      apellido: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      peso: new FormControl('', [Validators.required, Validators.min(20)]),
-      estatura: new FormControl('', [Validators.required, Validators.min(0)]),
-    });
 
     AOS.init({
       offset: 100,

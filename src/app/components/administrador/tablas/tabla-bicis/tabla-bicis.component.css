@@ -103,3 +103,130 @@
       text-align: center;
     }
   }
+
+
+
+
+  /* Estilos para ocultar el modal al inicio */
+#editModal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  z-index: 1000;
+  width: 320px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  text-align: center;
+}
+
+/* Para oscurecer el fondo cuando el modal está abierto */
+#modalOverlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+/* Contenido del modal */
+#editModal .card-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Título del modal */
+#editModal .card-heading {
+  font-size: 20px;
+  font-weight: 700;
+  color: rgb(27, 27, 27);
+}
+
+/* Descripción */
+#editModal .card-description {
+  font-weight: 100;
+  color: rgb(102, 102, 102);
+}
+
+/* Estilos para el input */
+#editModal .input-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#editModal .form-control {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  outline: none;
+  transition: 0.3s;
+}
+
+#editModal .form-control:focus {
+  border-color: #188AFF;
+  box-shadow: 0 0 5px rgba(24, 138, 255, 0.5);
+}
+
+/* Botones */
+#editModal .card-button-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+#editModal .card-button {
+  width: 45%;
+  height: 35px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+#editModal .primary {
+  background-color: #188AFF;
+  color: white;
+}
+
+#editModal .primary:hover {
+  background-color: #0056b3;
+}
+
+#editModal .secondary {
+  background-color: #ddd;
+}
+
+#editModal .secondary:hover {
+  background-color: rgb(197, 197, 197);
+}
+
+/* Botón de cierre */
+#editModal .exit-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+#editModal .exit-button svg {
+  fill: rgb(175, 175, 175);
+}
+
+#editModal .exit-button:hover svg {
+  fill: black;
+}
