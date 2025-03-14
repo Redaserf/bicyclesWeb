@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
+
 
 body {
     font-family: 'Montserrat', sans-serif;
@@ -28,10 +30,23 @@ body {
     box-shadow: 0 12px 45px rgba(24, 138, 255, 0.8);
 }
 
-.btn-primary {
-    background-color: #188AFF;
-    border-color: #188AFF;
+a.disabled {
+    pointer-events: none;
+    opacity: 0.6;
+    cursor: not-allowed;
 }
+
+/* Estilos para la animación del botón de verificación */
+.btn-primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-primary i {
+    margin-right: 8px;
+}
+
 
 h2 {
     color: #188AFF;
@@ -83,12 +98,6 @@ a {
 
 a:hover {
     color: #0056b3;
-}
-
-a.disabled {
-    pointer-events: none;
-    opacity: 0.6;
-    cursor: not-allowed;
 }
 
 a.loading {
