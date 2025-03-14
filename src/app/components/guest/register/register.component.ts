@@ -22,7 +22,7 @@ export class RegisterComponent implements AfterViewInit, CanExit {
   nombre: string = '';
   apellido: string = '';
   peso: number = 0.00;
-  estatura: number = 0.00;
+  estatura: number = 0;
   email: string = '';
   password: string = '';
 

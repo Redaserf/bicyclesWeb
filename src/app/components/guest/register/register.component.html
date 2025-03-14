@@ -18,9 +18,11 @@
             <i class="fa-regular fa-user"></i>
             <input type="text" class="form-control" placeholder="Nombre" name="nombre" [(ngModel)]="nombre" required>
           </div>
-          <small *ngIf="erroresValidacion.nombre" class="text-danger">
-            {{ erroresValidacion.nombre[0] }}
-          </small>
+          <div style="margin-bottom:10px ;"class="text-center">
+            <small *ngIf="erroresValidacion.nombre" class="text-danger">
+              {{ erroresValidacion.nombre[0] }}
+            </small>
+          </div>
         </div>
 
         <div class="col-md-6">
@@ -50,9 +52,11 @@
             <i class="fa-solid fa-ruler"></i>
             <input type="number" class="form-control" placeholder="Estatura (m)" name="estatura" [(ngModel)]="estatura" required min="1.10" max="2.20" step="0.01">
           </div>
-          <small *ngIf="erroresValidacion.estatura" class="text-danger">
-            {{ erroresValidacion.estatura[0] }}
-          </small>
+          <div style="margin-bottom:10px ;"class="text-center">
+            <small *ngIf="erroresValidacion.estatura" class="text-danger">
+              {{ erroresValidacion.estatura[0] }}
+            </small>
+          </div>
         </div>
       </div>
 
@@ -60,28 +64,36 @@
         <i class="fa-regular fa-envelope"></i>
         <input type="email" class="form-control" placeholder="Email" name="email" [(ngModel)]="email" required>
       </div>
-      <small *ngIf="erroresValidacion.email" class="text-danger">
-        {{ erroresValidacion.email[0] }}
-      </small>
-
+      <div style="margin-bottom:10px ;"class="text-center">
+        <small *ngIf="erroresValidacion.email" class="text-danger">
+          {{ erroresValidacion.email[0] }}
+        </small>  
+      </div>
+     
       <div class="input-group-custom d-flex align-items-center">
         <i class="fa-solid fa-key"></i>
         <input [type]="verPassword ? 'text' : 'password'" class="form-control" placeholder="Contraseña" name="password" [(ngModel)]="password" required minlength="8">
         <span class="toggle-pass ms-2" (click)="verPassword = !verPassword">
           <fa-icon [icon]="verPassword ? faEyeSlash : faEye"></fa-icon>
         </span>
+      </div>  
+      <div style="margin-bottom:10px ;"class="text-center">
+        <small *ngIf="erroresValidacion.password" class="text-danger">
+          {{ erroresValidacion.password[0] }}
+        </small> 
       </div>
-      <small *ngIf="erroresValidacion.password" class="text-danger">
-        {{ erroresValidacion.password[0] }}
-      </small>
+     
 
       <div class="input-group-custom d-flex align-items-center">
         <i class="fa-solid fa-key"></i>
         <input type="password" class="form-control" placeholder="Confirmar contraseña" name="confirmPassword" [(ngModel)]="confirm_password" required>
       </div>
-      <small *ngIf="password !== confirm_password && confirm_password" class="text-danger">
-        Las contraseñas no coinciden.
-      </small>
+      <div style="margin-bottom:10px ;"class="text-center">
+        <small *ngIf="password !== confirm_password && confirm_password" class="text-danger">
+          Las contraseñas no coinciden.
+        </small>
+      </div>
+     
 
       <button type="submit" class="btn btn-custom w-100 mt-2" [disabled]="isLoading">
         <span *ngIf="isLoading" class="spinner-border spinner-border-sm"></span>
