@@ -96,3 +96,11 @@ body {
   display: flex;
   align-items: center;
 }
+
+small {
+  font-size: 12px;
+}
+
+.text-danger {
+  margin-bottom: 10px;
+}

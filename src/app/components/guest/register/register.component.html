@@ -1,5 +1,5 @@
 <div class="container my-5" data-aos="fade-up">
-  <div class="card card-custom ">
+  <div class="card card-custom">
     <div class="text-center mb-3">
       <img src="images/logimg.png" alt="Logo" class="logo-img">
     </div>
@@ -7,30 +7,23 @@
 
     <form (ngSubmit)="onRegister()" #registerForm="ngForm" novalidate>
 
-      <!-- Mensaje de error general -->
-      <div *ngIf="erroresValidacion.mensaje" class="alert alert-danger text-center">
-        {{ erroresValidacion.mensaje }}
-      </div>
-
       <div class="row">
         <div class="col-md-6">
           <div class="input-group-custom d-flex align-items-center">
             <i class="fa-regular fa-user"></i>
-            <input type="text" class="form-control" placeholder="Nombre" name="nombre" [(ngModel)]="nombre" required>
+            <input type="text" class="form-control" placeholder="Nombre" name="nombre" [(ngModel)]="nombre">
           </div>
-          <div style="margin-bottom:10px ;"class="text-center">
-            <small *ngIf="erroresValidacion.nombre" class="text-danger">
-              {{ erroresValidacion.nombre[0] }}
-            </small>
-          </div>
+          <small *ngIf="erroresValidacion.nombre" class="text-danger text-center d-block">
+            {{ erroresValidacion.nombre[0] }}
+          </small>
         </div>
 
         <div class="col-md-6">
           <div class="input-group-custom d-flex align-items-center">
             <i class="fa-regular fa-user"></i>
-            <input type="text" class="form-control" placeholder="Apellidos" name="apellido" [(ngModel)]="apellido" required>
+            <input type="text" class="form-control" placeholder="Apellidos" name="apellido" [(ngModel)]="apellido">
           </div>
-          <small *ngIf="erroresValidacion.apellido" class="text-danger">
+          <small *ngIf="erroresValidacion.apellido" class="text-danger text-center d-block">
             {{ erroresValidacion.apellido[0] }}
           </small>
         </div>
@@ -40,9 +33,9 @@
         <div class="col-md-6">
           <div class="input-group-custom d-flex align-items-center">
             <i class="fa-solid fa-weight-scale"></i>
-            <input type="number" class="form-control" placeholder="Peso (kg)" name="peso" [(ngModel)]="peso" required min="20" max="150" step="0.01">
+            <input type="number" class="form-control" placeholder="Peso (kg)" name="peso" [(ngModel)]="peso" min="20" max="150" step="0.01">
           </div>
-          <small *ngIf="erroresValidacion.peso" class="text-danger">
+          <small *ngIf="erroresValidacion.peso" class="text-danger text-center d-block">
             {{ erroresValidacion.peso[0] }}
           </small>
         </div>
@@ -50,62 +43,55 @@
         <div class="col-md-6">
           <div class="input-group-custom d-flex align-items-center">
             <i class="fa-solid fa-ruler"></i>
-            <input type="number" class="form-control" placeholder="Estatura (m)" name="estatura" [(ngModel)]="estatura" required min="1.10" max="2.20" step="0.01">
+            <input type="number" class="form-control" placeholder="Estatura (m)" name="estatura" [(ngModel)]="estatura" min="1.10" max="2.20" step="0.01">
           </div>
-          <div style="margin-bottom:10px ;"class="text-center">
-            <small *ngIf="erroresValidacion.estatura" class="text-danger">
-              {{ erroresValidacion.estatura[0] }}
-            </small>
-          </div>
+          <small *ngIf="erroresValidacion.estatura" class="text-danger text-center d-block">
+            {{ erroresValidacion.estatura[0] }}
+          </small>
         </div>
       </div>
 
       <div class="input-group-custom d-flex align-items-center">
         <i class="fa-regular fa-envelope"></i>
-        <input type="email" class="form-control" placeholder="Email" name="email" [(ngModel)]="email" required>
+        <input type="email" class="form-control" placeholder="Email" name="email" [(ngModel)]="email">
       </div>
-      <div style="margin-bottom:10px ;"class="text-center">
-        <small *ngIf="erroresValidacion.email" class="text-danger">
-          {{ erroresValidacion.email[0] }}
-        </small>  
-      </div>
-     
-      <div class="input-group-custom d-flex align-items-center">
-        <i class="fa-solid fa-key"></i>
-        <input [type]="verPassword ? 'text' : 'password'" class="form-control" placeholder="Contraseña" name="password" [(ngModel)]="password" required minlength="8">
-        <span class="toggle-pass ms-2" (click)="verPassword = !verPassword">
-          <fa-icon [icon]="verPassword ? faEyeSlash : faEye"></fa-icon>
-        </span>
-      </div>  
-      <div style="margin-bottom:10px ;"class="text-center">
-        <small *ngIf="erroresValidacion.password" class="text-danger">
-          {{ erroresValidacion.password[0] }}
-        </small> 
-      </div>
-     
+      <small *ngIf="erroresValidacion.email" class="text-danger text-center d-block">
+        {{ erroresValidacion.email[0] }}
+      </small>
 
       <div class="input-group-custom d-flex align-items-center">
         <i class="fa-solid fa-key"></i>
-        <input type="password" class="form-control" placeholder="Confirmar contraseña" name="confirmPassword" [(ngModel)]="confirm_password" required>
+        <input [type]="verPassword ? 'text' : 'password'" class="form-control" placeholder="Contraseña" name="password" [(ngModel)]="password">
+        <span class="toggle-pass ms-2" (click)="verPassword = !verPassword">
+          <fa-icon [icon]="verPassword ? faEyeSlash : faEye"></fa-icon>
+        </span>
       </div>
-      <div style="margin-bottom:10px ;"class="text-center">
-        <small *ngIf="password !== confirm_password && confirm_password" class="text-danger">
-          Las contraseñas no coinciden.
-        </small>
+      <small *ngIf="erroresValidacion.password" class="text-danger text-center d-block">
+        {{ erroresValidacion.password[0] }}
+      </small>
+
+      <div class="input-group-custom d-flex align-items-center">
+        <i class="fa-solid fa-key"></i>
+        <input type="password" 
+               class="form-control" 
+               [ngClass]="{'is-invalid': password !== confirm_password && confirm_password}" 
+               placeholder="Confirmar contraseña" 
+               name="confirmPassword" 
+               [(ngModel)]="confirm_password">
       </div>
-     
+      <!-- <small *ngIf="password !== confirm_password && confirm_password" class="text-danger text-center d-block">
+        Las contraseñas no coinciden.
+      </small>       -->
 
       <button type="submit" class="btn btn-custom w-100 mt-2" [disabled]="isLoading">
         <span *ngIf="isLoading" class="spinner-border spinner-border-sm"></span>
         <span *ngIf="!isLoading">Registrarse</span>
-      </button>      
+      </button>
 
       <p class="text-center mt-3">
         ¿Ya tienes cuenta? <a routerLink="/auth/login" class="text-decoration-none">Inicia sesión</a>
       </p>
 
-
     </form>
-    
   </div>
 </div>
