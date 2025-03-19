@@ -19,7 +19,8 @@ export class AuthService {
     peso: number,
     estatura: number,
     email: string,
-    password: string
+    password: string,
+    confirm_password: string
   ) {
     try {
       console.log('Antes de enviar la solicitud al backend');
@@ -30,7 +31,8 @@ export class AuthService {
         peso,
         estatura,
         email,
-        password
+        password,
+        confirm_password
       });
 
     console.log('Respuesta recibida del backend:', response.data);

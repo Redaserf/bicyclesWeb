@@ -56,23 +56,29 @@ export class RegisterComponent implements AfterViewInit, CanExit {
 
   async onRegister() {
     try {
-      this.erroresValidacion = {}; // Resetear errores
+      this.erroresValidacion = {};
       this.isLoading = true;
-
-    if (this.password !== this.confirm_password) {
-      this.erroresValidacion.password = ['Las contraseñas no coinciden.'];
-      this.isLoading = false;
-      return;
-    }
-
+  
+      if (!this.confirm_password) {
+        this.erroresValidacion.confirm_password = ['Debes confirmar tu contraseña.'];
+        this.isLoading = false;
+        return;
+      }
+  
+      if (this.password !== this.confirm_password) {
+        this.erroresValidacion.confirm_password = ['Las contraseñas no coinciden.'];
+        this.isLoading = false;
+        return;
+      }
+  
       console.log('Antes de llamar a AuthService.register');
-
+  
       await this.authService.register(
-        this.nombre, this.apellido, this.peso ?? 0, this.estatura ?? 0, this.email, this.password
+        this.nombre, this.apellido, this.peso ?? 0, this.estatura ?? 0, this.email, this.password, this.confirm_password
       );
-
+  
       console.log('Registro exitoso');
-
+  
       Swal.fire({
         icon: 'success',
         title: 'Registro exitoso',
@@ -82,10 +88,10 @@ export class RegisterComponent implements AfterViewInit, CanExit {
       }).then(() => {
         this.router.navigate(['/auth/code-verification'], { queryParams: { email: this.email, registered: 'true' } });
       });
-
+  
     } catch (error: any) {
       console.error('Error en el registro:', error);
-
+  
       if (error.errores) {
         this.erroresValidacion = error.errores;
       } else if (error.mensaje) {
@@ -96,5 +102,6 @@ export class RegisterComponent implements AfterViewInit, CanExit {
     } finally {
       this.isLoading = false;
     }
-  }
+  }  
+  
 }
