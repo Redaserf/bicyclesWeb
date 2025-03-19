@@ -24,9 +24,12 @@
           [(ngModel)]="email" 
           required>
       </div>
-      <small *ngIf="erroresValidacion?.email" class="text-danger">
-        {{ erroresValidacion.email[0] }}
-      </small>
+      <div style="margin-bottom:10px ;"class="text-center">
+        <small *ngIf="erroresValidacion?.email" class="text-danger">
+          {{ erroresValidacion.email[0] }}
+        </small>
+      </div>
+      
 
       <div class="input-group-custom d-flex align-items-center">
         <span class="input-icon">
@@ -44,10 +47,13 @@
           <fa-icon [icon]="verPassword ? faEyeSlash : faEye"></fa-icon>
         </span>
       </div>
-      <small *ngIf="erroresValidacion?.password" class="text-danger">
-        {{ erroresValidacion.password[0] }}
-      </small>
-
+      <div style="margin-bottom:10px ;"class="text-center">
+        <small *ngIf="erroresValidacion?.password" class="text-danger">
+          {{ erroresValidacion.password[0] }}
+        </small>
+      </div>
+      
+      
       <button 
         class="btn-custom w-100 mt-3" 
         type="submit" 

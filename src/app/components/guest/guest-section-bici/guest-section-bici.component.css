@@ -1,6 +1,14 @@
 #Informacion {
     padding-top: 60px;
-    background-color: #7FCDFF;
+    background-color: #ECF7FF;
+background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat-back.svg');
+background-position: center;
+background-repeat: repeat;
+background-size: 4%;
+}
+.img-fluid{
+    width:500px;
+    height: 500px;
 }
 
 
@@ -63,9 +71,23 @@
 
 .card__description_img {
     margin: 10px 0 0;
+    margin-top: 20px;
     font-size: 14px;
     color: #000000;
     line-height: 1.4;
+}
+
+.full-width-image img {
+    width: 100%;
+    padding: 100px;
+    height: 500px; /* Ajusta la altura según necesites */
+    object-fit: cover; /* Para que no se deforme */
+}
+
+@media (max-width: 768px) {
+    .full-width-image img {
+        height: 300px; /* Reduce la altura en móviles */
+    }
 }
 
 /* Adaptaciones para pantallas pequeñas */
@@ -79,6 +101,12 @@
     .card_img {
         padding: 10px;
     }
+    .img-fluid{
+        width:200px;
+        height: 200px;
+    }
+    
+
 }
 
 @media (min-width: 768px) {
@@ -89,23 +117,30 @@
 
 @media (max-width: 767px) {
     .card_img {
-        height: auto;
+        height: 200px;
     }
+    .img-fluid{
+        width:300px;
+        height: 300px;
+    }
+    
 }
 
 /* ===== Sección de la bicicleta e Instagram (segunda sección) ===== */
 .icon-style {
     font-size: 60px;
-    color: #000000;
+    color: #428ce2;
     margin-bottom: 15px;
     transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .bicicleta-img {
     max-width: 78%;
+    border-radius: 25px;
+    margin-bottom:20px;
     height: auto;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+ 
+  
     transition: transform 0.3s ease;
     margin-left: 20px;
 }
