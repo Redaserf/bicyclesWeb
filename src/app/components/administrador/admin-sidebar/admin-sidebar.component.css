@@ -1,9 +1,9 @@
-
-
+/* Estilo general para enlaces */
 a {
     text-decoration: none;
 }
 
+/* SIDEBAR (Oculto por defecto en todas las pantallas) */
 #mainNav {
     background: linear-gradient(180deg, #188AFF, #188AFF);
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
@@ -16,8 +16,15 @@ a {
     left: 0;
     top: 0;
     z-index: 998;
+    transform: translateX(-100%); /* Oculta la sidebar por defecto */
 }
 
+/* Sidebar activa (cuando se abre) */
+#mainNav.active {
+    transform: translateX(0);
+}
+
+/* Contenedor del logo */
 .logo-container {
     text-align: center;
     padding: 10px;
@@ -30,6 +37,7 @@ a {
     border-radius: 10px;
 }
 
+/* Estilos para los enlaces del menú */
 .vlink {
     color: white !important;
     padding: 12px 20px;
@@ -42,14 +50,16 @@ a {
 
 .vlink i {
     font-size: 1.5rem;
-    color: white !important; /* Asegura que los iconos también sean blancos */
+    color: white !important;
 }
 
+/* Efecto al pasar el cursor sobre los enlaces */
 .vlink:hover {
     background: #0056b3;
     transform: translateX(5px);
 }
 
+/* BOTÓN DEL MENÚ (siempre visible) */
 #toggleMenu {
     position: fixed;
     top: 15px;
@@ -61,12 +71,12 @@ a {
     border-radius: 40%;
     cursor: pointer;
     z-index: 1000;
-    display: none;
     transition: background 0.3s ease, transform 0.3s ease;
 }
 
+/* Hover del botón del menú */
 #toggleMenu:hover {
-    background: #188AFF;
+    background: #0056b3;
     transform: scale(1.1);
 }
 
@@ -74,19 +84,7 @@ a {
     font-size: 1.4rem;
 }
 
-@media (max-width: 768px) {
-    #mainNav {
-        transform: translateX(-100%);
-    }
-
-    #mainNav.active {
-        transform: translateX(0);
-    }
-
-    #toggleMenu {
-        display: block;
-    }
-}
+/* BOTÓN DE CERRAR SESIÓN */
 #logoutBtn {
     background: #2600ff;
     color: white;
@@ -99,15 +97,27 @@ a {
     transition: background 0.3s ease, transform 0.3s ease;
 }
 
+/* Hover del botón de cerrar sesión */
 #logoutBtn:hover {
     background: #c82333;
     transform: scale(1.05);
 }
 
-/* esta clase es para los otros componentes que estén */
-/* #content {
-    margin-left: 200px;
+/* RESPONSIVE: Para móviles */
+@media (max-width: 768px) {
+    #mainNav {
+        width: 200px;
+    }
+}
+
+/* Contenido principal (para empujar cuando el menú esté abierto) */
+#content {
+    margin-left: 0;
     padding: 20px;
     flex: 1;
     transition: margin-left 0.4s ease-in-out;
-} */
+}
+
+#content.menu-open {
+    margin-left: 200px; /* Ajusta el contenido cuando el menú está abierto */
+}

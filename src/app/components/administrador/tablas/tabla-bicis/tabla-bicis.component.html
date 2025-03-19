@@ -5,27 +5,29 @@
       <h2 class="panel-title">Bicicletas</h2>
     </div>
     <div class="panel-body">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Acciones</th>
-            <th>Nombre de la Bici</th>
-            <th>Usuario</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let bici of bicis">
-            <td>
-              <ul class="action-list">
-                <li><a (click)="openModal(bici)"><i class="fa fa-edit"></i> Editar</a></li>
-                <li><a (click)="eliminarBici(bici)"><i class="fa fa-trash"></i> Eliminar</a></li>
-              </ul>
-            </td>
-            <td>{{ bici.nombre }}</td>
-            <td>{{ bici.usuario.nombre + " " + bici.usuario.apellido }}</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Acciones</th>
+              <th>Nombre de la Bici</th>
+              <th>Usuario</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let bici of bicis">
+              <td>
+                <ul class="action-list">
+                  <li><a (click)="openModal(bici)"><i class="fa fa-edit"></i> Editar</a></li>
+                  <li><a (click)="eliminarBici(bici)"><i class="fa fa-trash"></i> Eliminar</a></li>
+                </ul>
+              </td>
+              <td>{{ bici.nombre }}</td>
+              <td>{{ bici.usuario.nombre + " " + bici.usuario.apellido }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>

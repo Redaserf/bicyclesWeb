@@ -25,40 +25,42 @@
   <!-- Tabla de usuarios -->
   <div class="panel">
     <div class="panel-heading">
-      <h2 class="panel-title">Usuarios</h2>
+      <h2 class="panel-title text-center">Usuarios</h2>
     </div>
     <div class="panel-body">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Acciones</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Email</th>
-            <th>Peso</th>
-            <th>Estatura</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let usuario of usuarios">
-            <td>
-              <ul class="action-list">
-                <li><button class="btn btn-warning btn-sm"><i class="fa fa-edit" (click)="editarUsuario(usuario)"></i></button></li>
-                <li>
-                  <button class="btn btn-danger btn-sm" (click)="openModal(usuario)">
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+          <thead class="thead-light">
+            <tr>
+              <th>Acciones</th>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>Email</th>
+              <th>Peso</th>
+              <th>Estatura</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let usuario of usuarios">
+              <td>
+                <div class="btn-group" role="group" aria-label="Acciones">
+                  <button type="button" class="btn btn-warning btn-sm" (click)="editarUsuario(usuario)">
+                    <i class="fa fa-edit"></i>
+                  </button>
+                  <button type="button" class="btn btn-danger btn-sm" (click)="openModal(usuario)">
                     <i class="fa fa-trash"></i>
                   </button>
-                </li>
-              </ul>
-            </td>
-            <td>{{ usuario.nombre }}</td>
-            <td>{{ usuario.apellido }}</td>
-            <td>{{ usuario.email }}</td>
-            <td>{{ usuario.peso }}</td>
-            <td>{{ usuario.estatura }}</td>
-          </tr>
-        </tbody>
-      </table>
+                </div>
+              </td>
+              <td>{{ usuario.nombre }}</td>
+              <td>{{ usuario.apellido }}</td>
+              <td>{{ usuario.email }}</td>
+              <td>{{ usuario.peso }}</td>
+              <td>{{ usuario.estatura }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>

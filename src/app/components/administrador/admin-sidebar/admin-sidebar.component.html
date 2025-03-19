@@ -9,10 +9,10 @@
         </div>
 
         <ul class="list-unstyled ms-2">
-            <li><a class="vlink" [routerLink]="['/admin/usuarios']"><i class="fas fa-users"></i><span>Usuarios</span></a></li>
-            <li><a class="vlink" [routerLink]="['/admin/bicicletas']"><i class="fas fa-bicycle"></i><span>Bicicletas</span></a></li>
-            <li><a class="vlink" [routerLink]="['/admin/estadisticas']"><i class="fas fa-chart-bar"></i><span>Estadísticas</span></a></li>
-            <li><a class="vlink" [routerLink]="['/admin/perfil']"><i class="fas fa-user"></i><span>Perfil</span></a></li>
+            <li><a class="vlink" [routerLink]="['/admin/usuarios']" (click)="toggleSidebar()"><i class="fas fa-users"></i><span>Usuarios</span></a></li>
+            <li><a class="vlink" [routerLink]="['/admin/bicicletas']" (click)="toggleSidebar()"><i class="fas fa-bicycle"></i><span>Bicicletas</span></a></li>
+            <li><a class="vlink" [routerLink]="['/admin/estadisticas']" (click)="toggleSidebar()"><i class="fas fa-chart-bar"></i><span>Estadísticas</span></a></li>
+            <li><a class="vlink" [routerLink]="['/admin/perfil']" (click)="toggleSidebar()"><i class="fas fa-user"></i><span>Perfil</span></a></li>
         </ul>
     </div>
 

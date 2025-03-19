@@ -79,7 +79,9 @@ export const routes: Routes = [
             {path: 'bicicletas',component: TablaBicisComponent, canActivate: [authGuard], data: { roles: [3] } },
             {path: 'recorridos',component: TablaRecorridoComponent, canActivate: [authGuard], data: { roles: [3] } }, // basta de reirse chicos
             {path: 'other-stuff',component: TablaGenericaComponent, canActivate: [authGuard], data: { roles: [3] } },
-        ]
+        ],
+        canActivate: [authGuard], 
+        data: { roles: [3] }
     },
 
     {path: 'admin/usuario/editar/:id', component: EditarUsuarioComponent },
