@@ -1,71 +1,118 @@
-<div class="container">
-  <div class="card shadow-sm mb-4">
-    <div class="card-header" style="background-color: #2794ff; color: #fff; border-radius: 10px 10px 0 0;">
-      <h3 class="m-0 py-2">Perfil</h3>
+
+<div class="profile-container">
+  <div class="profile-card main-info">
+    <h2 class="profile-name">{{ perfilForm.get('nombre')?.value }} {{ perfilForm.get('apellido')?.value }}</h2>
+    <p class="profile-subtitle">{{ perfilForm.get('email')?.value }}</p>
+    
+    <!-- Avatar -->
+    <div class="avatar">
+      <img src="images/logimg.png" alt="Foto de perfil" />
     </div>
-    <form [formGroup]="perfilForm" (ngSubmit)="guardarPerfil()" novalidate class="p-4">
-      <div class="row">
-        <div class="col-md-6 mb-3">
-          <input formControlName="nombre" class="form-control" placeholder="Nombre" />
-          <small class="text-danger" *ngIf="perfilForm.controls['nombre'].touched && perfilForm.controls['nombre'].errors?.['required']">
-            El nombre es obligatorio.
-          </small>
-          <small class="text-danger" *ngIf="perfilForm.controls['nombre'].errors?.['servidor']">
-            {{ perfilForm.controls['nombre'].errors?.['servidor'] }}
-          </small>
-        </div>
+    
+    <p class="profile-email">
+      <strong>Email:</strong> {{ perfilForm.get('email')?.value }}
+    </p>
+  </div>
 
-        <div class="col-md-6 mb-3">
-          <input formControlName="apellido" class="form-control" placeholder="Apellido" />
-          <small class="text-danger" *ngIf="perfilForm.controls['apellido'].touched && perfilForm.controls['apellido'].errors?.['required']">
-            El apellido es obligatorio.
-          </small>
-          <small class="text-danger" *ngIf="perfilForm.controls['apellido'].errors?.['servidor']">
-            {{ perfilForm.controls['apellido'].errors?.['servidor'] }}
-          </small>
-        </div>
+  <!-- Tarjeta 2: Detalles del Perfil -->
+  <div class="profile-card detail-info">
+    <h3 class="detail-title">Detalles del Perfil</h3>
+    <p><strong>Peso:</strong> {{ perfilForm.get('peso')?.value }}</p>
+    <p><strong>Estatura:</strong> {{ perfilForm.get('estatura')?.value }}</p>
+  </div>
 
-        <div class="col-md-6 mb-3">
-          <input type="email" formControlName="email" class="form-control" placeholder="Email" [disabled]="true"/>
-          <small class="text-danger" *ngIf="perfilForm.controls['email'].touched && perfilForm.controls['email'] .errors?.['required']">
-            El email es obligatorio.
-          </small>
-          <small class="text-danger" *ngIf="perfilForm.controls['email'].errors?.['email']">
-            Debe ser un email válido.
-          </small>
-          <small class="text-danger" *ngIf="perfilForm.controls['email'].errors?.['servidor']">
-            {{ perfilForm.controls['email'].errors?.['servidor'] }}
-          </small>
-        </div>
+  <!-- Botones de acción -->
+  <div class="profile-actions">
+    <button type="button" class="action-btn edit-btn" data-bs-toggle="modal" data-bs-target="#editProfileModal">
+      Editar Perfil
+    </button>
+  </div>
+</div>
 
-        <div class="col-md-3 mb-3">
-          <input type="number" step="0.01" formControlName="peso" class="form-control" placeholder="Peso (kg)" />
-          <small class="text-danger" *ngIf="perfilForm.controls['peso'].touched && perfilForm.controls['peso'].errors?.['required']">
-            El peso es obligatorio.
-          </small>
-          <small class="text-danger" *ngIf="perfilForm.controls['peso'].errors?.['min']">
-            El peso debe ser mayor a 0.
-          </small>
-          <small class="text-danger" *ngIf="perfilForm.controls['peso'].errors?.['servidor']">
-            {{ perfilForm.controls['peso'].errors?.['servidor'] }}
-          </small>
-        </div>
 
-        <div class="col-md-3 mb-3">
-          <input type="number" step="0.01" formControlName="estatura" class="form-control" placeholder="Estatura (m)" />
-          <small class="text-danger" *ngIf="perfilForm.controls['estatura'].touched && perfilForm.controls['estatura'].errors?.['required']">
-            La estatura es obligatoria.
-          </small>
-          <small class="text-danger" *ngIf="perfilForm.controls['estatura'].errors?.['min']">
-            La estatura debe ser mayor a 0.
-          </small>
-          <small class="text-danger" *ngIf="perfilForm.controls['estatura'].errors?.['servidor']">
-            {{ perfilForm.controls['estatura'].errors?.['servidor'] }}
-          </small>
-        </div>
+<!-- Modal para editar el perfil -->
+<div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Encabezado del Modal -->
+      <div class="modal-header" style="background-color: #2794ff; color: #fff;">
+        <h5 class="modal-title" id="editProfileModalLabel">Editar Perfil</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
       </div>
-
-      <button type="submit" class="btn btn-save">Guardar Perfil</button>
-    </form>
+      <!-- Cuerpo del Modal con el formulario -->
+      <div class="modal-body">
+        <form [formGroup]="perfilForm" (ngSubmit)="guardarPerfil()" novalidate>
+          <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" formControlName="nombre" class="form-control" id="nombre" placeholder="Nombre" />
+            <small class="text-danger" *ngIf="perfilForm.controls['nombre'].touched && perfilForm.controls['nombre'].errors?.['required']">
+              El nombre es obligatorio.
+            </small>
+            <small class="text-danger" *ngIf="perfilForm.controls['nombre'].errors?.['servidor']">
+              {{ perfilForm.controls['nombre'].errors?.['servidor'] }}
+            </small>
+          </div>
+          
+          <div class="mb-3">
+            <label for="apellido" class="form-label">Apellido</label>
+            <input type="text" formControlName="apellido" class="form-control" id="apellido" placeholder="Apellido" />
+            <small class="text-danger" *ngIf="perfilForm.controls['apellido'].touched && perfilForm.controls['apellido'].errors?.['required']">
+              El apellido es obligatorio.
+            </small>
+            <small class="text-danger" *ngIf="perfilForm.controls['apellido'].errors?.['servidor']">
+              {{ perfilForm.controls['apellido'].errors?.['servidor'] }}
+            </small>
+          </div>
+          
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" formControlName="email" class="form-control" id="email" placeholder="Email" [disabled]="true" />
+            <small class="text-danger" *ngIf="perfilForm.controls['email'].touched && perfilForm.controls['email'].errors?.['required']">
+              El email es obligatorio.
+            </small>
+            <small class="text-danger" *ngIf="perfilForm.controls['email'].errors?.['email']">
+              Debe ser un email válido.
+            </small>
+            <small class="text-danger" *ngIf="perfilForm.controls['email'].errors?.['servidor']">
+              {{ perfilForm.controls['email'].errors?.['servidor'] }}
+            </small>
+          </div>
+          
+          <div class="mb-3">
+            <label for="peso" class="form-label">Peso (kg)</label>
+            <input type="number" step="0.01" formControlName="peso" class="form-control" id="peso" placeholder="Peso (kg)" />
+            <small class="text-danger" *ngIf="perfilForm.controls['peso'].touched && perfilForm.controls['peso'].errors?.['required']">
+              El peso es obligatorio.
+            </small>
+            <small class="text-danger" *ngIf="perfilForm.controls['peso'].errors?.['min']">
+              El peso debe ser mayor a 0.
+            </small>
+            <small class="text-danger" *ngIf="perfilForm.controls['peso'].errors?.['servidor']">
+              {{ perfilForm.controls['peso'].errors?.['servidor'] }}
+            </small>
+          </div>
+          
+          <div class="mb-3">
+            <label for="estatura" class="form-label">Estatura (m)</label>
+            <input type="number" step="0.01" formControlName="estatura" class="form-control" id="estatura" placeholder="Estatura (m)" />
+            <small class="text-danger" *ngIf="perfilForm.controls['estatura'].touched && perfilForm.controls['estatura'].errors?.['required']">
+              La estatura es obligatoria.
+            </small>
+            <small class="text-danger" *ngIf="perfilForm.controls['estatura'].errors?.['min']">
+              La estatura debe ser mayor a 0.
+            </small>
+            <small class="text-danger" *ngIf="perfilForm.controls['estatura'].errors?.['servidor']">
+              {{ perfilForm.controls['estatura'].errors?.['servidor'] }}
+            </small>
+          </div>
+          
+          <!-- Footer del modal con botones -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Guardar Perfil</button>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
 </div>
