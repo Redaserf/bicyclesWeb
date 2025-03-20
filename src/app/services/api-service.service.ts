@@ -9,7 +9,7 @@ export class ApiService {
 
   constructor() { 
     this.axiosInstance = axios.create({
-      baseURL: 'http://192.168.253.10:8000/api/v1',
+      baseURL: 'http://192.168.1.11:8000/api/v1',
       timeout: 1000,
       headers: {
         'Content-Type': 'application/json',
