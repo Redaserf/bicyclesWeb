@@ -77,3 +77,19 @@ body {
 .btn-custom:disabled {
   background-color: #90CAF9;
 }
+
+.btn-regresar{
+  background-color: #000000;
+  color: white;
+  border-radius: 10px;
+  font-weight: 600;
+  padding: 12px;
+  transition: background 0.3s;
+}
+.btn-regresar:hover:not(:disabled) {
+  background-color: #363839;
+}
+
+.btn-regresar:disabled {
+  background-color: #90CAF9;
+}

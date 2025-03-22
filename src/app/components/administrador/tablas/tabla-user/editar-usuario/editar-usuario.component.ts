@@ -1,13 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ApiService } from '../../../../../services/api-service.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NgFor, NgIf } from '@angular/common';
 import { Usuario } from '../tabla-user.component';
 
 @Component({
   selector: 'app-editar-usuario',
-  imports: [ReactiveFormsModule, NgIf],
+  imports: [ReactiveFormsModule, NgIf,RouterLink],
   templateUrl: './editar-usuario.component.html',
   styleUrl: './editar-usuario.component.css'
 })

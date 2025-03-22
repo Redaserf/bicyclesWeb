@@ -1,9 +1,6 @@
 <div class="container">
     <div class="card-custom">
-      <div class="text-center mb-3">
-        <img src="assets/images/user-placeholder.png" class="logo-img" alt="Foto de perfil">
-      </div>
-      
+     
       <h3 class="text-center mb-3">Editar Usuario</h3>
     
       <form [formGroup]="usuarioForm" (ngSubmit)="actualizarUsuario()">
@@ -75,6 +72,8 @@
   
         <!-- Botón de actualizar -->
         <button type="submit" class="btn btn-custom w-100 mt-3">Actualizar</button>
+        <button [routerLink]="['/admin/usuarios']"  class="btn btn-regresar w-100 mt-3">Regresar</button>
+        
         
         <!-- Mensaje de éxito -->
         <p *ngIf="mensajeExito" class="text-success text-center mt-2">{{ mensajeExito }}</p>

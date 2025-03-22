@@ -91,8 +91,9 @@ a {
     padding: 12px;
     border: none;
     border-radius: 8px;
-    margin: 20px;
-    width: calc(100% - 40px);
+    /* Reduce o quita el margin para que no se corte en móviles */
+    margin: 10px;
+    width: calc(100% - 20px);
     cursor: pointer;
     transition: background 0.3s ease, transform 0.3s ease;
 }
@@ -107,6 +108,8 @@ a {
 @media (max-width: 768px) {
     #mainNav {
         width: 200px;
+        /* Activa scroll vertical si el contenido excede la pantalla */
+        overflow-y: auto;
     }
 }
 
