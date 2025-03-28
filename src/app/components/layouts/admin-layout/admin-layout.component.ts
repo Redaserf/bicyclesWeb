@@ -11,10 +11,5 @@ import { CommonModule } from '@angular/common';
   styleUrl: './admin-layout.component.css'
 })
 export class AdminLayoutComponent {
-  cargandoVar: boolean = true;
 
-  cargando() {
-    //aqui se pondra la pantalla de carga o se cambiara propiedad de el componente de carga
-    this.cargandoVar = true;
-  }
 }

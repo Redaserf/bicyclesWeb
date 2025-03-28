@@ -1,41 +1,24 @@
-<div class="bici-container">
+<div *ngIf="!cargando" class="bici-container">
   <div class="bici-card">
-    <!-- Cabecera -->
     <div class="header-container">
       <h1 class="titulo"><i class="fas fa-bicycle"></i> Mis Bicicletas</h1>
-      <div class="search-container">
-        <input type="text" placeholder="Buscar por nombre..." class="search-input">
-        <i class="fas fa-search search-icon"></i>
-      </div>
     </div>
-    <!-- Botón Agregar -->
+    
     <div class="add-btn">
-      <button onclick="document.getElementById('modalAgregar').classList.add('show')">
+      <button (click)="openModalAgregar()">
         <i class="fas fa-plus"></i> Agregar Bicicleta
       </button>
     </div>
-    <!-- Lista de Bicicletas -->
+
     <div id="bicisContainer">
-      <div class="bici-item">
+      <div class="bici-item" *ngFor="let bici of bicicletas">
         <div class="bici-icon"><i class="fas fa-bicycle"></i></div>
-        <div class="bici-name">Bici Roja</div>
+        <div class="bici-name">{{ bici.nombre }}</div>
         <div class="bici-actions">
-          <button class="edit-btn" onclick="document.getElementById('modalEditar').classList.add('show')">
+          <button class="edit-btn" (click)="openModalEditar(bici)">
             <i class="fas fa-edit"></i>
           </button>
-          <button class="delete-btn" onclick="document.getElementById('modalEliminar').classList.add('show')">
-            <i class="fas fa-trash"></i>
-          </button>
-        </div>
-      </div>
-      <div class="bici-item">
-        <div class="bici-icon"><i class="fas fa-bicycle"></i></div>
-        <div class="bici-name">Bici Azul</div>
-        <div class="bici-actions">
-          <button class="edit-btn" onclick="document.getElementById('modalEditar').classList.add('show')">
-            <i class="fas fa-edit"></i>
-          </button>
-          <button class="delete-btn" onclick="document.getElementById('modalEliminar').classList.add('show')">
+          <button class="delete-btn" (click)="openModalEliminar(bici)">
             <i class="fas fa-trash"></i>
           </button>
         </div>
@@ -44,38 +27,56 @@
   </div>
 </div>
 
+<!-- Fondo oscuro para el modal -->
+<div #overlay id="modalOverlay" class="overlay" (click)="cerrarModal()"></div>
+
 <!-- Modal Agregar Bicicleta -->
-<div class="modal-overlay" id="modalAgregar">
+<div #modalAgregar class="modal-overlay">
   <div class="modal-content">
     <h2>Agregar Bicicleta</h2>
-    <input type="text" placeholder="Nombre de la bicicleta" class="modal-input" />
+    <input type="text" [(ngModel)]="nuevaBici" placeholder="Nombre de la bicicleta" class="modal-input" />
+    <small class="text-danger" *ngIf="errores?.nombre">
+      {{ errores.nombre[0] }}
+    </small>
     <div class="modal-buttons">
-      <button class="cancel-btn" onclick="document.getElementById('modalAgregar').classList.remove('show')">Cancelar</button>
-      <button class="confirm-btn">Agregar</button>
+      <button class="cancel-btn" (click)="cerrarModal()">Cancelar</button>
+      <button class="confirm-btn" (click)="agregarBicicleta()">
+        <span *ngIf="isLoading" class="spinner"></span>
+        Agregar
+      </button>      
     </div>
   </div>
 </div>
 
 <!-- Modal Editar Bicicleta -->
-<div class="modal-overlay" id="modalEditar">
+<div #modalEditar class="modal-overlay">
   <div class="modal-content">
     <h2>Editar Bicicleta</h2>
-    <input type="text" value="Bici Roja" class="modal-input" />
+    <input *ngIf="bicicletaSeleccionada" type="text" [(ngModel)]="nuevoNombre" class="modal-input" />
+    <small class="text-danger" *ngIf="errores?.nombre">
+      {{ errores.nombre[0] }}
+    </small>
     <div class="modal-buttons">
-      <button class="cancel-btn" onclick="document.getElementById('modalEditar').classList.remove('show')">Cancelar</button>
-      <button class="confirm-btn">Guardar</button>
+      <button class="cancel-btn" (click)="cerrarModal()">Cancelar</button>
+      <button class="confirm-btn" (click)="editarBicicleta()">
+        <span *ngIf="isLoading" class="spinner"></span>
+        Guardar
+      </button>
     </div>
   </div>
 </div>
 
 <!-- Modal Eliminar Bicicleta -->
-<div class="modal-overlay" id="modalEliminar">
+<div #modalEliminar class="modal-overlay">
   <div class="modal-content">
     <h2>¿Eliminar Bicicleta?</h2>
     <p class="modal-text">¿Estás seguro de que quieres eliminar esta bicicleta?</p>
     <div class="modal-buttons">
-      <button class="cancel-btn" onclick="document.getElementById('modalEliminar').classList.remove('show')">Cancelar</button>
-      <button class="confirm-btn">Eliminar</button>
+      <button class="cancel-btn" (click)="cerrarModal()">Cancelar</button>
+      <button class="confirm-btn" (click)="eliminarBicicleta()">
+        <span *ngIf="isLoading" class="spinner"></span>
+        Eliminar
+      </button>
     </div>
   </div>
 </div>

@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
-import { NgFor } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { NgFor, NgIf } from '@angular/common';
 import * as AOS from 'aos';
 import { LogoComponent } from '../../global/logo/logo.component';
 import { RouterLink } from '@angular/router';
+import { CargaService } from '../../../services/carga.service';
 
 @Component({
   selector: 'app-guest-home',
@@ -10,9 +11,20 @@ import { RouterLink } from '@angular/router';
   templateUrl: './guest-home.component.html',
   styleUrl: './guest-home.component.css'
 })
-export class GuestHomeComponent {
+export class GuestHomeComponent implements OnInit {
+
+  cargando: boolean = true;
+
+  constructor(private cargaService: CargaService) { }
+
+  ngOnInit(): void {
+    this.cargaService.show();
+    this.cargaService.cargando$.subscribe((cargando) => {
+      this.cargando = cargando;
+    });
+  }
+
   ngAfterViewInit(): void {
-    // Inicializa AOS si está disponible
     if (typeof AOS !== 'undefined') {
       AOS.init({
         offset: 100,       // Desplazamiento desde el top de la página en px
@@ -50,6 +62,11 @@ export class GuestHomeComponent {
         searchInput.style.display = 'none';
       });
     }
+
+    setTimeout(() => {
+      this.cargaService.hide();
+    }, 1100);
+
   }
 
   //opciones Array
