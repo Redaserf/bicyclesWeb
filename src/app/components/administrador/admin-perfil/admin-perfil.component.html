@@ -1,5 +1,4 @@
-
-<div class="profile-container">
+<div *ngIf="!cargando" class="profile-container">
   <div class="profile-card main-info">
     <h2 class="profile-name">{{ perfilForm.get('nombre')?.value }} {{ perfilForm.get('apellido')?.value }}</h2>
     <p class="profile-subtitle">{{ perfilForm.get('email')?.value }}</p>

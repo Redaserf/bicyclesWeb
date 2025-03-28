@@ -3,6 +3,8 @@ import AOS from 'aos';
 import { ApiService } from '../../../services/api-service.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgIf } from '@angular/common';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { CargaService } from '../../../services/carga.service';
 
 @Component({
   selector: 'app-admin-perfil',
@@ -11,11 +13,11 @@ import { NgIf } from '@angular/common';
   styleUrl: './admin-perfil.component.css'
 })
 export class AdminPerfilComponent implements OnInit {
-
+  cargando: boolean = true;
   perfilForm!: FormGroup;
   errores: any = {};
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService, private cargaService: CargaService) { }
 
 
 
@@ -42,6 +44,11 @@ export class AdminPerfilComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.cargaService.show();
+    this.cargaService.cargando$.subscribe((cargando) => {
+      this.cargando = cargando;//aqui se cambia el estado cuando cambia el estado
+    });
+
     this.perfilForm = new FormGroup({
       nombre: new FormControl('', [Validators.required]),
       apellido: new FormControl('', [Validators.required]),
@@ -60,6 +67,7 @@ export class AdminPerfilComponent implements OnInit {
         peso: data.peso,
         estatura: data.estatura,
       });
+      this.cargaService.hide();
     });
 
 

@@ -6,26 +6,40 @@
     </div>
     <div class="panel-body">
       <div class="table-responsive">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Acciones</th>
-              <th>Nombre de la Bici</th>
-              <th>Usuario</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let bici of bicis">
-              <td>
-                <ul class="action-list">
-                  <li><a (click)="openModal(bici)"><i class="fa fa-edit"></i> Editar</a></li>
-                  <li><a (click)="eliminarBici(bici)"><i class="fa fa-trash"></i> Eliminar</a></li>
-                </ul>
-              </td>
-              <td>{{ bici.nombre }}</td>
-              <td>{{ bici.usuario.nombre + " " + bici.usuario.apellido }}</td>
-            </tr>
-          </tbody>
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+          <!-- Columna Acciones -->
+          <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef class="col-header">Acciones</th>
+            <td mat-cell *matCellDef="let bici">
+              <ul class="action-list">
+                <li>
+                  <a (click)="openModal(bici)">
+                    <i class="fa fa-edit"></i> Editar
+                  </a>
+                </li>
+                <li>
+                  <a (click)="eliminarBici(bici)">
+                    <i class="fa fa-trash"></i> Eliminar
+                  </a>
+                </li>
+              </ul>
+            </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="col-header">Nombre</th>
+            <td mat-cell *matCellDef="let bici"> {{bici.nombre}} </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="usuario">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="col-header">Usuario</th>
+            <td mat-cell *matCellDef="let bici"> {{bici.usuario.nombre + ' ' + bici.usuario.apellido}} </td>
+          </ng-container>
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        
         </table>
       </div>
     </div>

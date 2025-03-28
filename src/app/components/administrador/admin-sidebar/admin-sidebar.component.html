@@ -1,4 +1,4 @@
-<button id="toggleMenu" (click)="toggleSidebar()">
+<button *ngIf="!cargando" id="toggleMenu" (click)="toggleSidebar()">
     <i [class]="menuAbierto ? 'fas fa-times' : 'fas fa-bars'"></i>
 </button>
 

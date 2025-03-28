@@ -2,6 +2,7 @@ import { CommonModule, NgFor } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from '../../../../services/api-service.service';
 import { Router } from '@angular/router';
+import { CargaService } from '../../../../services/carga.service';
 
 export interface Usuario {
   id: number;
@@ -14,7 +15,7 @@ export interface Usuario {
 
 @Component({
   selector: 'app-tabla-user',
-  imports: [CommonModule, NgFor],
+  imports: [CommonModule, CommonModule],
   templateUrl: './tabla-user.component.html',
   styleUrl: './tabla-user.component.css'
 })
@@ -25,16 +26,23 @@ export class TablaUserComponent implements OnInit {
 
   usuarios: Usuario[] = [];
   usuarioSeleccionado: any = null;
+  cargando: boolean = true;
 
-  constructor(private api: ApiService, private router: Router) { }
+  constructor(private api: ApiService, private router: Router, private cargaService: CargaService) { }
 
   ngOnInit(): void {
+    this.cargaService.show();
+    this.cargaService.cargando$.subscribe((cargando) => {
+      this.cargando = cargando;//aqui se cambia el estado cuando cambia el estado
+    });
     
     this.api.get('admin/usuarios').then((response: any) => {
       this.usuarios = response.data;
       console.log('usuarios', this.usuarios);
+      this.cargaService.hide();
     }).catch((error: any) => {
       console.log('error todos los usuarios', error);
+      this.cargaService.hide();
     });
 
   }

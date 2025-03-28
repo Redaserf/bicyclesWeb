@@ -1,19 +1,28 @@
-import { NgClass } from '@angular/common';
-import { Component, HostListener } from '@angular/core';
+import { NgClass, NgIf } from '@angular/common';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../../services/auth-service.service';
+import { CargaService } from '../../../services/carga.service';
 
 @Component({
   selector: 'app-admin-sidebar',
-  imports: [NgClass, RouterLink],
+  imports: [NgClass, RouterLink, NgIf],
   templateUrl: './admin-sidebar.component.html',
   styleUrl: './admin-sidebar.component.css'
 })
-export class AdminSidebarComponent {
+export class AdminSidebarComponent implements OnInit {
   menuAbierto: boolean = false;
+  cargando: boolean = true;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router, private cargaService: CargaService) {}
+
+  ngOnInit(): void {
+    this.cargaService.cargando$.subscribe((cargando) => {
+      this.cargando = cargando;//aqui se cambia el estado cuando cambia el estado
+    });
+
+  }
 
   toggleSidebar(): void {
     this.menuAbierto = !this.menuAbierto;
