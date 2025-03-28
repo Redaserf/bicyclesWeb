@@ -1,13 +1,13 @@
+
 <div *ngIf="!cargando" class="profile-container">
   <div class="profile-card main-info">
     <h2 class="profile-name">{{ perfilForm.get('nombre')?.value }} {{ perfilForm.get('apellido')?.value }}</h2>
-    <p class="profile-subtitle">{{ perfilForm.get('email')?.value }}</p>
-    
+
     <!-- Avatar -->
     <div class="avatar">
       <img src="images/logimg.png" alt="Foto de perfil" />
     </div>
-    
+
     <p class="profile-email">
       <strong>Email:</strong> {{ perfilForm.get('email')?.value }}
     </p>
@@ -22,22 +22,22 @@
 
   <!-- Botones de acción -->
   <div class="profile-actions">
-    <button type="button" class="action-btn edit-btn" data-bs-toggle="modal" data-bs-target="#editProfileModal">
+    <button type="button" class="action-btn edit-btn" (click)="abrirModal()">
       Editar Perfil
     </button>
   </div>
 </div>
 
-
 <!-- Modal para editar el perfil -->
-<div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+<div #editProfileModal class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <!-- Encabezado del Modal -->
       <div class="modal-header" style="background-color: #2794ff; color: #fff;">
         <h5 class="modal-title" id="editProfileModalLabel">Editar Perfil</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        <button type="button" class="btn-close" (click)="cerrarModal()" aria-label="Cerrar"></button>
       </div>
+
       <!-- Cuerpo del Modal con el formulario -->
       <div class="modal-body">
         <form [formGroup]="perfilForm" (ngSubmit)="guardarPerfil()" novalidate>
@@ -51,7 +51,7 @@
               {{ perfilForm.controls['nombre'].errors?.['servidor'] }}
             </small>
           </div>
-          
+
           <div class="mb-3">
             <label for="apellido" class="form-label">Apellido</label>
             <input type="text" formControlName="apellido" class="form-control" id="apellido" placeholder="Apellido" />
@@ -62,7 +62,7 @@
               {{ perfilForm.controls['apellido'].errors?.['servidor'] }}
             </small>
           </div>
-          
+
           <div class="mb-3">
             <label for="email" class="form-label">Email</label>
             <input type="email" formControlName="email" class="form-control" id="email" placeholder="Email" [disabled]="true" />
@@ -76,7 +76,7 @@
               {{ perfilForm.controls['email'].errors?.['servidor'] }}
             </small>
           </div>
-          
+
           <div class="mb-3">
             <label for="peso" class="form-label">Peso (kg)</label>
             <input type="number" step="0.01" formControlName="peso" class="form-control" id="peso" placeholder="Peso (kg)" />
@@ -84,13 +84,13 @@
               El peso es obligatorio.
             </small>
             <small class="text-danger" *ngIf="perfilForm.controls['peso'].errors?.['min']">
-              El peso debe ser mayor a 0.
+              El peso debe ser mayor a 20kg.
             </small>
             <small class="text-danger" *ngIf="perfilForm.controls['peso'].errors?.['servidor']">
               {{ perfilForm.controls['peso'].errors?.['servidor'] }}
             </small>
           </div>
-          
+
           <div class="mb-3">
             <label for="estatura" class="form-label">Estatura (m)</label>
             <input type="number" step="0.01" formControlName="estatura" class="form-control" id="estatura" placeholder="Estatura (m)" />
@@ -98,17 +98,20 @@
               La estatura es obligatoria.
             </small>
             <small class="text-danger" *ngIf="perfilForm.controls['estatura'].errors?.['min']">
-              La estatura debe ser mayor a 0.
+              La estatura debe ser mayor a 1.10cm.
             </small>
             <small class="text-danger" *ngIf="perfilForm.controls['estatura'].errors?.['servidor']">
               {{ perfilForm.controls['estatura'].errors?.['servidor'] }}
             </small>
           </div>
-          
+
           <!-- Footer del modal con botones -->
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-primary">Guardar Perfil</button>
+            <button type="button" class="btn btn-secondary" (click)="cancelarEdicion()">Cancelar</button>
+            <button type="submit" class="btn btn-primary" [disabled]="perfilForm.invalid || isLoading">
+              <span *ngIf="isLoading" class="spinner"></span>
+              Guardar Perfil
+            </button>
           </div>
         </form>
       </div>
