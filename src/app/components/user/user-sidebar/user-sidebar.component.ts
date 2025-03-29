@@ -16,11 +16,15 @@ export class UserSidebarComponent {
   constructor(private authService: AuthService, private router: Router) {}
   
   toggleSidebar(): void {
-    this.menuAbierto = !this.menuAbierto;
+    setTimeout(() => {
+      this.menuAbierto = !this.menuAbierto;
+    }, 10);
   }
 
   cerrarSideBar(): void {
-    this.menuAbierto = false;
+    setTimeout(() => {
+      this.menuAbierto = false;
+    }, 1);
   }
 
   @HostListener('document:click', ['$event'])
