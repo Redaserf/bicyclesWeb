@@ -48,6 +48,7 @@ export class UserEstadisticasComponent {
       // Si ya existe una gráfica previa, la destruimos para no superponer
       if (this.chart) {
         this.chart.data.datasets[0].data = this.chartData[tab];
+        this.chart.data.datasets[0].label = tab;
         this.chart.update();
       }else{
           this.api.get('semana/estadisticas').then((response: any) => {
