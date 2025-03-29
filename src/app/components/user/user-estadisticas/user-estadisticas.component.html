@@ -43,30 +43,33 @@
 
     <!-- <h1 class="text-center" style="padding: 10px;">Resumen semanal</h1> -->
 
-    <h1 class="text-center mt-4 mb-3" >
-      Unidad de medida:
-      <p>      
-        {{ selectedTab === 'calorias' ? ' kc' : (selectedTab === 'duraciones' ? ' min' : ' m') }}
-      </p> 
-    </h1>
 
 
     <div *ngIf="!cargando" class="row mt-4 justify-content-center">
       <div class="col-md-3">
         <div class="card text-center p-4">
-          <h4 class="fw-bold fs-2 text-primary">{{chart ? generales[selectedTab]['total'] : 0}}</h4>
+          <h4 class="fw-bold fs-2 text-primary">{{chart ? generales[selectedTab]['total'] : 0}}</h4>      
+          <h3>      
+            {{ selectedTab === 'calorias' ? ' kc' : (selectedTab === 'duraciones' ? ' min' : ' m') }}
+          </h3> 
           <p class="text-muted">Total</p>
         </div>
       </div>
       <div class="col-md-3">
         <div class="card text-center p-4">
           <h4 class="fw-bold fs-2 text-success">{{chart ? generales[selectedTab]['maxima'] : 0}}</h4>
+          <h3>      
+            {{ selectedTab === 'calorias' ? ' kc' : (selectedTab === 'duraciones' ? ' min' : ' m') }}
+          </h3> 
           <p class="text-muted">Mejor</p>
         </div>
       </div>
       <div class="col-md-3">
         <div class="card text-center p-4">
           <h4 class="fw-bold fs-2 text-danger">{{chart ? generales[selectedTab]['promedio'] : 0}}</h4>
+          <h3>      
+            {{ selectedTab === 'calorias' ? ' kc' : (selectedTab === 'duraciones' ? ' min' : ' m') }}
+          </h3> 
           <p class="text-muted">Promedio</p>
         </div>
       </div>
