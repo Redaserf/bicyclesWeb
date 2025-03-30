@@ -1,23 +1,33 @@
 <section class="footer">
     <div class="footer-basic">
         <footer>
-          <div class="social"><!-- Instagram -->
-            <a href="#"><i class="fab fa-instagram"></i></a>
+          <div class="social">
             
-            <!-- Snapchat -->
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/bicyclesutt/"><i class="fab fa-instagram"></i></a>
+            
+            <!-- Whatsapp -->
             <a href="#"><i class="fab fa-whatsapp"></i></a>
             
             <!-- Twitter -->
-            <a href="#"><i class="fab fa-x-twitter"></i></a>
+            <a href="https://x.com/BicyclesUt71524"><i class="fab fa-x-twitter"></i></a>
             
             <!-- Facebook -->
-            <a href="#"><i class="fab fa-facebook"></i></a></div>
+            <a href="https://www.facebook.com/profile.php?id=61574040741821"><i class="fab fa-facebook"></i></a></div>
+
           <ul class="list-inline">
-              <li class="list-inline-item"><a href="#">Home</a></li>
-              <li class="list-inline-item"><a href="#">Services</a></li>
-              <li class="list-inline-item"><a href="#">About</a></li>
-              <li class="list-inline-item"><a href="#">Terms</a></li>
-              <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+            <li class="list-inline-item"><a [routerLink]="['/home']" >Inicio</a></li>
+            <!-- <li class="list-inline-item"><a [routerLink]="['/home']">Services</a></li> -->
+            <li class="list-inline-item"><a [routerLink]="['/info']">Nosotros</a></li>
+            <li class="list-inline-item">
+              <a 
+                href="https://mail.google.com/mail/?view=cm&to=bicyclesutt@gmail.com&su=Consulta%20sobre%20servicios&body=Hola,%20me%20gustaría%20obtener%20más%20información%20sobre%20sus%20servicios."
+                target="_blank">
+                Contáctanos
+              </a>
+            </li>
+            <li class="list-inline-item"><a [routerLink]="['/auth/register']">Registrate</a></li>
+            <!-- <li class="list-inline-item"><a [routerLink]="['/home']">Privacy Policy</a></li> -->
           </ul>
           <p class="copyright">Bicycles © 2025</p>
       </footer>
