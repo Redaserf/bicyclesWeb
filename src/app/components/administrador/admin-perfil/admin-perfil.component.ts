@@ -16,7 +16,9 @@ declare var bootstrap: any;
 export class AdminPerfilComponent implements OnInit {
 
   @ViewChild('editProfileModal') editProfileModal!: ElementRef;
+
   cargando: boolean = true;
+  isDisabledCancelar = false;
   perfilForm!: FormGroup;
   errores: any = {};
   perfilOriginal: any = {};
@@ -54,6 +56,7 @@ export class AdminPerfilComponent implements OnInit {
 
   async guardarPerfil() {
     this.isLoading = true;
+    this.isDisabledCancelar = true;
   
     try {
       const response = await this.api.put('usuario', this.perfilForm.value);
@@ -65,6 +68,7 @@ export class AdminPerfilComponent implements OnInit {
       console.log('Error al guardar el perfil:', error);
     } finally {
       this.isLoading = false;
+      this.isDisabledCancelar = false;
     }
   }  
 

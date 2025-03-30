@@ -73,11 +73,11 @@ export class RegisterComponent implements AfterViewInit, CanExit, OnInit {
       this.erroresValidacion = {};
       this.isLoading = true;
   
-      if (!this.confirm_password) {
-        this.erroresValidacion.confirm_password = ['Debes confirmar tu contraseña.'];
-        this.isLoading = false;
-        return;
-      }
+      // if (!this.confirm_password) {
+      //   this.erroresValidacion.confirm_password = ['Debes confirmar tu contraseña.'];
+      //   this.isLoading = false;
+      //   return;
+      // }
   
       if (this.password !== this.confirm_password) {
         this.erroresValidacion.confirm_password = ['Las contraseñas no coinciden.'];

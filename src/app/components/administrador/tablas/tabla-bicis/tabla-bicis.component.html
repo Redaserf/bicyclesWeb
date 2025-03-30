@@ -14,65 +14,73 @@
             <td mat-cell *matCellDef="let bici">
               <ul class="action-list">
                 <li>
-                  <a (click)="openModal(bici)">
+                  <a (click)="openModalEditar(bici)">
                     <i class="fa fa-edit"></i> Editar
                   </a>
                 </li>
                 <li>
-                  <a (click)="eliminarBici(bici)">
+                  <a (click)="openModalEliminar(bici)">
                     <i class="fa fa-trash"></i> Eliminar
                   </a>
                 </li>
               </ul>
             </td>
           </ng-container>
-        
+
+          <!-- Columna Nombre -->
           <ng-container matColumnDef="nombre">
             <th mat-header-cell *matHeaderCellDef mat-sort-header class="col-header">Nombre</th>
-            <td mat-cell *matCellDef="let bici"> {{bici.nombre}} </td>
+            <td mat-cell *matCellDef="let bici"> {{ bici.nombre }} </td>
           </ng-container>
-        
+
+          <!-- Columna Usuario -->
           <ng-container matColumnDef="usuario">
             <th mat-header-cell *matHeaderCellDef mat-sort-header class="col-header">Usuario</th>
-            <td mat-cell *matCellDef="let bici"> {{bici.usuario.nombre + ' ' + bici.usuario.apellido}} </td>
+            <td mat-cell *matCellDef="let bici">
+              {{ bici.usuario.nombre + ' ' + bici.usuario.apellido }}
+            </td>
           </ng-container>
-        
+
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        
         </table>
       </div>
     </div>
   </div>
 </div>
 
-
-
 <!-- Fondo oscuro para el modal -->
-<div #overlay id="modalOverlay" class="overlay" (click)="closeModal()"></div>
+<div #overlay id="modalOverlay" class="overlay" (click)="cerrarModal()"></div>
 
-<!-- Modal de edición -->
-<div #modal id="editModal" class="card">
-  <div class="card-content">
-    <p class="card-heading">Editar Bicicleta</p>
-    <p class="card-description">Modifica el nombre de la bicicleta.</p>
-
-    <div class="input-group">
-      <input type="text" [(ngModel)]="nuevoNombre" class="form-control" placeholder="Nuevo nombre de la bici">
+<!-- Modal Editar Bicicleta -->
+<div #modalEditar class="modal-overlay">
+  <div class="modal-content">
+    <h2>Editar Bicicleta</h2>
+    <input *ngIf="bicicletaSeleccionada" type="text" [(ngModel)]="nuevoNombre" class="modal-input" />
+    <small class="text-danger" *ngIf="errores?.nombre">
+      {{ errores.nombre[0] }}
+    </small>
+    <div class="modal-buttons">
+      <button class="cancel-btn" (click)="cerrarModal()">Cancelar</button>
+      <button class="confirm-btn" (click)="editarBicicleta()" [disabled]="isLoading">
+        <span *ngIf="isLoading" class="spinner"></span>
+        Guardar
+      </button>
     </div>
   </div>
-
-  <div class="card-button-wrapper">
-    <button class="card-button secondary" (click)="closeModal()">Cancelar</button>
-    <button class="card-button primary" (click)="actualizarNombre()">Guardar</button>
-  </div>
-
-  <button class="exit-button" (click)="closeModal()">
-    <svg height="20px" viewBox="0 0 384 512">
-      <path
-        d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
-      ></path>
-    </svg>
-  </button>
 </div>
 
+<!-- Modal Eliminar Bicicleta -->
+<div #modalEliminar class="modal-overlay">
+  <div class="modal-content">
+    <h2>¿Eliminar Bicicleta?</h2>
+    <p class="modal-text">¿Estás seguro de que quieres eliminar esta bicicleta?</p>
+    <div class="modal-buttons">
+      <button #cancelar class="cancel-btn" (click)="cerrarModal()">Cancelar</button>
+      <button #guardar class="confirm-btn" (click)="eliminarBicicleta()" [disabled]="isLoading">
+        <span *ngIf="isLoading" class="spinner"></span>
+        Eliminar
+      </button>
+    </div>
+  </div>
+</div>

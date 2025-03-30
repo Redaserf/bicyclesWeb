@@ -29,24 +29,28 @@ import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
 
-    // =========[ Auth ]=========
+    // =========[ Auth (no logueados) ]=========
 
     {
         path: 'auth',
         component: AuthLayoutComponent,
         children: [
-            {path: '', redirectTo: 'login', pathMatch: 'full'},
-            {path: 'login', component: LoginComponent, canDeactivate:[FormLoginGuard]},
-            {path: 'register', component: RegisterComponent, canDeactivate: [FormRegisterGuard]},
-            {path: 'code-verification', component: CodeVerificationComponent},
-            {path: 'resend-code', component: ResendCodeComponent},
-        ]
-    },
+          { path: '', redirectTo: 'login', pathMatch: 'full' },
+          { path: 'login', component: LoginComponent },
+          { path: 'register', component: RegisterComponent },
+          { path: 'code-verification', component: CodeVerificationComponent },
+          { path: 'resend-code', component: ResendCodeComponent }
+        ],
+
+        canActivate: [authGuard], 
+        data: { roles: [0] }
+
+      },
 
     // =========[ Guest ]=========
 
     { path: '', redirectTo: 'home', pathMatch: 'full'},
-    { path: 'home', component: GuestLayoutComponent, pathMatch: 'full'},
+    { path: 'home', component: GuestLayoutComponent, pathMatch: 'full', canActivate: [authGuard], data: { roles: [0] }},
 
     // =========[ User ]=========
 
@@ -55,13 +59,17 @@ export const routes: Routes = [
         component:UserLayoutComponent,
         children:[
             {path: '', redirectTo: 'home', pathMatch: 'full'},
-            {path:"home", component: UserHomeComponent, canActivate: [authGuard], data: { roles: [2, 3] } },
-            {path:"recorridos", component: UserRecorridoComponent, canActivate: [authGuard], data: { roles: [2, 3] } },
-            {path:"bicicletas", component: UserBicicletasComponent, canActivate: [authGuard], data: { roles: [2, 3] } },
-            {path:"perfil", component: UserPerfilComponent, canActivate: [authGuard], data: { roles: [2, 3] } },
-            {path:"recorridos-realizados", component: UserRecorridoshechosComponent, canActivate: [authGuard], data: { roles: [2, 3] } },
-            {path:"estadisticas", component: UserEstadisticasComponent, canActivate: [authGuard], data: { roles: [2, 3] } },
-        ]
+            {path:"home", component: UserHomeComponent },
+            {path:"recorridos", component: UserRecorridoComponent },
+            {path:"bicicletas", component: UserBicicletasComponent },
+            {path:"perfil", component: UserPerfilComponent },
+            {path:"recorridos-realizados", component: UserRecorridoshechosComponent },
+            {path:"estadisticas", component: UserEstadisticasComponent },
+        ],
+
+        canActivate: [authGuard], 
+        data: { roles: [2] }
+
     },
 
     // =========[ Admin ]=========
@@ -71,19 +79,20 @@ export const routes: Routes = [
         component: AdminLayoutComponent,
         children: [
             {path: '', redirectTo: 'home', pathMatch: 'full'},
-            {path: 'home',component: AdminPerfilComponent, canActivate: [authGuard], data: { roles: [3] } }, // de momento este porque no hay un 'home' como tal asdfasdh
-            {path: 'perfil',component: AdminPerfilComponent, canActivate: [authGuard], data: { roles: [3] } },
-            {path: 'estadisticas',component: AdminEstadisticasComponent, canActivate: [authGuard], data: { roles: [3] } },
-            {path: 'usuarios',component: TablaUserComponent, canActivate: [authGuard], data: { roles: [3] } },
-            {path: 'administradores',component: TablaAdminComponent, canActivate: [authGuard], data: { roles: [3] } },
-            {path: 'bicicletas',component: TablaBicisComponent, canActivate: [authGuard], data: { roles: [3] } },
-            {path: 'recorridos',component: TablaRecorridoComponent, canActivate: [authGuard], data: { roles: [3] } }, // basta de reirse chicos
-            {path: 'other-stuff',component: TablaGenericaComponent, canActivate: [authGuard], data: { roles: [3] } },
+            {path: 'home',component: AdminPerfilComponent },
+            {path: 'perfil',component: AdminPerfilComponent },
+            {path: 'estadisticas',component: AdminEstadisticasComponent },
+            {path: 'usuarios',component: TablaUserComponent },
+            {path: 'administradores',component: TablaAdminComponent },
+            {path: 'bicicletas',component: TablaBicisComponent },
+            {path: 'recorridos',component: TablaRecorridoComponent },
+            {path: 'other-stuff',component: TablaGenericaComponent },
+            {path: 'usuario/editar/:id',component: EditarUsuarioComponent },
         ],
+
         canActivate: [authGuard], 
         data: { roles: [3] }
-    },
 
-    {path: 'admin/usuario/editar/:id', component: EditarUsuarioComponent },
+    },
 
 ];

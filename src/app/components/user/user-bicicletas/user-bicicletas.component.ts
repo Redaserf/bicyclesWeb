@@ -105,6 +105,7 @@ export class UserBicicletasComponent implements OnInit {
   
   cerrarModal() {
     this.errores = {};
+    this.isLoading = false;
 
     this.modalAgregarRef.nativeElement.style.display = 'none';
     this.modalEditarRef.nativeElement.style.display = 'none';
@@ -157,7 +158,7 @@ export class UserBicicletasComponent implements OnInit {
       this.toastr.error('No se pudo actualizar la bicicleta.', 'Error');
 
     } finally {
-      this.isLoading = false;
+      // this.isLoading = false;
     }
   }
   
