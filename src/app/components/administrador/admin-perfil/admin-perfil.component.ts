@@ -5,6 +5,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { NgIf } from '@angular/common';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { CargaService } from '../../../services/carga.service';
+import { ToastrService } from 'ngx-toastr';
 declare var bootstrap: any;
 
 @Component({
@@ -25,7 +26,7 @@ export class AdminPerfilComponent implements OnInit {
   isLoading = false;
   private modalInstance: any;
 
-  constructor(private api: ApiService, private cargaService: CargaService) { }
+  constructor(private api: ApiService, private cargaService: CargaService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
 
@@ -63,9 +64,13 @@ export class AdminPerfilComponent implements OnInit {
       console.log(response);
       this.cargarPerfil();
       this.cerrarModal();
+
+      this.toastr.success('Perfil actualizado correctamente.', '¡Éxito!');
     } catch (error: any) {
       this.procesarErroresValidaciones(error);
       console.log('Error al guardar el perfil:', error);
+
+      this.toastr.error('No se pudo actualizar el perfil.', 'Error');
     } finally {
       this.isLoading = false;
       this.isDisabledCancelar = false;

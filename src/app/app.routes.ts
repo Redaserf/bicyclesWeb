@@ -26,6 +26,9 @@ import { GuestLayoutComponent } from './components/layouts/guest-layout/guest-la
 import { AuthLayoutComponent } from './components/layouts/auth-layout/auth-layout.component';
 import { EditarUsuarioComponent } from './components/administrador/tablas/tabla-user/editar-usuario/editar-usuario.component';
 import { authGuard } from './guards/auth.guard';
+import { NotFoundComponent } from './components/global/not-found/not-found.component';
+import { NotFoundLayoutComponent } from './components/layouts/guest-layout/not-found-layout/not-found-layout.component';
+import { GuestInformacionComponent } from './components/guest/guest-informacion/guest-informacion.component';
 
 export const routes: Routes = [
 
@@ -39,7 +42,8 @@ export const routes: Routes = [
           { path: 'login', component: LoginComponent },
           { path: 'register', component: RegisterComponent },
           { path: 'code-verification', component: CodeVerificationComponent },
-          { path: 'resend-code', component: ResendCodeComponent }
+          { path: 'resend-code', component: ResendCodeComponent },
+          { path: '**', component: NotFoundComponent }
         ],
 
         canActivate: [authGuard], 
@@ -51,12 +55,13 @@ export const routes: Routes = [
 
     { path: '', redirectTo: 'home', pathMatch: 'full'},
     { path: 'home', component: GuestLayoutComponent, pathMatch: 'full', canActivate: [authGuard], data: { roles: [0] }},
+    { path: 'info', component: GuestInformacionComponent, pathMatch: 'full', canActivate: [authGuard], data: { roles: [0] }},
 
     // =========[ User ]=========
 
     {
         path:"user",
-        component:UserLayoutComponent,
+        component: UserLayoutComponent,
         children:[
             {path: '', redirectTo: 'home', pathMatch: 'full'},
             {path:"home", component: UserHomeComponent },
@@ -65,6 +70,7 @@ export const routes: Routes = [
             {path:"perfil", component: UserPerfilComponent },
             {path:"recorridos-realizados", component: UserRecorridoshechosComponent },
             {path:"estadisticas", component: UserEstadisticasComponent },
+            { path: '**', component: NotFoundComponent }
         ],
 
         canActivate: [authGuard], 
@@ -88,11 +94,16 @@ export const routes: Routes = [
             {path: 'recorridos',component: TablaRecorridoComponent },
             {path: 'other-stuff',component: TablaGenericaComponent },
             {path: 'usuario/editar/:id',component: EditarUsuarioComponent },
+            { path: '**', component: NotFoundComponent }
         ],
 
         canActivate: [authGuard], 
         data: { roles: [3] }
 
     },
+
+    // =========[ Ruta 404 Global (no manejados) ]=========
+
+    { path: '**', component: NotFoundLayoutComponent }
 
 ];
