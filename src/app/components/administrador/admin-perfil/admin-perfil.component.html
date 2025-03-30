@@ -107,7 +107,7 @@
 
           <!-- Footer del modal con botones -->
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" (click)="cancelarEdicion()">Cancelar</button>
+            <button type="button" class="btn btn-secondary" [disabled]="isDisabledCancelar" (click)="cancelarEdicion()">Cancelar</button>
             <button type="submit" class="btn btn-primary" [disabled]="perfilForm.invalid || isLoading">
               <span *ngIf="isLoading" class="spinner"></span>
               Guardar Perfil
