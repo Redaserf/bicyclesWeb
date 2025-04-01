@@ -1,242 +1,227 @@
-/* Panel de la tabla */
-.panel {
-    background: linear-gradient(to right, #188AFF, #188AFF);
-    border-radius: 10px;
-    border: none;
-    box-shadow: 0 0 0 5px rgba(0,0,0,0.05), 0 0 0 10px rgba(0,0,0,0.05);
-  }
-  .panel .panel-heading {
-    padding: 20px 15px;
-    border-radius: 10px 10px 0 0;
-    margin: 0;
-  }
-  .panel .panel-heading .title {
-    color: #fff;
-    font-size: 28px;
-    font-weight: 500;
-    text-transform: capitalize;
-    line-height: 40px;
-    margin: 0;
-  }
-  .panel .panel-heading .btn_group {
-    text-align: end;
-  }
-  .panel .panel-heading .form-control {
-    color: #fff;
-    background-color: transparent;
-    width: 70%;
-    height: 40px;
-    border: 2px solid #fff;
-    border-radius: 20px;
-    display: inline-block;
-    transition: all 0.3s ease;
-  }
-  .panel .panel-heading .form-control:focus {
-    background-color: rgba(255,255,255,0.2);
-    box-shadow: none;
-    outline: none;
-  }
-  .panel .panel-heading .form-control::placeholder {
-    color: rgba(255,255,255,0.5);
-    font-size: 15px;
-    font-weight: 500;
-  }
-
-  .panel .panel-body {
-    padding: 0;
-  }
-
-  /* Encabezado de la tabla */
-  .panel .panel-body .table thead tr th {
-    color: #fff;
-    background-color: rgba(255, 255, 255, 0.545);
-    font-size: 16px;
-    font-weight: 500;
-    text-transform: uppercase;
-    padding: 12px;
-    border: none;
-  }
-
-  /* Cuerpo de la tabla */
-  .panel .panel-body .table tbody tr td {
-    color: #000;                /* Texto en negro */
-    background-color: #fff;     /* Fondo blanco para contraste */
-    font-size: 15px;
-    padding: 15px 12px;         /* Espacio entre datos */
-    vertical-align: middle;
-    border: none;
-  }
-
-  /* Lista de acciones */
-  .panel .panel-body .table tbody .action-list {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-  }
-  .panel .panel-body .table tbody .action-list li {
-    display: inline-block;
-    margin: 0 5px;
-  }
-  .panel .panel-body .table tbody .action-list li a {
-    color: #24a5fb;            /* Se puede ajustar el color del icono/texto de la acción */
-    font-size: 15px;
-    position: relative;
-    z-index: 1;
-    transition: all 0.3s ease;
-    text-decoration: none;
-  }
-  .panel .panel-body .table tbody .action-list li a:hover {
-    text-shadow: 1px 1px 0 rgba(0,0,0,0.2);
-  }
-
-  /* Se elimina el footer de panel si no se requiere paginación */
-  .panel .panel-footer {
-    display: none;
-  }
-
-  @media only screen and (max-width:767px) {
-    .panel .panel-heading .title {
-      text-align: center;
-      margin: 0 0 10px;
-    }
-    .panel .panel-heading .btn_group {
-      text-align: center;
-    }
-  }
-
-
-
-
-  /* Estilos para ocultar el modal al inicio */
-#editModal {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: white;
-  z-index: 1000;
-  width: 320px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  padding: 20px;
-  text-align: center;
-}
-
-/* Para oscurecer el fondo cuando el modal está abierto */
-#modalOverlay {
-  display: none;
+/* Estilos generales */
+.modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 999;
-}
-
-/* Contenido del modal */
-#editModal .card-content {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-/* Título del modal */
-#editModal .card-heading {
-  font-size: 20px;
-  font-weight: 700;
-  color: rgb(27, 27, 27);
-}
-
-/* Descripción */
-#editModal .card-description {
-  font-weight: 100;
-  color: rgb(102, 102, 102);
-}
-
-/* Estilos para el input */
-#editModal .input-group {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
+  background: rgba(0, 0, 0, 0.4);
+  display: none;
   align-items: center;
-}
-
-#editModal .form-control {
-  width: 100%;
-  padding: 10px;
-  font-size: 14px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  outline: none;
-  transition: 0.3s;
-}
-
-#editModal .form-control:focus {
-  border-color: #188AFF;
-  box-shadow: 0 0 5px rgba(24, 138, 255, 0.5);
-}
-
-/* Botones */
-#editModal .card-button-wrapper {
-  display: flex;
   justify-content: center;
-  gap: 10px;
+  transition: opacity 0.3s ease;
 }
 
-#editModal .card-button {
-  width: 45%;
-  height: 35px;
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 15px;
+}
+
+.confirm-btn {
+  background-color: #188aff;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.confirm-btn:hover {
+  background-color: #0f6fdc;
+}
+
+.cancel-btn {
+  background-color: #ff4f4f;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.cancel-btn:hover {
+  background-color: #c82333;
+}
+
+.modal-input {
+  width: 100%;
+  padding: 10px 15px;
+  border: 2px solid #188aff;
+  border-radius: 30px;
+  font-size: 1rem;
+  margin-top: 10px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+.modal-input:focus {
+  border-color: #0f6fdc;
+}
+
+.text-danger {
+  color: red;
+  font-size: 0.9rem;
+}
+
+/* Spinner de carga */
+.spinner {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  border: 2px solid white;
+  border-top: 2px solid #188aff;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Estilos para la tabla */
+.table-responsive {
+  overflow-x: auto;
+}
+
+.mat-header-row {
+  background-color: #e3f2fd;
+}
+
+.mat-header-cell {
+  color: #0d47a1;
+  font-weight: bold;
+}
+
+.action-list a {
+  color: #1565c0;
+  text-decoration: none;
+  font-weight: 500;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: color 0.2s ease;
+}
+
+.action-list a:hover {
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Panel de la tabla */
+.panel {
+  background: linear-gradient(to right, #188aff, #188aff);
   border-radius: 10px;
   border: none;
-  cursor: pointer;
-  font-weight: 600;
-  transition: 0.3s;
+  box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.05), 0 0 0 10px rgba(0, 0, 0, 0.05);
+}
+.panel .panel-heading {
+  padding: 20px 15px;
+  border-radius: 10px 10px 0 0;
+  margin: 0;
+}
+.panel .panel-heading .title {
+  color: #fff;
+  font-size: 28px;
+  font-weight: 500;
+  text-transform: capitalize;
+  line-height: 40px;
+  margin: 0;
+}
+.panel .panel-heading .btn_group {
+  text-align: end;
+}
+.panel .panel-heading .form-control {
+  color: #fff;
+  background-color: transparent;
+  width: 70%;
+  height: 40px;
+  border: 2px solid #fff;
+  border-radius: 20px;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+.panel .panel-heading .form-control:focus {
+  background-color: rgba(255, 255, 255, 0.2);
+  box-shadow: none;
+  outline: none;
+}
+.panel .panel-heading .form-control::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 15px;
+  font-weight: 500;
 }
 
-#editModal .primary {
-  background-color: #188AFF;
-  color: white;
+.panel .panel-body {
+  padding: 0;
 }
 
-#editModal .primary:hover {
-  background-color: #0056b3;
-}
-
-#editModal .secondary {
-  background-color: #ddd;
-}
-
-#editModal .secondary:hover {
-  background-color: rgb(197, 197, 197);
-}
-
-/* Botón de cierre */
-#editModal .exit-button {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  background: transparent;
+/* Encabezado de la tabla */
+.panel .panel-body .table thead tr th {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.545);
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: uppercase;
+  padding: 12px;
   border: none;
-  cursor: pointer;
 }
 
-#editModal .exit-button svg {
-  fill: rgb(175, 175, 175);
+/* Cuerpo de la tabla */
+.panel .panel-body .table tbody tr td {
+  color: #000;
+  background-color: #fff;
+  font-size: 15px;
+  padding: 15px 12px;
+  vertical-align: middle;
+  border: none;
 }
 
-#editModal .exit-button:hover svg {
-  fill: black;
+/* Lista de acciones */
+.panel .panel-body .table tbody .action-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
 }
-.container{
-  max-width: 1200px;  
-     /* Controla el ancho máximo general */
-  margin: 120px auto 40px;   /* Más espacio arriba, centrado y algo de espacio abajo */
-  font-family: 'Poppins', sans-serif;  /* Fuente "bonita" */
-  display: flex;
-  flex-direction: column;    /* Apila tarjetas y botones de forma vertical */
-  gap: 20px;                 /* Espacio entre tarjetas y botones */
-  padding: 0 20px;  
+.panel .panel-body .table tbody .action-list li {
+  display: inline-block;
+  margin: 0 5px;
+}
+.panel .panel-body .table tbody .action-list li a {
+  color: #24a5fb;
+  font-size: 15px;
+  position: relative;
+  z-index: 1;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+.panel .panel-body .table tbody .action-list li a:hover {
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Se elimina el footer de panel si no se requiere paginación */
+.panel .panel-footer {
+  display: none;
+}
+
+/* Responsive para pantallas pequeñas */
+@media only screen and (max-width: 767px) {
+  .panel .panel-heading .title {
+    text-align: center;
+    margin: 0 0 10px;
+  }
+  .panel .panel-heading .btn_group {
+    text-align: center;
+  }
 }

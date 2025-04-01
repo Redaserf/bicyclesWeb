@@ -1,21 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import AOS from 'aos';
 import Chart from 'chart.js/auto';
 import { ApiService } from '../../../services/api-service.service';
+import { CargaService } from '../../../services/carga.service';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-admin-estadisticas',
-  imports: [],
+  imports: [NgIf],
   templateUrl: './admin-estadisticas.component.html',
   styleUrl: './admin-estadisticas.component.css'
 })
-export class AdminEstadisticasComponent {
+export class AdminEstadisticasComponent implements OnInit{
   labels: string[] = [];
   data: number[] = [];
+  cargando: boolean = true;
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService, private cargaService: CargaService) { }
 
   ngOnInit(): void {
+    this.cargaService.show();
+    
+    this.cargaService.cargando$.subscribe((cargando) => {
+      this.cargando = cargando;//aqui se cambia el estado cuando cambia el estado
+    });
+
     this.crearGrafica();
         AOS.init({
           offset: 100,
@@ -43,7 +52,7 @@ export class AdminEstadisticasComponent {
 
     crearGrafica() {
       const ctx = document.getElementById('miGrafico') as HTMLCanvasElement;
-      
+      this.cargaService.show();
       this.api.get('admin/recorridos/semana').then((response: any) => {
         console.log('Respuesta del backend:', response);
         if(response.status === 200) {
@@ -70,13 +79,12 @@ export class AdminEstadisticasComponent {
           });
         
         }
+
+        this.cargaService.hide();
       }).catch((error: any) => {
         console.error('Error al obtener los datos:', error);
+        this.cargaService.hide();
       });
-
-      this.labels = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes'];
-      console.log('Labels:', this.labels);
-      console.log('Data:', this.data);
 
     }
 

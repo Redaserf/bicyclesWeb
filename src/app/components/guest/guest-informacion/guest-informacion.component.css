@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+.auth-layout {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #ECF7FF;
+    background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat-back.svg');
+    background-position: center;
+    background-repeat: repeat;
+    background-size: 4%;
+    margin: 0;
+    padding: 0 15px; /* Padding horizontal para que no se pegue a los bordes en móviles */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+  }
+
+#Informacion h2 {
+  font-size: 2.5rem;
+  color: #188aff;
+  margin-bottom: 20px;
+}
+
+#Informacion p {
+  font-size: 1.1rem;
+  color: #333;
+}
+
+#Informacion .card {
+  background-color: #fff;
+  border-radius: 10px;
+  transition: transform 0.3s ease-in-out;
+}
+
+#Informacion .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}

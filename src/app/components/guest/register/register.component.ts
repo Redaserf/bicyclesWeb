@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { CanExit } from '../../../guards/form-register.guard';
 import { Observable } from 'rxjs';
 import Swal from 'sweetalert2';
@@ -8,16 +8,18 @@ import { FormsModule } from '@angular/forms';
 import * as AOS from 'aos';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '../../../services/auth-service.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
+import { CargaService } from '../../../services/carga.service';
 
 @Component({
   selector: 'app-register',
-  imports: [FontAwesomeModule, RouterLink, FormsModule, CommonModule],
+  imports: [FontAwesomeModule, RouterLink, FormsModule, CommonModule, NgIf],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
 
-export class RegisterComponent implements AfterViewInit, CanExit {
+export class RegisterComponent implements AfterViewInit, CanExit, OnInit {
+  cargando: boolean = true;
   nombre: string = '';
   apellido: string = '';
   peso: number | null = null;
@@ -29,10 +31,22 @@ export class RegisterComponent implements AfterViewInit, CanExit {
   faEye = faEye;
   faEyeSlash = faEyeSlash;
   verPassword: boolean = false;
+  verConfirmPassword: boolean = false;
   isLoading: boolean = false;
   erroresValidacion: any = {};
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router, private cargaService: CargaService) {}
+
+  ngOnInit(): void {
+    this.cargaService.show();
+    this.cargaService.cargando$.subscribe((cargando) => {
+      this.cargando = cargando;
+    });
+
+    setTimeout(() => {
+      this.cargaService.hide();
+    }, 600);
+  }
 
   // Inicialización de AOS para animaciones
   ngAfterViewInit(): void {
@@ -59,11 +73,11 @@ export class RegisterComponent implements AfterViewInit, CanExit {
       this.erroresValidacion = {};
       this.isLoading = true;
   
-      if (!this.confirm_password) {
-        this.erroresValidacion.confirm_password = ['Debes confirmar tu contraseña.'];
-        this.isLoading = false;
-        return;
-      }
+      // if (!this.confirm_password) {
+      //   this.erroresValidacion.confirm_password = ['Debes confirmar tu contraseña.'];
+      //   this.isLoading = false;
+      //   return;
+      // }
   
       if (this.password !== this.confirm_password) {
         this.erroresValidacion.confirm_password = ['Las contraseñas no coinciden.'];

@@ -73,16 +73,21 @@
       <!-- CONFIRMAR CONTRASEÑA -->
       <div class="input-group-custom d-flex align-items-center">
         <i class="fa-solid fa-key"></i>
-        <input type="password" 
-               class="form-control" 
-               [ngClass]="{'is-invalid': erroresValidacion.confirm_password}" 
-               placeholder="Confirmar contraseña" 
-               name="confirmPassword" 
-               [(ngModel)]="confirm_password">
+        <input 
+          [type]="verConfirmPassword ? 'text' : 'password'" 
+          class="form-control" 
+          [ngClass]="{'is-invalid': erroresValidacion.confirm_password}" 
+          placeholder="Confirmar contraseña" 
+          name="confirmPassword" 
+          [(ngModel)]="confirm_password">
+        
+        <span class="toggle-pass ms-2" (click)="verConfirmPassword = !verConfirmPassword">
+          <fa-icon [icon]="verConfirmPassword ? faEyeSlash : faEye"></fa-icon>
+        </span>
       </div>
       <small *ngIf="erroresValidacion.confirm_password" class="text-danger text-center d-block">
         {{ erroresValidacion.confirm_password[0] }}
-      </small>      
+      </small>        
 
       <button type="submit" class="btn btn-custom w-100 mt-2" [disabled]="isLoading">
         <span *ngIf="isLoading" class="spinner-border spinner-border-sm"></span>

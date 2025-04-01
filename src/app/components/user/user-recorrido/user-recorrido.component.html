@@ -1,135 +1,74 @@
-<div class="recorridos-container">
-    <div class="recorridos-card">
-      <!-- Cabecera -->
-      <div class="header-container">
-        <h1 class="titulo"><i class="fas fa-road"></i> Mis Recorridos</h1>
-        <div class="filter-container">
-          <select class="filter-select">
-            <option value="bike">Bicicleta</option>
-            <option value="date">Fecha</option>
-          </select>
-          <input type="text" placeholder="Buscar..." class="filter-input">
-        </div>
-      </div>
-      <!-- Lista de Recorridos -->
-      <div id="recorridosContainer">
-        <div class="recorrido-item" onclick="document.getElementById('modalDetalle').classList.add('show')">
-          <div class="recorrido-icon"><i class="fas fa-bicycle"></i></div>
-          <div class="recorrido-info">
-            <div class="recorrido-name">Bici Roja</div>
-            <div class="recorrido-date">2025-03-10</div>
-            <div class="recorrido-stats">
-              <span class="recorrido-distance">15 km</span>
-              <span class="recorrido-duration">00:45:00</span>
-            </div>
-          </div>
-          <div class="recorrido-actions">
-            <button class="delete-btn" onclick="event.stopPropagation(); document.getElementById('modalEliminar').classList.add('show')">
-              <i class="fas fa-trash"></i>
-            </button>
-          </div>
-        </div>
-        <div class="recorrido-item" onclick="document.getElementById('modalDetalle').classList.add('show')">
-          <div class="recorrido-icon"><i class="fas fa-bicycle"></i></div>
-          <div class="recorrido-info">
-            <div class="recorrido-name">Bici Azul</div>
-            <div class="recorrido-date">2025-03-11</div>
-            <div class="recorrido-stats">
-              <span class="recorrido-distance">20 km</span>
-              <span class="recorrido-duration">01:00:00</span>
-            </div>
-          </div>
-          <div class="recorrido-actions">
-            <button class="delete-btn" onclick="event.stopPropagation(); document.getElementById('modalEliminar').classList.add('show')">
-              <i class="fas fa-trash"></i>
-            </button>
-          </div>
-        </div>
-        <div class="recorrido-item" onclick="document.getElementById('modalDetalle').classList.add('show')">
-            <div class="recorrido-icon"><i class="fas fa-bicycle"></i></div>
-            <div class="recorrido-info">
-              <div class="recorrido-name">Bici Azul</div>
-              <div class="recorrido-date">2025-03-11</div>
-              <div class="recorrido-stats">
-                <span class="recorrido-distance">20 km</span>
-                <span class="recorrido-duration">01:00:00</span>
-              </div>
-            </div>
-            <div class="recorrido-actions">
-              <button class="delete-btn" onclick="event.stopPropagation(); document.getElementById('modalEliminar').classList.add('show')">
-                <i class="fas fa-trash"></i>
-              </button>
-            </div>
-          </div>
-          <div class="recorrido-item" onclick="document.getElementById('modalDetalle').classList.add('show')">
-            <div class="recorrido-icon"><i class="fas fa-bicycle"></i></div>
-            <div class="recorrido-info">
-              <div class="recorrido-name">Bici Azul</div>
-              <div class="recorrido-date">2025-03-11</div>
-              <div class="recorrido-stats">
-                <span class="recorrido-distance">20 km</span>
-                <span class="recorrido-duration">01:00:00</span>
-              </div>
-            </div>
-            <div class="recorrido-actions">
-              <button class="delete-btn" onclick="event.stopPropagation(); document.getElementById('modalEliminar').classList.add('show')">
-                <i class="fas fa-trash"></i>
-              </button>
-            </div>
-          </div>
-          <div class="recorrido-item" onclick="document.getElementById('modalDetalle').classList.add('show')">
-            <div class="recorrido-icon"><i class="fas fa-bicycle"></i></div>
-            <div class="recorrido-info">
-              <div class="recorrido-name">Bici Azul</div>
-              <div class="recorrido-date">2025-03-11</div>
-              <div class="recorrido-stats">
-                <span class="recorrido-distance">20 km</span>
-                <span class="recorrido-duration">01:00:00</span>
-              </div>
-            </div>
-            <div class="recorrido-actions">
-              <button class="delete-btn" onclick="event.stopPropagation(); document.getElementById('modalEliminar').classList.add('show')">
-                <i class="fas fa-trash"></i>
-              </button>
-            </div>
-          </div>
+<div *ngIf="!cargando" class="recorridos-container">
+  <div class="recorridos-card">
+    <div class="header-container">
+      <h1 class="titulo"><i class="fas fa-road"></i> Mis Recorridos</h1>
+      <div class="filter-container">
+        <!-- <select class="filter-select">
+          <option value="bike">Bicicleta</option>
+          <option value="date">Fecha</option>
+        </select> -->
+        <input type="text" placeholder="Buscar..." class="filter-input" [(ngModel)]="searchTerm">
       </div>
     </div>
-  </div>
 
-  <!-- Modal Detalle Recorrido (Modal Grande) -->
-  <div class="modal-overlay" id="modalDetalle">
-    <div class="modal-content large-modal">
-      <div class="detalle-header">
-        <h2>Detalle del Recorrido</h2>
-      </div>
-      <div class="detalle-body">
-        <img src="images/logimg.png" alt="Imagen de Bicicleta" class="detalle-image">
-        <div class="detalle-info">
-          <p><strong>Bicicleta:</strong> Bici Roja</p>
-          <p><strong>Fecha:</strong> 2025-03-10</p>
-          <p><strong>Distancia Total:</strong> 15 km</p>
-          <p><strong>Duración:</strong> 00:45:00</p>
-          <p><strong>Velocidad Promedio:</strong> 20 km/h</p>
-          <p><strong>Velocidad Máxima:</strong> 30 km/h</p>
-          <p><strong>Calorías Quemadas:</strong> 300 kcal</p>
-          <p><strong>Temperatura Promedio:</strong> 22°C</p>
+    <div id="recorridosContainer">
+      <div *ngFor="let recorrido of recorridosFiltrados" class="recorrido-item" (click)="abrirModalDetalle(recorrido)">
+        <div class="recorrido-icon"><i class="fas fa-bicycle"></i></div>
+        <div class="recorrido-info">
+          <div class="recorrido-name">{{ recorrido.bicicleta_nombre }}</div>
+          <div class="recorrido-date">{{ recorrido.created_at | date }}</div>
+          <div class="recorrido-stats">
+            <span class="recorrido-distance">{{ recorrido.distancia_recorrida }} km</span>
+            <span class="recorrido-duration">{{ recorrido.tiempo }}</span>
+          </div>
+        </div>
+        <div class="recorrido-actions">
+          <button class="delete-btn" (click)="abrirModalEliminar(recorrido.id); $event.stopPropagation();">
+            <i class="fas fa-trash"></i>
+          </button>
         </div>
       </div>
-      <div class="detalle-footer">
-        <button class="cancel-btn" onclick="document.getElementById('modalDetalle').classList.remove('show')">Cerrar</button>
-      </div>
-    </div>
-  </div>
+    </div>    
 
-  <!-- Modal Eliminar Recorrido -->
-  <div class="modal-overlay" id="modalEliminar">
-    <div class="modal-content">
-      <h2>¿Eliminar Recorrido?</h2>
-      <p class="modal-text">¿Estás seguro de que quieres eliminar este recorrido?</p>
-      <div class="modal-buttons">
-        <button class="cancel-btn" onclick="document.getElementById('modalEliminar').classList.remove('show')">Cancelar</button>
-        <button class="confirm-btn">Eliminar</button>
+  </div>
+</div>
+
+<!-- Modal Detalle Recorrido -->
+<div class="modal-overlay" id="modalDetalle" *ngIf="recorridoSeleccionado">
+  <div class="modal-content large-modal">
+    <div class="detalle-header">
+      <h2>Detalle del Recorrido</h2>
+    </div>
+    <div class="detalle-body">
+      <img src="images/logimg.png" alt="Imagen de Bicicleta" class="detalle-image">
+      <div class="detalle-info">
+        <p><strong>Bicicleta:</strong> {{ recorridoSeleccionado.bicicleta_nombre }}</p>
+        <p><strong>Fecha:</strong> {{ recorridoSeleccionado.created_at | date }}</p>
+        <p><strong>Distancia Total:</strong> {{ recorridoSeleccionado.distancia_recorrida }} km</p>
+        <p><strong>Duración:</strong> {{ recorridoSeleccionado.tiempo }}</p>
+        <p><strong>Velocidad Promedio:</strong> {{ recorridoSeleccionado.velocidad_promedio }} km/h</p>
+        <p><strong>Velocidad Máxima:</strong> {{ recorridoSeleccionado.velocidad_maxima }} km/h</p>
+        <p><strong>Calorías Quemadas:</strong> {{ recorridoSeleccionado.calorias }} kcal</p>
+        <p><strong>Temperatura Promedio:</strong> {{ recorridoSeleccionado.temperatura }}°C</p>
       </div>
     </div>
+    <div class="detalle-footer">
+      <button class="cancel-btn" (click)="cerrarModalDetalle()">Cerrar</button>
+    </div>
   </div>
+</div>
+
+<!-- Modal Eliminar Recorrido -->
+<div class="modal-overlay" id="modalEliminar" *ngIf="idRecorridoAEliminar !== null">
+  <div class="modal-content">
+    <h2>¿Eliminar Recorrido?</h2>
+    <p class="modal-text">¿Estás seguro de que quieres eliminar este recorrido?</p>
+    <div class="modal-buttons">
+      <button class="cancel-btn" (click)="cerrarModalEliminar()">Cancelar</button>
+      <button class="confirm-btn" (click)="confirmarEliminar()">
+        <span *ngIf="isLoading" class="spinner"></span>
+        Eliminar
+      </button>
+    </div>
+  </div>
+</div>

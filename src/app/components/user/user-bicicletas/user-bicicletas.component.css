@@ -231,3 +231,23 @@ body {
   font-weight: 600;
   color: #444;
 }
+
+.overlay {
+  display: none;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  border: 2px solid white;
+  border-top: 2px solid #188AFF;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

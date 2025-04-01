@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { CanExit } from '../../../guards/form-login.guard';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
@@ -9,15 +9,17 @@ import { faUser, faKey ,faEye,
 import Swal from 'sweetalert2'
 import { Observable } from 'rxjs';
 import { AuthService } from '../../../services/auth-service.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
+import { CargaService } from '../../../services/carga.service';
 
 @Component({
   selector: 'app-login',
-  imports: [FontAwesomeModule, FormsModule, RouterLink, CommonModule],
+  imports: [FontAwesomeModule, FormsModule, RouterLink, CommonModule, NgIf],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent implements AfterViewInit, CanExit {
+export class LoginComponent implements AfterViewInit, CanExit, OnInit {
+  cargando: boolean = true;
   faUser = faUser;
   faKey = faKey;
   faEye = faEye;
@@ -30,7 +32,18 @@ export class LoginComponent implements AfterViewInit, CanExit {
   errorMessage: string = '';
   erroresValidacion: any = {};
 
-constructor(private authService: AuthService, private router: Router) {}
+constructor(private authService: AuthService, private router: Router, private cargaService: CargaService) {}
+
+  ngOnInit(): void {
+    this.cargaService.show();
+    this.cargaService.cargando$.subscribe((cargando) => {
+      this.cargando = cargando;
+    });
+
+    setTimeout(() => {
+      this.cargaService.hide();
+    }, 600);
+  }
 
   ngAfterViewInit(): void {
     AOS.init({

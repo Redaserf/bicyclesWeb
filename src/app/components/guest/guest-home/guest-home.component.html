@@ -10,7 +10,7 @@ padding: 0;">
     <input class="menu-icon" type="checkbox" id="menu-icon" name="menu-icon"/>
     <label for="menu-icon"></label>
 
-    <nav class="nav">     
+    <nav class="nav">
         <ul class="pt-5 list-unstyled d-flex flex-column align-items-center">
             <li *ngFor="let opcion of opcionesSeguimiento"><a routerLink="{{ opcion.ruta }}">{{ opcion.nombre }}</a></li>
         </ul>

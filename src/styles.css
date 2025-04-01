@@ -7,3 +7,23 @@
     border: 2px solid #3085d6; /* Borde azul */
     padding: 20px; /* Espaciado interno */
   }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+/* Quitar el icono del ojo en los inputs password */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+}
+
+input[type="password"]::-webkit-credentials-auto-fill-button {
+  display: none !important;
+}
+
+input[type="password"]::-webkit-contacts-auto-fill-button {
+  display: none !important;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
