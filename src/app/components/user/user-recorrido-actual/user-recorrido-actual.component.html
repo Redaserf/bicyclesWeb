@@ -1,0 +1,41 @@
+<div class="recorrido-container" *ngIf="!cargando">
+    <!-- Parte superior -->
+    <div class="top-section">
+      <div class="gif-container">
+        <img src="images/recorrido.gif" alt="Gif ciclista">
+      </div>
+      <div class="reloj-container">
+        <i class="fas fa-clock text-primary"></i>
+        <span>{{ tiempoRecorrido }}</span>
+      </div>
+    </div>
+  
+    <!-- Tarjetas abajo -->
+    <div class="cards-grid">
+      <div class="card">
+        <h4>{{ datos.temperatura }} °C</h4>
+        <p>Temperatura</p>
+      </div>
+      <div class="card">
+        <h4>{{ datos.calorias }} kcal</h4>
+        <p>Calorías</p>
+      </div>
+      <div class="card">
+        <h4>{{ datos.distancia }} km</h4>
+        <p>Distancia</p>
+      </div>
+      <div class="card">
+        <h4>{{ datos.velocidadPromedio }} km/h</h4>
+        <p>Velocidad promedio</p>
+      </div>
+      <div class="card">
+        <h4>{{ datos.velocidadActual }} km/h</h4>
+        <p>Velocidad actual</p>
+      </div>
+      <div class="card">
+        <h4>{{ datos.velocidadMaxima }} km/h</h4>
+        <p>Velocidad máxima</p>
+      </div>
+    </div>
+  </div>
+  
