@@ -1,30 +1,27 @@
 <div *ngIf="!cargando" id="content" class="container">
-    <!-- Contenedor Grid que llena todo el espacio disponible -->
-    <div class="cards-grid-container">
-      <div class="card">
-        <h4 class="fw-bold fs-2 text-primary">{{ datos.duracion }}</h4>
-        <p class="text-muted">Duración Total</p>
-      </div>
-      <div class="card">
-        <h4 class="fw-bold fs-2 text-success">{{ datos.recorridos }}</h4>
-        <p class="text-muted">Número de Entrenamientos</p>
-      </div>
-      <div class="card">
-        <h4 class="fw-bold fs-2 text-danger">{{ datos.distancia }} km</h4>
-        <p class="text-muted">Distancia Total</p>
-      </div>
-      <div class="card">
-        <h4 class="fw-bold fs-2 text-primary">{{ datos.calorias }} kcal</h4>
-        <p class="text-muted">Calorías Totales</p>
-      </div>
-      <div class="card">
-        <h4 class="fw-bold fs-2 text-success">que pongo aquí :v</h4>
-        <p class="text-muted">Velocidad Promedio</p>
-      </div>
-      <div class="card">
-        <h4 class="fw-bold fs-2 text-danger">que pongo aquí :v</h4>
-        <p class="text-muted">Frecuencia Cardiaca</p>
-      </div>
+  <div class="cards-grid-container">
+    <!-- Columna larga izquierda -->
+    <div class="card card-duracion">
+      <h4 class="fw-bold fs-2 text-primary">{{ datos.duracion }}</h4>
+      <p class="text-muted">Duración Total</p>
+    </div>
+
+    <!-- Arriba derecha -->
+    <div class="card card-entrenamientos">
+      <h4 class="fw-bold fs-2 text-success">{{ datos.recorridos }}</h4>
+      <p class="text-muted">Número de Entrenamientos</p>
+    </div>
+
+    <!-- Medio derecha -->
+    <div class="card card-distancia">
+      <h4 class="fw-bold fs-2 text-danger">{{ datos.distancia }} km</h4>
+      <p class="text-muted">Distancia Total</p>
+    </div>
+
+    <!-- Tarjeta inferior ancha -->
+    <div class="card card-calorias">
+      <h4 class="fw-bold fs-2 text-primary">{{ datos.calorias }} kcal</h4>
+      <p class="text-muted">Calorías Totales</p>
     </div>
   </div>
-  
+</div>

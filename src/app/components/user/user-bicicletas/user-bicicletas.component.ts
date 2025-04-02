@@ -6,6 +6,8 @@ import { FormsModule } from '@angular/forms';
 import { Usuario } from '../../administrador/tablas/tabla-user/tabla-user.component';
 import { ToastrService } from 'ngx-toastr';
 import { CargaService } from '../../../services/carga.service';
+import { MatPaginator } from '@angular/material/paginator';
+import { PageEvent } from '@angular/material/paginator';
 declare var bootstrap: any;
 
 export interface Bicicleta {
@@ -16,7 +18,7 @@ export interface Bicicleta {
 
 @Component({
   selector: 'app-user-bicicletas',
-  imports: [CommonModule, FormsModule, NgIf],
+  imports: [CommonModule, FormsModule, NgIf, MatPaginator],
   templateUrl: './user-bicicletas.component.html',
   styleUrl: './user-bicicletas.component.css'
 })
@@ -26,7 +28,13 @@ export class UserBicicletasComponent implements OnInit {
   @ViewChild('modalEditar', { static: false }) modalEditarRef!: ElementRef;
   @ViewChild('modalEliminar', { static: false }) modalEliminarRef!: ElementRef;
   @ViewChild('overlay', { static: false }) overlayRef!: ElementRef;  
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
+  length = 0;
+  pageSize = 5;
+  pageIndex = 0;
+  // pageSizeOptions = [8, 16];
+  
   cargando: boolean = true;
   bicicletas: Bicicleta[] = [];
   bicicletaSeleccionada: any = null;
@@ -34,6 +42,7 @@ export class UserBicicletasComponent implements OnInit {
   nuevaBici: string = '';
   isLoading = false;
   errores: any = {};
+  searchTerm: string = '';
 
   constructor(private apiService: ApiService, private toastr: ToastrService, private cargaService: CargaService) {}
 
@@ -56,17 +65,25 @@ export class UserBicicletasComponent implements OnInit {
 
   }
 
-  public async getBicicletas() {
+  public async getBicicletas(page = 1, perPage = this.pageSize) {
     try {
-      const response = await this.apiService.get('/bicicleta');
-      this.bicicletas = response.data.data;
-      console.log('Bicicletas del usuario:', this.bicicletas);
+      const response = await this.apiService.get(`/bicicleta?page=${page}&per_page=${perPage}`);
+      const data = response.data.data;
+  
+      this.bicicletas = data.data;
+      this.length = data.total;
+      this.pageIndex = data.current_page - 1;
     } catch (error) {
       console.error('Error al obtener bicicletas:', error);
       this.bicicletas = [];
     } finally {
       this.cargaService.hide();
     }
+  }  
+  
+  onPageChange(event: PageEvent) {
+    this.pageSize = event.pageSize;
+    this.getBicicletas(event.pageIndex + 1, event.pageSize);
   }
   
   openModalAgregar() {
@@ -115,19 +132,33 @@ export class UserBicicletasComponent implements OnInit {
     this.bicicletaSeleccionada = null;
   }  
 
+  get bicicletasFiltradas() {
+    if (!this.searchTerm.trim()) {
+      return this.bicicletas;
+    }
+  
+    return this.bicicletas.filter(bici =>
+      bici.nombre.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+  }  
+
   async agregarBicicleta() {
     this.isLoading = true;
     this.errores = {};
   
     try {
-      const response = await this.apiService.post('bicicleta', {
+      await this.apiService.post('bicicleta', {
         nombre: this.nuevaBici
       });
   
-      this.bicicletas.push(response.data.bicicleta);
       this.nuevaBici = '';
       this.cerrarModal();
       this.toastr.success('Bicicleta agregada correctamente.', '¡Éxito!');
+  
+      const totalDespues = this.length + 1;
+      const ultimaPagina = Math.ceil(totalDespues / this.pageSize);
+      this.getBicicletas(ultimaPagina);
+  
     } catch (error: any) {
       console.error('Error al agregar bicicleta:', error);
       this.procesarErroresValidaciones(error);
@@ -135,7 +166,7 @@ export class UserBicicletasComponent implements OnInit {
     } finally {
       this.isLoading = false;
     }
-  }
+  }  
 
   async editarBicicleta() {
     this.isLoading = true;
@@ -146,7 +177,8 @@ export class UserBicicletasComponent implements OnInit {
         nombre: this.nuevoNombre
       });
   
-      this.getBicicletas();
+      await this.getBicicletas(this.pageIndex + 1);
+
       setTimeout(() => {
         this.toastr.success('Bicicleta actualizada correctamente.', '¡Éxito!');
         this.cerrarModal();

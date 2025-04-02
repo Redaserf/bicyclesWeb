@@ -9,13 +9,14 @@ import {
 } from '@angular/core';
 import { ApiService } from '../../../../services/api-service.service';
 import { Usuario } from '../tabla-user/tabla-user.component';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CargaService } from '../../../../services/carga.service';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { MatSort, Sort, MatSortModule } from '@angular/material/sort';
+import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
+import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 
 export interface Bicicleta {
   id: number;
@@ -25,17 +26,34 @@ export interface Bicicleta {
 
 @Component({
   selector: 'app-tabla-bicis',
-  imports: [CommonModule, FormsModule, MatTableModule],
+  imports: [CommonModule, FormsModule, MatTableModule, MatPaginatorModule, NgIf],
   templateUrl: './tabla-bicis.component.html',
   styleUrl: './tabla-bicis.component.css',
 })
 export class TablaBicisComponent implements OnInit, AfterViewInit {
   private _liveAnnouncer = inject(LiveAnnouncer);
 
-  // Modales
   @ViewChild('modalEditar', { static: false }) modalEditarRef!: ElementRef;
   @ViewChild('modalEliminar', { static: false }) modalEliminarRef!: ElementRef;
   @ViewChild('overlay', { static: false }) overlayRef!: ElementRef;
+
+  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  cargando: boolean = true;
+  bicis: Bicicleta[] = [];
+  dataSource!: MatTableDataSource<Bicicleta>;
+  displayedColumns: string[] = ['acciones', 'nombre', 'usuario'];
+
+  // Paginación
+  length = 0;
+  pageSize = 8;
+  pageIndex = 0;
+
+  nuevoNombre: string = '';
+  bicicletaSeleccionada: any = null;
+  isLoading = false;
+  errores: any = {};
 
   constructor(
     private api: ApiService,
@@ -43,18 +61,6 @@ export class TablaBicisComponent implements OnInit, AfterViewInit {
     private toastr: ToastrService,
     private cdr: ChangeDetectorRef
   ) {}
-
-  cargando: boolean = true;
-  bicis: Bicicleta[] = [];
-  nuevoNombre: string = '';
-  bicicletaSeleccionada: any = null;
-  isLoading = false;
-  errores: any = {};
-
-  dataSource!: MatTableDataSource<Bicicleta>;
-  displayedColumns: string[] = ['acciones', 'nombre', 'usuario'];
-
-  @ViewChild(MatSort) sort!: MatSort;
 
   ngOnInit(): void {
     this.cargaService.show();
@@ -71,12 +77,26 @@ export class TablaBicisComponent implements OnInit, AfterViewInit {
     }
   }
 
-  obtenerBicicletas() {
-    this.api.get('admin/bicicletas').then((response) => {
-      this.bicis = response.data;
+  obtenerBicicletas(page: number = 1, perPage: number = this.pageSize) {
+    this.api.get(`admin/bicicletas?page=${page}&per_page=${perPage}`).then((response) => {
+      const paginated = response.data;
+      this.bicis = paginated.data;
+
       this.dataSource = new MatTableDataSource(this.bicis);
+      this.dataSource.sort = this.sort;
+
+      // Paginación
+      this.length = paginated.total;
+      this.pageSize = paginated.per_page;
+      this.pageIndex = paginated.current_page - 1;
+
       this.cargaService.hide();
     });
+  }
+
+  onPageChange(event: PageEvent) {
+    this.pageSize = event.pageSize;
+    this.obtenerBicicletas(event.pageIndex + 1, this.pageSize);
   }
 
   openModalEditar(bicicleta: Bicicleta) {
@@ -99,18 +119,15 @@ export class TablaBicisComponent implements OnInit, AfterViewInit {
   }
 
   cerrarModal() {
-    if (this.modalEditarRef && this.modalEliminarRef && this.overlayRef) {
-      this.modalEditarRef.nativeElement.style.display = 'none';
-      this.modalEliminarRef.nativeElement.style.display = 'none';
-      this.overlayRef.nativeElement.style.display = 'none';
-    }
+    this.modalEditarRef.nativeElement.style.display = 'none';
+    this.modalEliminarRef.nativeElement.style.display = 'none';
+    this.overlayRef.nativeElement.style.display = 'none';
     this.bicicletaSeleccionada = null;
   }
 
   async editarBicicleta() {
     this.isLoading = true;
     this.errores = {};
-
     try {
       await this.api.put(`bicicleta/${this.bicicletaSeleccionada.id}`, {
         nombre: this.nuevoNombre,
@@ -119,7 +136,6 @@ export class TablaBicisComponent implements OnInit, AfterViewInit {
       this.toastr.success('Bicicleta actualizada correctamente.', '¡Éxito!');
       this.cerrarModal();
     } catch (error: any) {
-      console.error('Error al editar bicicleta:', error);
       this.toastr.error('No se pudo actualizar la bicicleta.', 'Error');
       this.procesarErroresValidaciones(error);
     } finally {
@@ -127,27 +143,20 @@ export class TablaBicisComponent implements OnInit, AfterViewInit {
     }
   }
 
-  // Eliminar bicicleta
   async eliminarBicicleta() {
     this.isLoading = true;
-
     try {
       await this.api.delete(`bicicleta/${this.bicicletaSeleccionada.id}`);
-      this.bicis = this.bicis.filter(
-        (bici) => bici.id !== this.bicicletaSeleccionada.id
-      );
       this.toastr.success('Bicicleta eliminada correctamente.', '¡Éxito!');
-      this.obtenerBicicletas();
+      this.obtenerBicicletas(this.pageIndex + 1, this.pageSize);
       this.cerrarModal();
     } catch (error) {
-      console.error('Error al eliminar bicicleta:', error);
       this.toastr.error('No se pudo eliminar la bicicleta.', 'Error');
     } finally {
       this.isLoading = false;
     }
   }
 
-  // Procesar errores del servidor
   procesarErroresValidaciones(error: any) {
     if (error && error.errores) {
       this.errores = error.errores;

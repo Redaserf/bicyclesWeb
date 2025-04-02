@@ -2,6 +2,23 @@
   <div class="bici-card">
     <div class="header-container">
       <h1 class="titulo"><i class="fas fa-bicycle"></i> Mis Bicicletas</h1>
+
+      <div class="search-container">
+        <input type="text" class="search-input" placeholder="Buscar bicicleta..." [(ngModel)]="searchTerm">
+        <i class="fas fa-search search-icon"></i>
+      </div>
+      
+      <div class="paginator-container">
+        <mat-paginator
+          [length]="length"
+          [pageSize]="pageSize"
+          [pageIndex]="pageIndex"
+          [hidePageSize]="true"
+          (page)="onPageChange($event)"
+          showFirstLastButtons>
+        </mat-paginator>
+      </div>
+
     </div>
     
     <div class="add-btn">
@@ -11,7 +28,7 @@
     </div>
 
     <div id="bicisContainer">
-      <div class="bici-item" *ngFor="let bici of bicicletas">
+      <div class="bici-item" *ngFor="let bici of bicicletasFiltradas">
         <div class="bici-icon"><i class="fas fa-bicycle"></i></div>
         <div class="bici-name">{{ bici.nombre }}</div>
         <div class="bici-actions">
@@ -23,7 +40,7 @@
           </button>
         </div>
       </div>
-    </div>
+    </div>    
   </div>
 </div>
 

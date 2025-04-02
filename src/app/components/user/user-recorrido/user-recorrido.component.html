@@ -2,13 +2,23 @@
   <div class="recorridos-card">
     <div class="header-container">
       <h1 class="titulo"><i class="fas fa-road"></i> Mis Recorridos</h1>
-      <div class="filter-container">
-        <!-- <select class="filter-select">
-          <option value="bike">Bicicleta</option>
-          <option value="date">Fecha</option>
-        </select> -->
-        <input type="text" placeholder="Buscar..." class="filter-input" [(ngModel)]="searchTerm">
+
+      <div class="search-container">
+        <input type="text" class="search-input" placeholder="Buscar bicicleta..." [(ngModel)]="searchTerm">
+        <i class="fas fa-search search-icon"></i>
       </div>
+
+      <div class="paginator-container">
+        <mat-paginator
+          [length]="length"
+          [pageSize]="pageSize"
+          [pageIndex]="pageIndex"
+          [hidePageSize]="true"
+          (page)="onPageChange($event)"
+          showFirstLastButtons>
+        </mat-paginator>
+      </div>
+      
     </div>
 
     <div id="recorridosContainer">

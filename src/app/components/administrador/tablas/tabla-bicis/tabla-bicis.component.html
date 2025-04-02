@@ -31,6 +31,17 @@
             </tr>
           </tbody>
         </table>
+
+        <!-- Paginator -->
+        <mat-paginator
+          [length]="length"
+          [pageSize]="pageSize"
+          [pageIndex]="pageIndex"
+          [hidePageSize]="true"
+          (page)="onPageChange($event)"
+          showFirstLastButtons>
+        </mat-paginator>
+      
       </div>
     </div>
   </div>

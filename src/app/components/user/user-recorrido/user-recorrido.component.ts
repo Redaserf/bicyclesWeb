@@ -1,19 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import AOS from 'aos';
 import { ApiService } from '../../../services/api-service.service';
 import { CommonModule, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { CargaService } from '../../../services/carga.service';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 declare var bootstrap: any;
 
 @Component({
   selector: 'app-user-recorrido',
-  imports: [CommonModule, FormsModule, NgIf],
+  imports: [CommonModule, FormsModule, NgIf, MatPaginator],
   templateUrl: './user-recorrido.component.html',
   styleUrl: './user-recorrido.component.css'
 })
 export class UserRecorridoComponent implements OnInit {
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  length = 0;
+  pageSize = 8;
+  pageIndex = 0;
 
   isLoading = false;
   cargando: boolean = true;
@@ -25,7 +31,6 @@ export class UserRecorridoComponent implements OnInit {
   constructor(private apiService: ApiService, private toastr: ToastrService, private cargaService: CargaService) {}
 
   ngOnInit(): void {
-
     this.cargaService.show();
     this.cargaService.cargando$.subscribe((cargando) => {
       this.cargando = cargando;
@@ -42,25 +47,38 @@ export class UserRecorridoComponent implements OnInit {
     this.obtenerRecorridos();
   }
 
-  public async getRecorridos() {
+  async obtenerRecorridos(page: number = 1, perPage: number = this.pageSize) {
     try {
-      const response = await this.apiService.get('/recorridos');
-      return response.data;
+      const response = await this.apiService.get(`/recorridos?page=${page}&per_page=${perPage}`);
+      const paginated = response.data.data;
+  
+      console.log("Recorridos:", paginated);
+  
+      this.recorridos = paginated.data;
+      this.length = paginated.total;
+      this.pageIndex = paginated.current_page - 1;
+      
     } catch (error) {
       console.error('Error al obtener recorridos:', error);
-      return { recorridos: [] };
+      this.recorridos = [];
     } finally {
       this.cargaService.hide();
     }
+  }  
+
+  onPageChange(event: PageEvent) {
+    this.pageSize = event.pageSize;
+    this.obtenerRecorridos(event.pageIndex + 1, event.pageSize);
   }
 
-  public async deleteRecorrido(id: number) {
+  async deleteRecorrido(id: number) {
     try {
       this.isLoading = true;
       await this.apiService.delete(`/recorrido/${id}`);
-      this.recorridos = this.recorridos.filter(rec => rec.id !== id);
-      this.cerrarModalEliminar();
       this.toastr.success('Recorrido eliminado correctamente.', '¡Éxito!');
+      this.cerrarModalEliminar();
+
+      this.obtenerRecorridos(this.pageIndex + 1, this.pageSize);
     } catch (error) {
       console.error('Error al eliminar recorrido:', error);
       this.toastr.error('No se pudo eliminar el recorrido.', 'Error');
@@ -68,15 +86,6 @@ export class UserRecorridoComponent implements OnInit {
       this.isLoading = false;
     }
   }
-
-  obtenerRecorridos() {
-    this.getRecorridos().then(data => {
-      console.log("Recorridos obtenidos:", data.recorridos);
-      this.recorridos = data.recorridos;
-    }).catch(error => {
-      console.error('Error al cargar recorridos:', error);
-    });
-  }  
 
   abrirModalDetalle(recorrido: any) {
     this.recorridoSeleccionado = recorrido;
@@ -112,7 +121,7 @@ export class UserRecorridoComponent implements OnInit {
     if (!this.searchTerm.trim()) {
       return this.recorridos;
     }
-  
+
     return this.recorridos.filter(recorrido => {
       return (
         (recorrido.bicicleta_nombre?.toLowerCase().includes(this.searchTerm.toLowerCase()) || "") ||
@@ -122,5 +131,4 @@ export class UserRecorridoComponent implements OnInit {
       );
     });
   }
-  
 }

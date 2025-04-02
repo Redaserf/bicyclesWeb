@@ -266,3 +266,35 @@ body {
     to { transform: rotate(360deg); }
   }
   
+  .paginator-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  .paginator-container mat-paginator {
+    margin: 0;
+  }
+  
+  .search-container {
+    position: relative;
+    width: 250px;
+    margin-top: 10px;
+  }
+  .search-input {
+    width: 100%;
+    padding: 8px 40px 8px 15px;
+    border: 2px solid #188AFF;
+    border-radius: 30px;
+    font-size: 1rem;
+    outline: none;
+  }
+  .search-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #188AFF;
+  }
+  
