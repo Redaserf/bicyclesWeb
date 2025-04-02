@@ -67,7 +67,7 @@ export class UserBicicletasComponent implements OnInit {
 
   public async getBicicletas(page = 1, perPage = this.pageSize) {
     try {
-      const response = await this.apiService.get(`/bicicleta?page=${page}&per_page=${perPage}`);
+      const response = await this.apiService.get(`/bicicleta/paginado?page=${page}&per_page=${perPage}`);
       const data = response.data.data;
   
       this.bicicletas = data.data;
