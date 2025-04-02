@@ -49,7 +49,7 @@ export class UserRecorridoComponent implements OnInit {
 
   async obtenerRecorridos(page: number = 1, perPage: number = this.pageSize) {
     try {
-      const response = await this.apiService.get(`/recorridos?page=${page}&per_page=${perPage}`);
+      const response = await this.apiService.get(`/recorridos/paginado?page=${page}&per_page=${perPage}`);
       const paginated = response.data.data;
   
       console.log("Recorridos:", paginated);
