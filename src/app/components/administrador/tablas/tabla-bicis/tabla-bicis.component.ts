@@ -44,6 +44,7 @@ export class TablaBicisComponent implements OnInit, AfterViewInit {
   bicis: Bicicleta[] = [];
   dataSource!: MatTableDataSource<Bicicleta>;
   displayedColumns: string[] = ['acciones', 'nombre', 'usuario'];
+  searchTerm: string = '';
 
   // Paginación
   length = 0;
@@ -92,6 +93,20 @@ export class TablaBicisComponent implements OnInit, AfterViewInit {
 
       this.cargaService.hide();
     });
+  }
+
+  get bicisFiltradas(): Bicicleta[] {
+    if (!this.searchTerm.trim()) {
+      return this.bicis;
+    }
+  
+    const termino = this.searchTerm.toLowerCase();
+  
+    return this.bicis.filter(bici =>
+      bici.nombre.toLowerCase().includes(termino) ||
+      bici.usuario?.nombre.toLowerCase().includes(termino) ||
+      bici.usuario?.apellido.toLowerCase().includes(termino)
+    );
   }
 
   onPageChange(event: PageEvent) {

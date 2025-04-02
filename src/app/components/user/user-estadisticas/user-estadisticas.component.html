@@ -2,34 +2,34 @@
 <div class="estadisticas-container">
   <div class="estadisticas-personalizado">
     <!-- Filtro -->
-    <div *ngIf="!cargando" class="d-flex justify-content-start mb-3">
+    <!-- <div *ngIf="!cargando" class="d-flex justify-content-start mb-3">
       <select class="form-select custom-select-long">
         <option value="day">Día</option>
         <option value="week">Semana</option>
         <option value="month">Mes</option>
         <option value="year">Año</option>
       </select>
-    </div>
+    </div> -->
 
     <!-- Tabs -->
     <ul *ngIf="!cargando" class="nav nav-pills mt-3 justify-content-center gap-3" id="dataTabs">
       <li class="nav-item">
         <a
-          class="nav-link px-4 py-2"
+          class="nav-link px-4 py-2 cursor"
           [class.active]="selectedTab === 'distancias'"
           (click)="crearGrafica('distancias')"
           >Distancia</a>
       </li>
       <li class="nav-item">
         <a
-          class="nav-link px-4 py-2"
+          class="nav-link px-4 py-2 cursor"
           [class.active]="selectedTab === 'calorias'"
           (click)="crearGrafica('calorias')"
           >Calorías</a>
       </li>
       <li class="nav-item">
         <a
-          class="nav-link px-4 py-2"
+          class="nav-link px-4 py-2 cursor"
           [class.active]="selectedTab === 'duraciones'"
           (click)="crearGrafica('duraciones')"
           >Duración</a>
