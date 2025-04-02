@@ -1,0 +1,93 @@
+.recorrido-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .top-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 30px;
+    position: relative;
+  }
+  
+  .gif-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+  }
+  
+  .gif-container img {
+    width: 420px;
+    max-width: 100%;
+    border-radius: 10px;
+  }
+  
+  .reloj-container {
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 1.8rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 100%;
+    max-width: 1000px;
+  }
+  
+  .card {
+    background: linear-gradient(120deg, #E6F7FF, #eef8ff);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 255, 0.2);
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .card h4 {
+    font-size: 2rem;
+    margin: 0 0 10px;
+  }
+  
+  .card p {
+    font-size: 1.1rem;
+    color: #555;
+  }
+
+  @media (max-width: 768px) {
+    .cards-grid {
+      grid-template-columns: 1fr; /* Una columna */
+    }
+  
+    .reloj-container {
+      position: static;
+      justify-content: center;
+      margin-top: 10px;
+    }
+  
+    .top-section {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .gif-container img {
+      width: 100%;
+      max-width: 300px; /* Más pequeño en móvil */
+    }
+  }
+  

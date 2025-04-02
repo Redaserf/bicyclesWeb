@@ -29,6 +29,7 @@ import { authGuard } from './guards/auth.guard';
 import { NotFoundComponent } from './components/global/not-found/not-found.component';
 import { NotFoundLayoutComponent } from './components/layouts/guest-layout/not-found-layout/not-found-layout.component';
 import { GuestInformacionComponent } from './components/guest/guest-informacion/guest-informacion.component';
+import { UserRecorridoActualComponent } from './components/user/user-recorrido-actual/user-recorrido-actual.component';
 
 export const routes: Routes = [
 
@@ -65,6 +66,7 @@ export const routes: Routes = [
         children:[
             {path: '', redirectTo: 'home', pathMatch: 'full'},
             {path:"home", component: UserHomeComponent },
+            {path:"recorrido-activo", component: UserRecorridoActualComponent },
             {path:"recorridos", component: UserRecorridoComponent },
             {path:"bicicletas", component: UserBicicletasComponent },
             {path:"perfil", component: UserPerfilComponent },

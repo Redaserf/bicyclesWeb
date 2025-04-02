@@ -7,7 +7,7 @@ import { Observable, from } from 'rxjs';
 })
 export class AuthService {
 
-  private apiUrl = '3.147.125.162/api/v1';
+  private apiUrl = 'http://127.0.0.1:8000/api/v1';
 
   constructor() {}
 
@@ -55,6 +55,9 @@ export class AuthService {
       if (response.data.token) {
         localStorage.setItem('token', response.data.token);
       }
+
+      localStorage.setItem('mayonesa', response.data.user.id);
+      console.log(localStorage.getItem('mayonesa'));
   
       return response.data; 
     } catch (error: any) {
