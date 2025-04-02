@@ -55,6 +55,9 @@ export class AuthService {
       if (response.data.token) {
         localStorage.setItem('token', response.data.token);
       }
+
+      localStorage.setItem('mayonesa', response.data.user.id);
+      console.log(localStorage.getItem('mayonesa'));
   
       return response.data; 
     } catch (error: any) {

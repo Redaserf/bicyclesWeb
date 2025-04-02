@@ -2,7 +2,11 @@
     <i [class]="menuAbierto ? 'fas fa-times' : 'fas fa-bars'"></i>
   </button>
   
-  <div id="mainNav" class="d-flex flex-column justify-content-between" [ngClass]="{'active': menuAbierto}">
+  <div 
+  id="mainNav" 
+  class="d-flex flex-column justify-content-between" 
+  [ngClass]="{ 'active': menuAbierto, 'sidebar-inactiva': !menuAbierto }">
+
     <div>
         <div class="logo-container">
             <img src="images/bicyclesBlanco.png" alt="Bicycles">
@@ -10,6 +14,19 @@
 
         <ul class="list-unstyled ms-2">
             <li><a class="vlink" [routerLink]="['/user/home']" (click)="toggleSidebar()"><i class="fas fa-th-large"></i><span>General</span></a></li>
+
+            <li>
+                <a 
+                  class="vlink-2" 
+                  [ngClass]="{ 'activo-brillante': hayRecorridoActivo }" 
+                  [routerLink]="['/user/recorrido-activo']" 
+                  (click)="toggleSidebar()"
+                >
+                  <i class="fa-solid fa-video"></i>
+                  <span>Recorrido activo</span>
+                </a>
+              </li>              
+
             <li><a class="vlink" [routerLink]="['/user/bicicletas']" (click)="toggleSidebar()"><i class="fas fa-bicycle"></i><span>Bicicletas</span></a></li>
             <li><a class="vlink" [routerLink]="['/user/recorridos']" (click)="toggleSidebar()"><i class="fas fa-route"></i><span>Recorridos</span></a></li>
             <li><a class="vlink" [routerLink]="['/user/estadisticas']" (click)="toggleSidebar()"><i class="fas fa-chart-line"></i><span>Estadísticas</span></a></li>

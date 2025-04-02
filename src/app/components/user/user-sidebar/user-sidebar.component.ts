@@ -12,6 +12,7 @@ import { AuthService } from '../../../services/auth-service.service';
 })
 export class UserSidebarComponent {
   menuAbierto: boolean = false;
+  hayRecorridoActivo = true;
 
   constructor(private authService: AuthService, private router: Router) {}
   

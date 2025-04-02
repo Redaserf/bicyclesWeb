@@ -65,6 +65,25 @@ a {
     transform: translateX(5px);
 }
 
+.vlink-2 {
+    color: white !important;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background 0.3s, transform 0.3s;
+    border-radius: 8px;
+}
+
+.vlink-2 i {
+    font-size: 1.5rem;
+    color: white !important;
+}
+
+.vlink-2:hover {
+    transform: translateX(5px);
+}
+
 #toggleMenu {
     position: fixed;
     top: 15px;
@@ -110,3 +129,27 @@ a {
     flex: 1;
     transition: margin-left 0.4s ease-in-out;
 } */
+
+.activo-brillante {
+    background: linear-gradient(45deg, #ff6a00, #ffdd00);
+    color: black !important;
+    font-weight: bold;
+    box-shadow: 0 0 15px #ffdd00;
+    animation: brillo 1.5s infinite alternate;
+}
+
+@keyframes brillo {
+    from {
+        transform: scale(1);
+        box-shadow: 0 0 10px #ffdd00;
+    }
+    to {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px #ff6a00;
+    }
+}
+
+.sidebar-inactiva {
+    pointer-events: none;
+    /* opacity: 0.5; */
+  }
