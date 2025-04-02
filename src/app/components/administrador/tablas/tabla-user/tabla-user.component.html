@@ -25,7 +25,17 @@
   <!-- Tabla de usuarios -->
   <div class="panel">
     <div class="panel-heading">
+      
       <h2 class="panel-title text-center">Usuarios</h2>
+      <div class="search-container">
+        <input
+          type="text"
+          class="search-input"
+          placeholder="Buscar por nombre..."
+          [(ngModel)]="searchTerm">
+        <i class="fas fa-search search-icon"></i>
+      </div>
+      
     </div>
     <div class="panel-body">
       <div class="table-responsive">
@@ -41,7 +51,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let usuario of usuarios">
+            <tr *ngFor="let usuario of usuariosFiltrados">
               <td>
                 <div class="btn-group" role="group" aria-label="Acciones">
                   <button style="margin-right: 8px;" type="button" class="btn btn-warning btn-sm" (click)="editarUsuario(usuario)">

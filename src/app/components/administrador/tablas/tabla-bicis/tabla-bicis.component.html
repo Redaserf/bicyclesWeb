@@ -4,6 +4,16 @@
     <div class="panel-heading">
       <h2 class="panel-title text-center">Bicicletas</h2>
     </div>
+    
+    <div class="search-container">
+      <input
+        type="text"
+        class="search-input"
+        placeholder="Buscar por nombre..."
+        [(ngModel)]="searchTerm">
+      <i class="fas fa-search search-icon"></i>
+    </div>
+
     <div class="panel-body">
       <div class="table-responsive">
         <table class="table table-bordered table-hover">
@@ -14,8 +24,9 @@
               <th>Usuario</th>
             </tr>
           </thead>
+          
           <tbody>
-            <tr *ngFor="let bici of bicis">
+            <tr *ngFor="let bici of bicisFiltradas">
               <td>
                 <div class="btn-group" role="group" aria-label="Acciones">
                   <button style="margin-right: 8px;" type="button" class="btn btn-warning btn-sm" (click)="openModalEditar(bici)">

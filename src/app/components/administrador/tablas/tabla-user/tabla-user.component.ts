@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CargaService } from '../../../../services/carga.service';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { CommonModule, NgFor } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 export interface Usuario {
   id: number;
@@ -16,7 +17,7 @@ export interface Usuario {
 
 @Component({
   selector: 'app-tabla-user',
-  imports: [CommonModule, NgFor, MatPaginator],
+  imports: [CommonModule, NgFor, MatPaginator, FormsModule],
   templateUrl: './tabla-user.component.html',
   styleUrl: './tabla-user.component.css'
 })
@@ -27,6 +28,7 @@ export class TablaUserComponent implements OnInit {
 
   usuarios: Usuario[] = [];
   usuarioSeleccionado: Usuario | null = null;
+  searchTerm: string = '';
 
   pageSize = 8;
   pageIndex = 0;
@@ -55,6 +57,18 @@ export class TablaUserComponent implements OnInit {
       this.cargaService.hide();
     }
   }
+
+  get usuariosFiltrados(): Usuario[] {
+    if (!this.searchTerm.trim()) {
+      return this.usuarios;
+    }
+  
+    return this.usuarios.filter(usuario =>
+      usuario.nombre.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      usuario.apellido.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      usuario.email.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );    
+  }  
 
   onPageChange(event: PageEvent) {
     this.pageSize = event.pageSize;

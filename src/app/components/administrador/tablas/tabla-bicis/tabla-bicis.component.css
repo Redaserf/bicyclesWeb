@@ -225,3 +225,24 @@
     text-align: center;
   }
 }
+
+.search-container {
+  position: relative;
+  width: 250px;
+  margin-top: 10px;
+}
+.search-input {
+  width: 100%;
+  padding: 8px 40px 8px 15px;
+  border: 2px solid #188AFF;
+  border-radius: 30px;
+  font-size: 1rem;
+  outline: none;
+}
+.search-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #188AFF;
+}
