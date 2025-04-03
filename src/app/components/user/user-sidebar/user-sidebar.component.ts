@@ -1,20 +1,43 @@
-import { NgClass } from '@angular/common';
-import { Component, HostListener } from '@angular/core';
+import { NgClass, NgIf } from '@angular/common';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../../services/auth-service.service';
+import Pusher  from 'pusher-js';
 
 @Component({
   selector: 'app-user-sidebar',
-  imports: [NgClass, RouterLink],
+  imports: [NgClass, RouterLink, NgIf],
   templateUrl: './user-sidebar.component.html',
   styleUrl: './user-sidebar.component.css'
 })
-export class UserSidebarComponent {
+export class UserSidebarComponent implements OnInit {
   menuAbierto: boolean = false;
-  hayRecorridoActivo = true;
+  hayRecorridoActivo: boolean = false;
 
   constructor(private authService: AuthService, private router: Router) {}
+
+  ngOnInit(): void {
+    
+    const evSourve = new EventSource(`http://127.0.0.1:8000/api/v1/recorrido/activo?usuarioId=${localStorage.getItem('mayonesa')}`);
+
+    evSourve.addEventListener('recorrido-activo', (event: any) => {
+      
+      console.log('Recorrido activo');
+      const data = JSON.parse(event.data);
+      this.hayRecorridoActivo = data.activo;
+
+    });
+
+    evSourve.addEventListener('sin-recorrido', (event: any) => {
+
+      console.log('No hay recorrido activo');
+      this.hayRecorridoActivo = false;
+
+    });
+    
+
+  }
   
   toggleSidebar(): void {
     setTimeout(() => {
