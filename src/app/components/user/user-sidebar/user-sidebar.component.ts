@@ -19,23 +19,17 @@ export class UserSidebarComponent implements OnInit {
 
   ngOnInit(): void {
     
-    const evSourve = new EventSource(`http://127.0.0.1:8000/api/v1/recorrido/activo?usuarioId=${localStorage.getItem('mayonesa')}`);
+    Pusher.logToConsole = true;
 
-    evSourve.addEventListener('recorrido-activo', (event: any) => {
-      
-      console.log('Recorrido activo');
-      const data = JSON.parse(event.data);
-      this.hayRecorridoActivo = data.activo;
-
+    var pusher = new Pusher('2552bfa49fa7687c7c80', {
+      cluster: 'us2'
     });
 
-    evSourve.addEventListener('sin-recorrido', (event: any) => {
-
-      console.log('No hay recorrido activo');
-      this.hayRecorridoActivo = false;
-
+    var channel = pusher.subscribe('recorrido_' + localStorage.getItem('mayonesa'));
+    channel.bind('RecorridoActivo', (data: any) => {
+      console.log('Recorrido activo: ', data.recorridoActivo);
+      this.hayRecorridoActivo = data.recorridoActivo;
     });
-    
 
   }
   
