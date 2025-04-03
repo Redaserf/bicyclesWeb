@@ -29,6 +29,8 @@ export class UserRecorridoActualComponent implements OnInit {
     var mayonesa = localStorage.getItem('mayonesa');
     console.log('mayonesa: ' + mayonesa);
 
+    
+
     this.cargaService.show();
     this.cargaService.cargando$.subscribe((cargando) => {
       this.cargando = cargando;

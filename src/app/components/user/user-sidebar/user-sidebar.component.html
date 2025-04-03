@@ -15,7 +15,7 @@
         <ul class="list-unstyled ms-2">
             <li><a class="vlink" [routerLink]="['/user/home']" (click)="toggleSidebar()"><i class="fas fa-th-large"></i><span>General</span></a></li>
 
-            <li>
+            <li *ngIf="hayRecorridoActivo">
                 <a 
                   class="vlink-2" 
                   [ngClass]="{ 'activo-brillante': hayRecorridoActivo }" 
@@ -25,7 +25,7 @@
                   <i class="fa-solid fa-video"></i>
                   <span>Recorrido activo</span>
                 </a>
-              </li>              
+            </li>              
 
             <li><a class="vlink" [routerLink]="['/user/bicicletas']" (click)="toggleSidebar()"><i class="fas fa-bicycle"></i><span>Bicicletas</span></a></li>
             <li><a class="vlink" [routerLink]="['/user/recorridos']" (click)="toggleSidebar()"><i class="fas fa-route"></i><span>Recorridos</span></a></li>

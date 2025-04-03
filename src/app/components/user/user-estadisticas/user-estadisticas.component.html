@@ -36,6 +36,11 @@
       </li>
     </ul>
 
+    <h3 class="text-center mt-4">      
+      {{ selectedTab === 'calorias' ? 'kilocaloría' : (selectedTab === 'duraciones' ? ' Minutos' : 'Metros') }}
+    </h3> 
+
+
     <!-- Estadística más grande -->
     
 
@@ -49,27 +54,18 @@
       <div class="col-md-3">
         <div class="card text-center p-4">
           <h4 class="fw-bold fs-2 text-primary">{{chart ? generales[selectedTab]['total'] : 0}}</h4>      
-          <h3>      
-            {{ selectedTab === 'calorias' ? ' kc' : (selectedTab === 'duraciones' ? ' min' : ' m') }}
-          </h3> 
           <p class="text-muted">Total</p>
         </div>
       </div>
       <div class="col-md-3">
         <div class="card text-center p-4">
           <h4 class="fw-bold fs-2 text-success">{{chart ? generales[selectedTab]['maxima'] : 0}}</h4>
-          <h3>      
-            {{ selectedTab === 'calorias' ? ' kc' : (selectedTab === 'duraciones' ? ' min' : ' m') }}
-          </h3> 
           <p class="text-muted">Mejor</p>
         </div>
       </div>
       <div class="col-md-3">
         <div class="card text-center p-4">
           <h4 class="fw-bold fs-2 text-danger">{{chart ? generales[selectedTab]['promedio'] : 0}}</h4>
-          <h3>      
-            {{ selectedTab === 'calorias' ? ' kc' : (selectedTab === 'duraciones' ? ' min' : ' m') }}
-          </h3> 
           <p class="text-muted">Promedio</p>
         </div>
       </div>
