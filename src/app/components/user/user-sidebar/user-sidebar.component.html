@@ -17,7 +17,7 @@
 
             <li *ngIf="hayRecorridoActivo">
                 <a 
-                  class="vlink-2" 
+                  class="vlink-2 bloqueable"
                   [ngClass]="{ 'activo-brillante': hayRecorridoActivo }" 
                   [routerLink]="['/user/recorrido-activo']" 
                   (click)="toggleSidebar()"
