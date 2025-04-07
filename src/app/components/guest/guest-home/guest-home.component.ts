@@ -76,6 +76,5 @@ export class GuestHomeComponent implements OnInit {
     {nombre: "Informacion", ruta: "/info"},
     // {nombre: "Descargar-App", ruta: "#"},
     // {nombre: "Contactanos", ruta: "/home#"},
-
   ];
 }
