@@ -35,6 +35,7 @@ export class LoginComponent implements AfterViewInit, CanExit, OnInit {
 constructor(private authService: AuthService, private router: Router, private cargaService: CargaService) {}
 
   ngOnInit(): void {
+    console.log('xd');
     this.cargaService.show();
     this.cargaService.cargando$.subscribe((cargando) => {
       this.cargando = cargando;

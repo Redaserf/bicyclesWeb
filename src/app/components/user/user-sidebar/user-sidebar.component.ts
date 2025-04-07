@@ -3,6 +3,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../../services/auth-service.service';
+import { ToastrService } from 'ngx-toastr';
 import Pusher  from 'pusher-js';
 
 @Component({
@@ -15,7 +16,7 @@ export class UserSidebarComponent implements OnInit {
   menuAbierto: boolean = false;
   hayRecorridoActivo: boolean = false;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router, private toastr: ToastrService) {}
 
   ngOnInit(): void {
     
@@ -26,24 +27,32 @@ export class UserSidebarComponent implements OnInit {
     });
 
     var channel = pusher.subscribe('recorrido_' + localStorage.getItem('mayonesa'));
-    channel.bind('RecorridoActivo', (data: any) => {
-      console.log('Recorrido activo: ', data.recorridoActivo);
-      this.hayRecorridoActivo = data.recorridoActivo;
+    channel.bind('recorrido-activo', (data: any) => {
+      this.hayRecorridoActivo = !data.acabado;
+
+      if(data.acabado) {
+        this.router.navigate(['/user/recorridos']);
+      }
+
     });
 
+    console.log(this.hayRecorridoActivo)
   }
   
   toggleSidebar(): void {
     setTimeout(() => {
       this.menuAbierto = !this.menuAbierto;
+      document.body.classList.toggle('sidebar-visible', this.menuAbierto);
     }, 10);
   }
-
+  
   cerrarSideBar(): void {
     setTimeout(() => {
       this.menuAbierto = false;
+      document.body.classList.remove('sidebar-visible');
     }, 1);
   }
+  
 
   @HostListener('document:click', ['$event'])
   clickout(event: any) {

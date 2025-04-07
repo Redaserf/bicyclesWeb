@@ -9,7 +9,7 @@ export class ApiService {
 
   constructor() { 
     this.axiosInstance = axios.create({
-      baseURL: 'http://127.0.0.1:8000/api/v1',
+      baseURL: 'https://apibiciutt.fun/api/v1',
       timeout: 15000,
       headers: {
         'Content-Type': 'application/json',
@@ -60,7 +60,7 @@ export class ApiService {
           return Promise.reject({ mensaje: 'Sesión expirada. Inicia sesión nuevamente.' });
   
         case 404:
-          return Promise.reject({ mensaje: 'Recurso no encontrado.' });
+          return Promise.reject({ mensaje: 'Recurso no encontrado.', msg: error.message });
   
         case 422:
           return Promise.reject({ errores: error.response.data.errors });

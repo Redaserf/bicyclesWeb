@@ -7,7 +7,7 @@ import { Observable, from } from 'rxjs';
 })
 export class AuthService {
 
-  private apiUrl = 'http://127.0.0.1:8000/api/v1';
+  private apiUrl = 'https://apibiciutt.fun/api/v1';
 
   constructor() {}
 
