@@ -73,9 +73,9 @@ export class GuestHomeComponent implements OnInit {
    opcionesSeguimiento = [
     {nombre: "Iniciar Sesión", ruta: "/auth/login"},
     {nombre: "Registrarse", ruta: "/auth/register"},
-    {nombre: "Informacion", ruta: "#"},
-    {nombre: "Descargar-App", ruta: "#"},
-    {nombre: "Contactanos", ruta: "#"},
+    {nombre: "Informacion", ruta: "/info"},
+    // {nombre: "Descargar-App", ruta: "#"},
+    // {nombre: "Contactanos", ruta: "/home#"},
 
   ];
 }
